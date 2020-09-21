@@ -1,0 +1,49 @@
+<?php
+	include_once 'formEGHLsend.php';
+	
+	$obj = new formEGHLsend('https://test2pay.ghl.com/IPGSG/Payment.aspx');
+
+
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		  // collect value of input field
+		  $OrderNumber = $_POST['OrderNumber'];
+		  $PaymentDesc = $_POST['PaymentDesc'];
+		  $PaymentID = $_POST['PaymentID'];
+		  if (empty($name)) {
+			echo "Name is empty";
+		  } else {
+			echo $name;
+		  }
+		}
+
+		
+	
+	//assign the appropraite values to each of the param
+	$obj->set('TransactionType','SALE');
+	$obj->set('PymtMethod','ANY');
+	$obj->set('OrderNumber','8');
+	$obj->set('PaymentDesc','order TBP Car #27');
+	$obj->set('ServiceID','SIT');  //assign the Merchant ID given by eGHL
+	$obj->set('PaymentID','SITTBP0000000000833'); //must be unique. Do increment
+	$obj->set('MerchantReturnURL','http://screwshop.thailandpages.com/payment/response.php');
+	$obj->set('MerchantCallBackURL','http://screwshop.thailandpages.com');
+	$obj->set('Amount','21.14');    //correct format = 10000.00
+	$obj->set('CurrencyCode','USD');
+	$obj->set('CustIP','127.0.0.1');
+	$obj->set('PageTimeout','780');
+	$obj->set('CustName','TBP test');
+	$obj->set('CustEmail','sciant@gmail.com');
+	$obj->set('CustPhone','6627519274');
+	$obj->set('MerchantTermsURL','http://screwshop.thailandpages.com');
+   
+	?>
+	
+    
+
+    
+     <?php
+	$form_html = $obj->getFormHTML('sit12345');  //assign the merchant password given by eGHL
+	echo $form_html;
+	 ?>
+	
+?>
