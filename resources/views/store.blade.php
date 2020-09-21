@@ -314,6 +314,7 @@
                     <thead>
                         <tr>
                         <th scope="col">Id.</th>
+                        <th scope="col">Ratting</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
@@ -323,7 +324,19 @@
                     <tbody>
                         @foreach($array_products->items as $item)
                             <tr>
-                                <th scope="row">{{$item['id']}}</th>
+                                <td>{{$item['id']}}</td>
+                                <td scope="row">
+                                    <div class="product-rating">
+                                        @php ($item['ratting']==5) ? $star = 5 : $star = $item['ratting'] % 5;  @endphp
+                                        @for ($i = 0; $i < $star; $i++)
+                                        <i class="fa fa-star"></i>
+                                        @endfor
+                                        @php $star_empty = 5 - $star @endphp
+                                        @for ($i = 0; $i < $star_empty; $i++)
+                                            <i class="fa fa-star-o empty"></i>
+                                        @endfor
+                                    </div>
+                                </td>
                                 <td>{{$item['name']}}</td>
                                 <td>{{$item['description']}}</td>
                                 <td>${{$item['price']}}</td>
