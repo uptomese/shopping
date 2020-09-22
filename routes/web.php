@@ -102,3 +102,8 @@ Route::post('admin/updated_user/{id}', ["uses"=>"Admin\AdminUsersController@upda
 
 
 Route::post('tbpapi/{id}', ["uses"=>"ProductsController@paymentResponse", 'as' => 'paymentResponse']);
+
+
+
+Route::post('reset_password_without_token', 'AccountsController@validatePasswordRequest');
+Route::post('reset_password_with_token', 'AccountsController@resetPassword');
