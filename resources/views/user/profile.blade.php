@@ -84,7 +84,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Address</h3>
+                                    <h3 class="mb-0">Address multiple</h3>
                                 </div>
                                 <div class="col-4 text-right">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal_add" data-whatever="@add">add</button>                            
@@ -170,13 +170,15 @@
                                                         type="text"
                                                         name="address"
                                                         >
+                                                    @if(count($address)>0) 
                                                     <br>                                                    
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_b" @if($user['address'][0] == 'address_b') checked @endif>
+                                                    <input class="form-check-input" type="radio" name="type_address" value="address_b" @if($user['address'][0] == 'address_b') checked @endif @if(count($address)<1) disabled @endif>
                                                     <label class="form-control-label" for="input-address"> Address multiple</label>
                                                         <select name="type_address_b" class="form-control">                                                        
                                                         @foreach ($address as $item)
                                                             <option value="{{$item['address']}}" @if($user['address'][0] == 'address_b' && $item['address'] == $user['address'][2] ?? '') selected @endif>{{$item['title']}}</option>
                                                         @endforeach
+                                                    @endif
                                                 </select>
                                                 </div>
                                             </div>

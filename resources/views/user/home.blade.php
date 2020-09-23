@@ -64,6 +64,7 @@
                                         <th scope="col">Products</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Delivery Status</th>
+                                        <th scope="col">At delivery</th>
                                         <th scope="col">Price</th>
                                     </tr>
                                 </thead>
@@ -97,9 +98,8 @@
                                                 <span class="status">{{$items['order']['status']}}</span>
                                             </span>
                                         </td>
-                                        <td>
-                                            ${{$items['order']['price']}}
-                                        </td>
+                                        <td>{{$items['order']['address']}}</td>
+                                        <td>${{$items['order']['price']}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

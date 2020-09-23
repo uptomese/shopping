@@ -144,6 +144,37 @@
                             <div><strong class="order-total">{{ $totalPrice }}</strong></div>
                         </div>
                     </div>
+                    <hr>
+                    @if(isset($address))
+                    <div class="payment-method">
+                        <div class="order-col">
+                            <div><strong>At delivery</strong></div>
+                        </div>
+                        <br>
+                        <div class="input-radio">
+                            <input type="radio" name="address" id="radio_address-1" value="{{$userData->address[1]}}" required @if($userData->address[0] == 'address_a') checked @endif>
+                            <label for="radio_address-1">
+                                <span></span>
+                                {{$userData->address[1]}}
+                            </label>
+                        </div>
+                        @if(count($address)>0)  
+                        <br>
+                        <div class="input-radio">
+                            <input type="radio" name="address" id="radio_address-2" value="address_b" required @if($userData->address[0] == 'address_b') checked @endif >
+                            <label for="radio_address-2">
+                                <span></span>
+                                <select name="address_mult"  class="input-select" style="width: 100%;">
+                                    @foreach ($address as $item)
+                                    <option value="{{$item['address']}}" @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) selected @endif>{{$item['title']}} [ {{$item['address']}} ]</option>
+                                    @endforeach
+                                </select>
+                            </label>
+                        </div> 
+                        @endif          
+                    </div>
+                    @endif
+                    <hr>
                     <div class="payment-method">
                         <div class="input-radio">
                             <input type="radio" name="payment" id="payment-1" value="credit_card" required>
@@ -152,8 +183,7 @@
                                 Pay by Credit Card   
                             </label>
                             <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Once credit card payment is clicked, customer leads to card inform fill up page. </p>
                             </div>
                         </div>
                         <!-- <div class="input-radio">
@@ -190,13 +220,13 @@
                             </div>
                         </div> -->
                     </div>
-                    <div class="input-checkbox">
+                    <!-- <div class="input-checkbox">
                         <input type="checkbox" id="terms">
                         <label for="terms">
                             <span></span>
                             I've read and accept the <a href="#">terms & conditions</a>
                         </label>
-                    </div>
+                    </div> -->
                     <!-- <a href="{{ route('createOrder') }}" class="primary-btn order-submit" type="submit">Place order</a> -->
                     <button type="submit" name="submit" class="primary-btn order-submit">Place order</button>
                 </div>

@@ -140,7 +140,14 @@ class ProductsController extends Controller
     {
         $cart = self::getCart($request);
         if($cart){
-            return view('cartproducts', $cart);
+            if(Auth::check()){
+                $address = DB::connection('mongodb')->collection("address")->where('user_id','=',Auth::user()->id*1)->get();
+                return view('cartproducts',$cart, [
+                    'address' => $address
+                    ]);
+            }else{
+                return view('cartproducts',$cart);
+            }
         }else{
             // return redirect()->route('allProducts');
             // self::index();
@@ -463,6 +470,10 @@ class ProductsController extends Controller
         $tel = $request->input('tel');
         $payment = $request->input('payment');
 
+        if($address=='address_b'){
+            $address = $request->input('address_mult');
+        }
+
         if($request->input('create_account')=='on'){
 
             $validatedData = $request->validate([
@@ -500,7 +511,7 @@ class ProductsController extends Controller
                     'user_id' => $user_id['id']*1,
                     'full_name' => null,
                     'email' => null,
-                    'address' => null,
+                    'address' => $address,
                     'phone' => null,
                     'created_at' => $date,
                     'updated_at' => $date
@@ -576,7 +587,7 @@ class ProductsController extends Controller
                     'user_id' => Auth::check() ? Auth::user()->id : 'no',
                     'full_name' => Auth::check() ? null : $first_name." ".$last_name,
                     'email' => Auth::check() ? null : $email,
-                    'address' => Auth::check() ? null : array('address_a', $address),
+                    'address' => $address,
                     'phone' => Auth::check() ? null : $tel,
                     'created_at' => $date,
                     'updated_at' => $date
