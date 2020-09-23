@@ -460,9 +460,6 @@ class ProductsController extends Controller
         $last_name = $request->input('last_name');
         $email = $request->input('email');
         $address = $request->input('address');
-        $city = $request->input('city');
-        $country = $request->input('country');
-        $zip_code = $request->input('zip_code');
         $tel = $request->input('tel');
         $payment = $request->input('payment');
 
@@ -480,7 +477,7 @@ class ProductsController extends Controller
                 'email' => $email,
                 'image' => 'default.jpg',
                 'password' => Hash::make($request->input('password')),
-                'address' => $address." ".$city." ".$country." ".$zip_code,
+                'address' => array('address_a', $address),
                 'phone' => $tel,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
@@ -515,7 +512,7 @@ class ProductsController extends Controller
                 $get_order_id = substr($get_order_id, 9);
                 $get_order_id = substr($get_order_id, 0,-2);
                 
-                $order_id = DB::connection('mongodb')->collection("orders")->select('id')->where('_id','=',$get_order_id)->first();
+                $order_id = DB::connection('mongodb')->collection("orders")->select('id','user_id')->where('_id','=',$get_order_id)->first();
 
                 $array_product_name = array();
     
@@ -553,8 +550,8 @@ class ProductsController extends Controller
                     $payment_id = "SITTBP1".sprintf("%010d", $order_id['id']).$random_str;
 
                     $payment_for = "Screwshop ".$order_srt_id;
-
-                    return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for);
+    
+                    return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
                 }
 
                 // return Redirect::to("payment/post.php?order_id=Order".$order_id['id']."&payment_id=".$payment_id."&product_name=".$array_product_name."&price_total=".$price_total);
@@ -567,7 +564,6 @@ class ProductsController extends Controller
 
             if($cart){
                 
-
                 $date = date('Y-m-d H:i:s');
                 $newOrderArray = array(
                     'id' => Order::database()->collection("orders")->getModifySequence('order_id'),
@@ -580,7 +576,7 @@ class ProductsController extends Controller
                     'user_id' => Auth::check() ? Auth::user()->id : 'no',
                     'full_name' => Auth::check() ? null : $first_name." ".$last_name,
                     'email' => Auth::check() ? null : $email,
-                    'address' => Auth::check() ? null : $address." ".$city." ".$country." ".$zip_code,
+                    'address' => Auth::check() ? null : array('address_a', $address),
                     'phone' => Auth::check() ? null : $tel,
                     'created_at' => $date,
                     'updated_at' => $date
@@ -592,7 +588,7 @@ class ProductsController extends Controller
                 $get_order_id = substr($get_order_id, 9);
                 $get_order_id = substr($get_order_id, 0,-2);
                 
-                $order_id = DB::connection('mongodb')->collection("orders")->select('id')->where('_id','=',$get_order_id)->first();
+                $order_id = DB::connection('mongodb')->collection("orders")->select('id','user_id')->where('_id','=',$get_order_id)->first();
 
                 foreach($cart->items as $cart_item){
 
@@ -627,10 +623,10 @@ class ProductsController extends Controller
                     $order_srt_id = "Order#".$order_id['id'];
                     $price_total = sprintf('%0.2f', $cart->totalPrice*1.0);
                     $payment_id = "SITTBP1".sprintf("%010d", $order_id['id']).$random_str;
-
+    
                     $payment_for = "Screwshop ".$order_srt_id;
-
-                    return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for);
+    
+                    return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
                 }
 
             }else{
@@ -662,10 +658,24 @@ class ProductsController extends Controller
         }
     }
 
-    public function creditCard($order_srt_id,$price_total,$payment_id,$product_name)
+    public function creditCard($order_srt_id,$price_total,$payment_id,$product_name,$user_id)
     {
-        $oid_user = Auth::id();
-        $encode_id_user = self::encode($oid_user,'tbp123');
+  
+        if(Auth::check()){
+            $oid_user = Auth::id();
+        }else{
+            if($user_id!="no"){
+                $oid = DB::connection('mongodb')->collection("users")->select('_id')->where('id','=',$user_id*1)->first();
+                $get_order_id = json_encode($oid['_id'], true);
+                $get_order_id2 = substr($get_order_id, 9);
+                $get_order_id3 = substr($get_order_id2, 0,-2);
+                $oid_user = $get_order_id3;
+            }else{
+                $oid_user = "no";
+            }
+        }
+
+        $oid_user=="no" ? $encode_id_user = null : $encode_id_user = self::encode($oid_user,'tbp123');
         
         $encode = base64_encode($order_srt_id.''.$payment_id);
         $encode2 = self::encode($encode,'tbp123');
@@ -688,7 +698,6 @@ class ProductsController extends Controller
         $CustName = 'TBP test';
         $CustEmail = 'sciant@gmail.com';
         $CustPhone = '6627519274';
-        // $MerchantTermsURL = 'http://screwshop.thailandpages.com';
         $MerchantTermsURL = 'http://127.0.0.1:8000';
 
         $HashValue =  hash('sha256', 'sit12345' . $ServiceID . $PaymentID . $MerchantReturnURL . $MerchantCallBackURL . $Amount . $CurrencyCode . $CustIP . $PageTimeout);
@@ -701,9 +710,7 @@ class ProductsController extends Controller
                 'PaymentDesc' => $product_name,
                 'ServiceID' => 'SIT',  
                 'PaymentID' => $payment_id, 
-                // 'MerchantReturnURL' => 'http://screwshop.thailandpages.com/payment/response.php',
                 'MerchantReturnURL' => 'http://127.0.0.1:8000/tbpapi/'.$encode2,
-                // 'MerchantCallBackURL' => 'http://screwshop.thailandpages.com',
                 'MerchantCallBackURL' => 'http://127.0.0.1:8000',
                 'Amount' => $price_total,
                 'CurrencyCode' => 'THB',
@@ -712,7 +719,6 @@ class ProductsController extends Controller
                 'CustName' => 'TBP test',
                 'CustEmail' => 'sciant@gmail.com',
                 'CustPhone' => '6627519274',
-                // 'MerchantTermsURL' => 'http://screwshop.thailandpages.com',
                 'MerchantTermsURL' => 'http://127.0.0.1:8000',
                 'HashValue' => $HashValue,
                 'Param6' => $encode_id_user
@@ -788,11 +794,12 @@ class ProductsController extends Controller
                     'status_payment' => $TxnStatus*1==0 ? 1 : 0,
                     ]);
 
-            $encode_order = base64_encode($order_id['order_id']*1);
+            $encode_order = str_rot13(base64_encode($order_id['order_id']*1));
 
             if(!Auth::check()){
                 Session::forget('cart');
                 // Session::flush();
+
                 $decode_test_id_user = self::decode($Param6,'tbp123');
  
                 Auth::loginUsingId($decode_test_id_user);
@@ -805,11 +812,6 @@ class ProductsController extends Controller
                 return redirect()->route('allProducts')->withsuccess($TxnMessage." Code = ".$encode_order);
             }
         }
-        
-        
-        // dd($_POST,$request->all(),$id);
-
-        // return $response;
     }
 
 
@@ -899,11 +901,11 @@ class ProductsController extends Controller
 
         $order = $request->input('order');
 
-        $decode_order = base64_decode($order);
+        $decode_order = base64_decode(str_rot13($order));
 
         if(is_numeric($decode_order)){
             $orders = Order::collection('orders')
-                ->select('orders.id as id','orders.price as price','orders.status as status','orders.status_payment as status_payment','users.name as name')
+                ->select('orders.id as id','orders.price as price','orders.status as status','orders.status_payment as status_payment','users.name as name','orders.full_name as full_name')
                 ->leftjoin('users','orders.user_id','users.id')
                 ->groupby('$selected')
                 ->where('orders.id','=',$decode_order*1)

@@ -43,7 +43,7 @@ class AdminUsersController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-            'address' => $request->input('address'),
+            'address' => array('address_a', $request->input('address')),
             'phone' => $request->input('phone'),
             'image' => 'default.jpg',
             'admin' => $request->input('status')*1,
@@ -69,7 +69,7 @@ class AdminUsersController extends Controller
             ->where('id',"=",$id*1)
             ->update([
                 'name' => $request->input('name'),
-                'address' => $request->input('address'),
+                'address' => array('address_a', $request->input('address')),
                 'phone' => $request->input('phone'),
                 'admin' => $request->input('status'),
                 'updated_at' => date('Y-m-d H:i:s')

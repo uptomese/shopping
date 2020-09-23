@@ -28,7 +28,7 @@
                                     <p>Email : {{ Auth::user()->email }}</p>
                                 </div>
                                 <div class=" col-6">
-                                    <p>Address : {{ Auth::user()->address }}</p>
+                                    <p>Address : @if(Auth::user()->address[0] == 'address_a') {{ Auth::user()->address[1] }} @else {{ Auth::user()->address[2] }} @endif</p>
                                     <p>Phone Number : {{ Auth::user()->phone }}</p>
                                 </div>
                             </div>
@@ -44,6 +44,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card">
+                    @if(isset($array_orders) && isset($orders))
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
@@ -115,6 +116,7 @@
                                 </ul>
                             </nav>
                         </div>
+                    @endif
                     </div>
                 </div>
             </div>

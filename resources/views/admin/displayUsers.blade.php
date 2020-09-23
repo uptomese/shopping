@@ -74,7 +74,11 @@
                                     {{$user['email']}}
                                 </td>
                                 <td>
-                                    {{$user['address'] ?? ''}}
+                                    @if($user['address'][0] ?? '' == 'address_a')
+                                    {{$user['address'][1] ?? ''}}
+                                    @else
+                                    {{$user['address'][2] ?? ''}}
+                                    @endif
                                 </td>
                                 <td>
                                     {{$user['phone'] ?? ''}}

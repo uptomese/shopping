@@ -30,12 +30,21 @@ class UsersController extends Controller
     }
 
     public function updateProfile(Request $request)
-    {
+    {       
+        $type_address = $request->input('type_address');
+
+        if($type_address=='address_a'){
+            $address = array('address_a', $request->input('address'));
+        }elseif ($type_address=='address_b'){
+            $address_id = $request->input('type_address_b');
+            $address_mult = DB::connection('mongodb')->collection("address")->where('id',"=", $address_id*1)->first();
+            $address = array('address_b', $request->input('address'), $address_mult['address']);
+        }
 
         $save = DB::connection('mongodb')->collection("users")->where('id',Auth::user()->id*1)->update([
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
-            'address' => $request->input('address'),
+            'address' => $address,
             'updated_at' => date('Y-m-d H:i:s')
         ]);
 

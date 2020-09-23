@@ -132,7 +132,12 @@
                             <i class="ni location_pin mr-2"></i>{{$user_order['email']}}
                         </div>
                         <div class="h2 mt-4">
-                            <i class="ni business_briefcase-24 mr-2"></i>{{$user_order['address'] ?? ''}}
+                            <i class="ni business_briefcase-24 mr-2"></i>
+                            @if($user_order['address'][0] == 'address_a')                            
+                            {{$user_order['address'][1] ?? ''}}
+                            @else
+                            {{$user_order['address'][2] ?? ''}}
+                            @endif
                         </div>
                         <div>
                             <i class="ni education_hat mr-2"></i>{{$user_order['phone'] ?? ''}}

@@ -134,7 +134,17 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-address">Address</label>
-                                            <input id="address" type="text" class="form-control @error('email') is-invalid @enderror" name="address" placeholder="Address" value="{{$user['address'] ?? ''}}" required autocomplete="address">
+                                            <!-- id="address" -->
+                                            <input 
+                                            id="autocomplete"
+                                            type="text" 
+                                            class="form-control @error('email') is-invalid @enderror" 
+                                            name="address" 
+                                            placeholder="Address" 
+                                            value="{{$user['address'][1] ?? ''}}" 
+                                            required 
+                                            autocomplete="address"
+                                            >
                                             @error('address')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -143,29 +153,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-city">City</label>
-                                            <input type="text" id="input-city" class="form-control" placeholder="City"
-                                                value="New York">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-country">Country</label>
-                                            <input type="text" id="input-country" class="form-control"
-                                                placeholder="Country" value="United States">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-country">Postal code</label>
-                                            <input type="number" id="input-postal-code" class="form-control"
-                                                placeholder="Postal code">
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                             <hr class="my-4" />
                             @if($user ?? '')

@@ -65,7 +65,12 @@
                                     <i class="ni location_pin mr-2"></i>{{$user['email']}}
                                 </div>
                                 <div class="h2 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>{{$user['address'] ?? ''}}
+                                    <i class="ni business_briefcase-24 mr-2"></i>
+                                    @if($user['address'][0] == 'address_a')
+                                        {{$user['address'][1] ?? ''}}
+                                    @else
+                                        {{$user['address'][2] ?? ''}}
+                                    @endif
                                 </div>
                                 <div>
                                     <i class="ni education_hat mr-2"></i>{{$user['phone'] ?? ''}}
@@ -155,20 +160,22 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_a" checked>
+                                                    <input class="form-check-input" type="radio" name="type_address" value="address_a" @if($user['address'][0] == 'address_a') checked @endif>
                                                     <label class="form-control-label" for="input-address"> Address</label>
-                                                    <input id="input-address" class="form-control"
+                                                    <input 
+                                                        id="autocomplete"
+                                                        class="form-control"
                                                         placeholder="Home Address"
-                                                        value="{{$user['address'] ?? ''}}"
+                                                        value="{{$user['address'][1] ?? ''}}"
                                                         type="text"
                                                         name="address"
                                                         >
-                                                    <br>
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_b">
+                                                    <br>                                                    
+                                                    <input class="form-check-input" type="radio" name="type_address" value="address_b" @if($user['address'][0] == 'address_b') checked @endif>
                                                     <label class="form-control-label" for="input-address"> Address multiple</label>
-                                                        <select name="type_address" class="form-control">
+                                                        <select name="type_address_b" class="form-control">                                                        
                                                         @foreach ($address as $item)
-                                                            <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                                            <option value="{{$item['address']}}" @if($user['address'][0] == 'address_b' && $item['address'] == $user['address'][2] ?? '') selected @endif>{{$item['title']}}</option>
                                                         @endforeach
                                                 </select>
                                                 </div>
@@ -206,7 +213,7 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Address</label>
                     <div class="col-sm-10">
-                        <input name="address"  class="form-control latitude" placeholder="Address" type="text" required>
+                        <input id="autocomplete2" name="address"  class="form-control latitude" placeholder="Address" type="text" required>
                     </div>
                 </div>
             </div>
