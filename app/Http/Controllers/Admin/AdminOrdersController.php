@@ -15,7 +15,7 @@ class AdminOrdersController extends Controller
     public function index()
     {
         $orders_users_in = Order::collection('orders')
-            ->select('orders.id as id','orders.date as date','orders.status as status','orders.price as price','users.name as name','users.address as address','users.image as image','users.phone as phone','orders.quantity as quantity','orders.status_payment as status_payment')
+            ->select('orders.id as id','orders.date as date','orders.status as status','orders.price as price','users.name as name','orders.address as address','users.image as image','users.phone as phone','orders.quantity as quantity','orders.status_payment as status_payment')
             ->leftjoin('users','orders.user_id','users.id')
             ->groupby('$selected')
             ->orderby('orders.id','desc')

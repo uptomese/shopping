@@ -13,7 +13,7 @@
     <div class="container mt--8 pb-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header"><h3 class="mb-0">Welcome</h3></div>
                         <div class="card-body">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card">
                     @if(isset($array_orders) && isset($orders))
                         <div class="card-header border-0">

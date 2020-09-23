@@ -126,7 +126,7 @@
                             <tr>
                                 <th scope="col" class="sort" data-sort="name">Order.</th>
                                 <th scope="col" class="sort" data-sort="budget">Date</th>
-                                <th scope="col" class="sort" data-sort="status">Delivery Status</th>
+                                <th scope="col" class="sort" data-sort="status"> At / Status ,Delivery</th>
                                 <th scope="col" class="sort" data-sort="status">Quantity</th>
                                 <th scope="col" class="sort" data-sort="price">Price</th>
                                 <!-- <th scope="col" class="sort" data-sort="name">Name</th> -->
@@ -153,14 +153,15 @@
                                     {{$item['date']}}
                                 </td>
                                 <td>
+                                    {{$item['address']}}&nbsp;(
                                     <span class="badge badge-dot mr-4">
                                         @if($item['status']=='wait')
                                         <i class="bg-warning"></i>
                                         @else
                                         <i class="bg-success"></i>
                                         @endif
-                                        <span class="status">{{$item['status']}}</span>
-                                    </span>
+                                        <span class="status">{{$item['status']}} )</span>
+                                    </span>                                    
                                 </td>
                                 <td class="budget">
                                     {{$item['quantity']}}
@@ -220,7 +221,7 @@
                             <tr>
                                 <th scope="col" class="sort" data-sort="name">Order.</th>
                                 <th scope="col" class="sort" data-sort="budget">Date</th>
-                                <th scope="col" class="sort" data-sort="status">Delivery Status</th>
+                                <th scope="col" class="sort" data-sort="status">At / Status ,Delivery</th>
                                 <th scope="col" class="sort" data-sort="status">Quantity</th>
                                 <th scope="col" class="sort" data-sort="price">Price</th>
                                 <!-- <th scope="col" class="sort" data-sort="name">Name</th> -->
@@ -247,14 +248,15 @@
                                     {{$item['date']}}
                                 </td>
                                 <td>
+                                    {{$item['address']}}&nbsp;(
                                     <span class="badge badge-dot mr-4">
                                         @if($item['status']=='wait')
                                         <i class="bg-warning"></i>
                                         @else
                                         <i class="bg-success"></i>
                                         @endif
-                                        <span class="status">{{$item['status']}}</span>
-                                    </span>
+                                        <span class="status">{{$item['status']}} )</span>
+                                    </span>  
                                 </td>
                                 <td class="budget">
                                     {{$item['quantity']}}
