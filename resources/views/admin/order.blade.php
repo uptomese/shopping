@@ -138,8 +138,8 @@
                             <tr @if($item['status_payment'] ?? '' == 1 ) style="background-color: lightgreen;" @endif>
                                 <th scope="row">
                                     <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder"
+                                        <a href="/admin/order/{{$item['id']}}" class="avatar rounded-circle mr-3">
+                                            <img alt="Image user"
                                                     src="{{ asset('storage') }}/user_images/{{$item['image'] ?? ''}}"
                                                     style="width:40px;height:40px;">
                                         </a>
@@ -232,7 +232,7 @@
                             <tr @if($item['status_payment'] ?? '' == 1 ) style="background-color: darkblue;" @endif>
                                 <th scope="row">
                                     <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
+                                        <a href="/admin/order/{{$item['id']}}" class="avatar rounded-circle mr-3">
                                             <img alt="Image placeholder"
                                                 src="{{ asset('storage') }}/user_images/default.jpg"
                                                 style="width:40px;height:40px;">

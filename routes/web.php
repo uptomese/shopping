@@ -50,6 +50,15 @@ Route::post('/user/update_profile/', ["uses"=>"UsersController@updateProfile", '
 
 Route::post('/user/update_image_profile/', ["uses"=>"UsersController@updateImageProfile", 'as' => 'updateImageProfile'])->middleware('auth');
 
+Route::post('/user/create_address/{id}', ["uses"=>"UsersController@createAddress", 'as' => 'createAddress'])->middleware('auth');
+
+Route::get('/user/edit_address/{id}', ["uses"=>"UsersController@editAddress", 'as' => 'editAddress'])->middleware('auth');
+
+Route::get('/user/delete_address/{id}', ["uses"=>"UsersController@deleteAddress", 'as' => 'deleteAddress'])->middleware('auth');
+
+Route::post('/user/update_address/{id}', ["uses"=>"UsersController@updateAddress", 'as' => 'updateAddress'])->middleware('auth');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

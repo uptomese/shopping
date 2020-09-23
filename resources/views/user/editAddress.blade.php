@@ -74,7 +74,6 @@
                         </div>
                     </div>
 
-
                     <div class="card">
                         <div class="card-header">
                             <div class="row align-items-center">
@@ -109,7 +108,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Edit profile </h3>
+                                    <h3 class="mb-0"><a href="{{ route('getProfile') }}">Profile</a> / Edit address </h3>
                                 </div>
                                 <!-- <div class="col-4 text-right">
                                     <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -117,67 +116,31 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="/user/update_profile" method="POST" enctype="multipart/form-data">
+                        <form action="/user/update_address/{{$address_edit[0]['id']}}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
-                                <h6 class="heading-small text-muted mb-4">User information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Name</label>
-                                                <input type="text" id="input-username" class="form-control" name="name"
-                                                    placeholder="Name" value="{{$user['name']}}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-email">Email</label>
-                                                <input type="email" id="input-email" class="form-control" name="email"
-                                                    placeholder="Email" value="{{$user['email']}}" disabled>
+                                                <label class="form-control-label" for="input-username">Title</label>
+                                                <input type="text" id="input-username" class="form-control" name="title"
+                                                    placeholder="Title" value="{{$address_edit[0]['title']}}">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">                                        
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-last-name">Phone number</label>
-                                                <input type="text" id="input-last-name" class="form-control" name="phone"
-                                                    placeholder="Phone" value="{{$user['phone'] ?? ''}}">
+                                                <label class="form-control-label" for="input-last-name">Address</label>
+                                                <textarea id="input-last-name" class="form-control" name="address"
+                                                    placeholder="Address" >{{$address_edit[0]['address']}}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <hr class="my-4" />
-                                <!-- Address -->
-                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_a" checked>
-                                                    <label class="form-control-label" for="input-address"> Address</label>
-                                                    <input id="input-address" class="form-control"
-                                                        placeholder="Home Address"
-                                                        value="{{$user['address'] ?? ''}}"
-                                                        type="text"
-                                                        name="address"
-                                                        >
-                                                    <br>
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_b">
-                                                    <label class="form-control-label" for="input-address"> Address multiple</label>
-                                                        <select name="type_address" class="form-control">
-                                                        @foreach ($address as $item)
-                                                            <option value="{{$item['id']}}">{{$item['title']}}</option>
-                                                        @endforeach
-                                                </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="my-4" />
-                                <button type="submit" name="submit" class="btn btn-round btn-primary">Update profile</button>
+                                <button type="submit" name="submit" class="btn btn-round btn-primary">Update address</button>
                             </form>
                         </div>
                     </div>

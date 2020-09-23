@@ -37,7 +37,6 @@
                                 <th scope="col" class="sort" data-sort="name">Product name</th>
                                 <th scope="col" class="sort" data-sort="budget">Product quantity</th>
                                 <th scope="col" class="sort" data-sort="status">Product price</th>
-                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -60,7 +59,7 @@
                                 <td class="budget">
                                     ${{$item['product_price']}}
                                 </td>
-                                <td class="text-right">
+                                <!-- <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,7 +71,7 @@
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
-                                </td>
+                                </td> -->
                             </tr>
                             @endforeach
                         </tbody>
@@ -96,6 +95,7 @@
                     <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image">
                             <a href="#">
+                            @if(isset($user_order['image']))
                                 @if($user_order['image']=='no')
                                 <img src="{{ asset('storage') }}/user_images/default.jpg" class="rounded-circle"
                                     style="width:150px;height:140px;">
@@ -103,21 +103,28 @@
                                 <img src="{{ asset('storage') }}/user_images/{{$user_order['image']}}"
                                     class="rounded-circle" style="width:150px;height:140px;">
                                 @endif
+                            @else
+                                <img src="{{ asset('storage') }}/user_images/default.jpg" class="rounded-circle"
+                                    style="width:150px;height:140px;">
+                            @endif 
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                     <div class="d-flex justify-content-between">
-                    @if($user_order['image']!='no')
-                        <a href="#" class="btn btn-sm btn-info  mr-4 ">Profile</a>
-                        <a href="#" class="btn btn-sm btn-danger float-right">Block</a>
-                    @endif
+                    @if(isset($user_order['image']))
+                        @if($user_order['image']!='no')
+                            <!-- <a href="#" class="btn btn-sm btn-info  mr-4 ">Profile</a>
+                            <a href="#" class="btn btn-sm btn-danger float-right">Block</a> -->
+                        @endif
+                    @endif 
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="text-center">
                         <br>
+                        @if(isset($user_order['image']))
                         <h5 class="h3">
                             {{$user_order['name']}}
                         </h5>
@@ -130,6 +137,11 @@
                         <div>
                             <i class="ni education_hat mr-2"></i>{{$user_order['phone'] ?? ''}}
                         </div>
+                        @else
+                        <h5 class="h3">
+                            user not found
+                        </h5>
+                        @endif
                     </div>
                 </div>
             </div>
