@@ -61,33 +61,8 @@
                         <div class="form-group">
                             <input class="input" type="email" name="email" placeholder="Email" required>
                         </div>
-
-
-                        <!-- <div class="form-group">
-								<input class="input" type="text" id="district" name="district" placeholder="District" required>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" id="amphoe" name="amphoe" placeholder="Amphoe" required>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" id="province" name="province" placeholder="Province" required>
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" id="zipcode" name="zipcode" placeholder="Zipcode" required>
-							</div> -->
-
-
                         <div class="form-group">
                             <input class="input" type="text" name="address" placeholder="Address" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="city" placeholder="City" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="country" placeholder="Country" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="zip_code" placeholder="ZIP Code" required>
                         </div>
                         <div class="form-group">
                             <input class="input" type="tel" name="tel" placeholder="Telephone" required>
@@ -155,7 +130,7 @@
                             <input type="radio" name="address" id="radio_address-1" value="{{$userData->address[1]}}" required @if($userData->address[0] == 'address_a') checked @endif>
                             <label for="radio_address-1">
                                 <span></span>
-                                {{$userData->address[1]}}
+                                @php if($userData->address[0] == 'address_a'){ echo '(default)';} @endphp {{$userData->address[1]}}
                             </label>
                         </div>
                         @if(count($address)>0)  
@@ -166,7 +141,9 @@
                                 <span></span>
                                 <select name="address_mult"  class="input-select" style="width: 100%;">
                                     @foreach ($address as $item)
-                                    <option value="{{$item['address']}}" @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) selected @endif>{{$item['title']}} [ {{$item['address']}} ]</option>
+                                    <option value="{{$item['address']}}" @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) selected @endif>
+                                    @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) (default) @endif {{$item['title']}} [ {{$item['address']}} ]
+                                    </option>
                                     @endforeach
                                 </select>
                             </label>

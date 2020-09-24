@@ -91,11 +91,11 @@
                                 </div>
                                 <div class=" w-100">
                                     <div class="custom-control custom-radio mb-3">
-                                        <input type="radio" id="customRadio1" name="status" class="custom-control-input" value="1" required>
+                                        <input type="radio" id="customRadio1" name="status" class="custom-control-input" value="1" @if(isset($user) && $user['admin'] == 1) checked @endif required>
                                         <label class="custom-control-label" for="customRadio1">is Admin</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="status" class="custom-control-input" value="0" checked required>
+                                        <input type="radio" id="customRadio2" name="status" class="custom-control-input" value="0" @if(isset($user) && $user['admin'] == 0) checked @endif required>
                                         <label class="custom-control-label" for="customRadio2">is User</label>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-last-name">Last name</label>
+                                                <label class="form-control-label" for="input-last-name">Confirm Password</label>
                                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                                             </div>
                                         </div>

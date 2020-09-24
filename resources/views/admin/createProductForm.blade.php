@@ -123,7 +123,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <div class="input-group mb-1">
-                                                    <input id="add_header" type="text" class="form-control" placeholder="Header" aria-label="Header" aria-describedby="button-addon2">
+                                                    <input id="add_header" type="text" class="form-control" placeholder="Header (Do not have '.' )" aria-label="Header" aria-describedby="button-addon2">
                                                     <div class="input-group-append">
                                                         <button onclick="addHeader()" class="btn btn-outline-primary" type="button" >Add header</button>
                                                     </div>&nbsp;&nbsp;   &nbsp;   &nbsp;                                                  

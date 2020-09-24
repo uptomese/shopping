@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
                             @foreach($users->items as $user)
-                            <tr>
+                            <tr style="@if($user['admin'] ?? '' == 1) background-color: aliceblue; @endif">
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
@@ -84,13 +84,10 @@
                                     {{$user['phone'] ?? ''}}
                                 </td>
                                 <td>
-                                    <a href="/admin/update_user/{{$user['id']}}" @if($user['admin']!=1)
-                                        class="btn btn-sm btn-outline-warning" @else
-                                        class="btn btn-sm btn-outline-warning disabled" @endif> <i
-                                            class="fa fa-edit"></i> แก้ไข</a>
-                                    <a href="#" @if($user['admin']!=1) class="btn btn-sm btn-outline-danger" @else
-                                        class="btn btn-sm btn-outline-danger disabled" @endif> <i
-                                            class="fa fa-times"></i> บล็อค</a>
+                                @if($user['name'] != 'admin')
+                                    <a href="/admin/update_user/{{$user['id']}}" class="btn btn-sm btn-outline-warning"><i class="fa fa-edit"></i> แก้ไข</a>
+                                @endif
+                                    <!-- <a href="#" class="btn btn-sm btn-outline-danger @if($user['admin']==1) disabled @endif"><i class="fa fa-times"></i> บล็อค</a> -->
                                 </td>
                             </tr>
                             @endforeach

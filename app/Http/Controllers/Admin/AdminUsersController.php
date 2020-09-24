@@ -33,6 +33,7 @@ class AdminUsersController extends Controller
     public function createdUser(Request $request)
     {
         $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255','exists:admin'],
             'email' => 'required|unique:users|email|max:255',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6'
@@ -71,7 +72,7 @@ class AdminUsersController extends Controller
                 'name' => $request->input('name'),
                 'address' => array('address_a', $request->input('address')),
                 'phone' => $request->input('phone'),
-                'admin' => $request->input('status'),
+                'admin' => $request->input('status')*1,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
 
