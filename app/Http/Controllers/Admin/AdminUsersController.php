@@ -19,10 +19,21 @@ class AdminUsersController extends Controller
         $users = User_nan::collection('users')
             ->select('id','name','email','address','phone','image','admin')
             ->where('id','!=','no')
+            ->andWhere('admin','=',0)
             ->orderBy('id','desc')
             ->paginate(10);
 
-        return view('admin.displayUsers',['users'=>$users]);
+        $admins = DB::connection('mongodb')->collection("users")
+            ->select('id','name','email','address','phone','image','admin')
+            ->where('id','!=','no')
+            ->where('admin','=',1)
+            ->orderBy('id','desc')
+            ->paginate(10,['*'],'admin');
+
+        return view('admin.displayUsers',[
+            'users' => $users,
+            'admins' => $admins,
+            ]);
     }
 
     public function createUser()
@@ -66,18 +77,22 @@ class AdminUsersController extends Controller
 
     public function updatedUser(Request $request, $id)
     {
-        $save = DB::connection('mongodb')->collection("users")
-            ->where('id',"=",$id*1)
-            ->update([
-                'name' => $request->input('name'),
-                'address' => array('address_a', $request->input('address')),
-                'phone' => $request->input('phone'),
-                'admin' => $request->input('status')*1,
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-
-        if($save){
+        if($request->input('name') == 'admin'){
             return redirect()->route('getUsers');
+        }else{
+            $save = DB::connection('mongodb')->collection("users")
+                ->where('id',"=",$id*1)
+                ->update([
+                    'name' => $request->input('name'),
+                    'address' => array('address_a', $request->input('address')),
+                    'phone' => $request->input('phone'),
+                    'admin' => $request->input('status')*1,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+    
+            if($save){
+                return redirect()->route('getUsers');
+            }
         }
     }
 }
