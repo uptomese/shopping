@@ -77,7 +77,6 @@ class AdminOrdersController extends Controller
             ->where('order_items.order_id','=',$id*1)
             ->get();
             
-
         $get_user_id = DB::connection('mongodb')->collection("orders")->select('*')->where('id',"=",$id*1)->first();
         if($get_user_id['user_id']!='no'){
             $user_order = DB::connection('mongodb')->collection("users")->select('*')->where('id',"=",$get_user_id['user_id']*1)->first();  
@@ -92,7 +91,12 @@ class AdminOrdersController extends Controller
             $user_order = $array_user[0];
         }
 
-        return view('admin.showOrder',['id'=>$id,'order_items'=>$order_items,'user_order'=>$user_order]);
+        return view('admin.showOrder',[
+            'id' => $id,
+            'order_items' => $order_items,
+            'user_order' => $user_order,
+            'order' => $get_user_id
+            ]);
     }
 
     public function updateOrderSuccess($id)
