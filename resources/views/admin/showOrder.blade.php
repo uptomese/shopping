@@ -25,11 +25,11 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Status Payment</h5>
-                                    <span class="h2 font-weight-bold mb-0">@if($order['status_payment']==1) Success @else Fail @endif</span>
+                                    <span class="h2 font-weight-bold mb-0">@if(isset($order['status_payment']) && $order['status_payment']==1) Success @else Fail @endif</span>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="icon icon-shape @if($order['status_payment']==1) bg-gradient-green @else bg-gradient-red @endif text-white rounded-circle shadow">
-                                        <i class="@if($order['status_payment']==1) ni ni-check-bold @else ni ni-fat-remove @endif"></i>
+                                    <div class="icon icon-shape @if(isset($order['status_payment']) && $order['status_payment']==1) bg-gradient-green @else bg-gradient-red @endif text-white rounded-circle shadow">
+                                        <i class="@if(isset($order['status_payment']) && $order['status_payment']==1) ni ni-check-bold @else ni ni-fat-remove @endif"></i>
                                     </div>
                                 </div>
                             </div>
