@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Call</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js"
+        integrity="sha256-2qQheewaqnZlXJ3RJRghVUwD/3fD9HNqxh4C+zvgmF4=" crossorigin="anonymous"></script>
+
+    <!--Import .css-->
+    <link rel="stylesheet" href="../assets/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/css/video/index.css" type="text/css" />
+
+    <!--Import .js-->
+    <script type="module" src="../assets/js/rtc.js"></script>
+    <script type="module" src="../assets/js/events.js"></script>
+    <script type="module" src="../assets/js/video/index.js"></script>
+    <script src="../assets/js/autolink.js"></script>
+    <script src="../assets/js/jquery-3.5.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdn.rawgit.com/yahoo/xss-filters/master/dist/xss-filters.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- poom -->
+    <link rel="stylesheet" href="../assets/css/video/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka+One" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css" />
+    <link rel="stylesheet" href="../assets/css/video/poom.css" />
+    <link rel="stylesheet" href="../assets/css/video/styles.css" />
+
+</head>
+
+<body>
+    <div class="custom-modal" id="recording-options-modal">
+        <div class="custom-modal-content">
+            <div class="row text-center">
+                <div class="col-md-6 mb-2">
+                    <span class="record-option" id="record-video">Record video</span>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <span class="record-option" id="record-screen">Record screen</span>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-outline-danger" id="closeModal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-aos="zoom-in" class="landing-threshold container"
+        style="background-position: center;background-size: cover;height: 100%;min-height: auto;" id="username-set"
+        hidden>
+        <div id="bg_image" class="bg-image"></div>
+        <div class="bg-text row">
+            <div data-aos="zoom-in" class="landing-intro">
+                <h1>
+                    <span id="friend" class="brand"
+                        style="color: rgb(227,109,0);text-transform: uppercase;"></span><br />
+                    <span id="friend_email" class="brand" style="color: rgb(227,109,0);font-size:25px"></span>
+                </h1>
+                <input type="hidden" id="your-name" />
+                <input type="hidden" id="session" />
+                <div class="col-12 text-center">
+                    <span class="form-text small text-danger" id="err-msg-username"></span>
+                </div>
+                <div class="phone">
+                    <div class="call-animation">
+                        <div class="img-circle">
+                            <img id="profile_image" class="pulse animated infinite rounded-circle" />
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group" role="group">
+                    <button id="enter-room" class="btn btn-success" type="button"
+                        style="color: rgb(52,247,71);background-color: rgba(255,255,255,0);width: 104px;">
+                        <i class="material-icons">phone</i>
+                    </button>
+                    <button id="cancel-room" class="btn btn-danger" type="button"
+                        style="color: rgb(247,64,52);background-color: rgba(255,255,255,0);width: 101px;margin-left: 0px;">
+                        <i class="material-icons">cancel</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-light navbar-expand room-comm" style="width: 100%;min-width: auto;margin-top: 10px;"
+        hidden>
+        <div class="container">
+            <div class="collapse navbar-collapse d-flex justify-content-center" id="navcol-1" style="margin-top: 10px;">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation">
+                        <button id="toggle-video" title="Hide Video" class="btn btn-light" type="button"
+                            style="margin-right: 15px;margin-left: 15px;color: rgb(0,0,0);">
+                            <i class="fa fa-video"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button id="toggle-mute" title="Mute" class="btn btn-light" type="button"
+                            style="margin-right: 15px;margin-left: 15px;color: rgb(0,0,0);">
+                            <i class="fa fa-microphone-alt"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button id="share-screen" title="Share screen" class="btn btn-light btn-hied" type="button"
+                            style="margin-right: 15px;margin-left: 15px;color: rgb(0,0,0);">
+                            <i class="fa fa-desktop"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button id="record" title="Record" class="btn btn-light" type="button"
+                            style="margin-right: 15px;margin-left: 15px;color: rgb(0,0,0);">
+                            <i class="fa fa-dot-circle"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation" hidden>
+                        <button id="toggle-chat-pane" title="Chat" class="btn btn-light" type="button"
+                            style="margin-right: 15px;margin-left: 15px;color: rgb(0,0,0);">
+                            <i class="fa fa-comment"></i><span class="badge badge-danger very-small font-weight-lighter"
+                                id="new-chat-notification" hidden>New</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button id="room_leave" title="Leave" class="btn btn-danger" type="button"
+                            style="margin-right: 15px;margin-left: 15px;color: red;">
+                            <i class="fa fa-phone"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container room-comm" hidden>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12">
+                <div id="main-section">
+                    <div class="user-video" id="videos"></div>
+                </div>
+                <video class="local-video" id="local" volume="0" autoplay muted></video>
+            </div>
+        </div>
+        <div class="col-md-3 chat-col d-print-none mb-2 bg-info" id="chat-pane" hidden>
+            <div class="row">
+                <div class="col-12 text-center h2 mb-3">CHAT</div>
+            </div>
+            <div id="chat-messages"></div>
+            <div class="row">
+                <textarea id="chat-input" class="form-control rounded-0 chat-box border-info" rows="3"
+                    placeholder="Type here..."></textarea>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/video/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+</body>
+
+</html>
+
+<style>
+    .navbar {
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+    @media (max-width: 480px) {
+        .btn-hied {
+            display: none;
+        }
+    }
+
+</style>

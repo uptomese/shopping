@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="h2 mt-4">
                                     <i class="ni business_briefcase-24 mr-2"></i>
-                                    @if($user['address'][0] == 'address_a')
+                                    @if(isset($user['address'][0]) && $user['address'][0] == 'address_a')
                                         {{$user['address'][1] ?? ''}}
                                     @else
                                         {{$user['address'][2] ?? ''}}
@@ -160,7 +160,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_a" @if($user['address'][0] == 'address_a') checked @endif>
+                                                    <input class="form-check-input" type="radio" name="type_address" value="address_a" @if(isset($user['address'][0]) && $user['address'][0] == 'address_a') checked @endif>
                                                     <label class="form-control-label" for="input-address"> Address</label>
                                                     <input 
                                                         id="autocomplete"

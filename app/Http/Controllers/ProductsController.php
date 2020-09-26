@@ -487,6 +487,7 @@ class ProductsController extends Controller
                 'admin' => 0,
                 'email' => $email,
                 'image' => 'default.jpg',
+                'status' => "offline",
                 'password' => Hash::make($request->input('password')),
                 'address' => array('address_a', $address),
                 'phone' => $tel,

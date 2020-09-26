@@ -1,0 +1,53 @@
+.btn-group,
+.btn-group-vertical {
+    padding-top: 14px;
+}
+
+.phone {
+    position: relative;
+    margin: 0 auto;
+    width: auto;
+    text-align: center;
+    color: #fff;
+    padding: 80px 0px;
+    border-radius: 10px;
+    height: 274px;
+    padding-top: 60px;
+}
+
+.call-image {
+    position: relative;
+}
+
+.call {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.rounded-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 10px solid;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+@ripple {
+    color: #fff;
+}

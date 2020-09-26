@@ -29,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+
+        date_default_timezone_set('Asia/Bangkok');
+        
         View::composer('*', function($view){
             $view->with('userData', Auth::user());
         });

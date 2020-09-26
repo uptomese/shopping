@@ -58,6 +58,7 @@ class AdminUsersController extends Controller
             'address' => array('address_a', $request->input('address')),
             'phone' => $request->input('phone'),
             'image' => 'default.jpg',
+            'status' => "offline",
             'admin' => $request->input('status')*1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
+        "intervention/image": "^2.5",
         "jenssegers/mongodb": "4.0.0-alpha.1",
         "laravel/framework": "^7.24",
         "laravel/helpers": "^1.3",

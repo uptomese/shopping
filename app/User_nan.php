@@ -40,6 +40,7 @@ class User_nan extends NanModel
             "email" => [
                 'Unique' => true
             ],
+            "status",
             "address",
             "phone",
             "created_at",
@@ -68,5 +69,15 @@ class User_nan extends NanModel
     public function isAdmin()
     {
         return $this->admin;
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function session()
+    {
+        return $this->hasMany(Session::class);
     }
 }

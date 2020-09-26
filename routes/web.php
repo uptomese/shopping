@@ -112,7 +112,29 @@ Route::post('admin/updated_user/{id}', ["uses"=>"Admin\AdminUsersController@upda
 
 Route::post('tbpapi/{id}', ["uses"=>"ProductsController@paymentResponse", 'as' => 'paymentResponse']);
 
-
-
+//reset password
 Route::post('reset_password_without_token', 'AccountsController@validatePasswordRequest');
+
 Route::post('reset_password_with_token', 'AccountsController@resetPassword');
+
+
+//chat video
+Route::post('get_messages', 'Chat\ChatController@fetchMessages');
+Route::post('messages', 'Chat\ChatController@sendMessage');
+Route::post('update_message', 'Chat\ChatController@updateMessage');
+Route::delete('message', 'Chat\ChatController@destroyMessage');
+
+Route::post('friends_list', 'Chat\UserController@getFriends');
+Route::post('/recount_unread', 'Chat\ChatController@reCount');
+Route::get('/user', function () {
+    return Auth::user();
+});
+Route::post('/reading', 'Chat\ChatController@reading');
+Route::post('/re_reading', 'Chat\ChatController@reReading');
+
+Route::post('/upload', 'Chat\ChatController@uploadFile');
+Route::post('/video_time', 'Chat\ChatController@videoTime');
+Route::post('/video_time_end', 'Chat\ChatController@videoTimeEnd');
+
+
+

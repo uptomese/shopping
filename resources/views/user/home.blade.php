@@ -28,7 +28,9 @@
                                     <p>Email : {{ Auth::user()->email }}</p>
                                 </div>
                                 <div class=" col-6">
-                                    <p>Address : @if(Auth::user()->address[0] == 'address_a') {{ Auth::user()->address[1] }} @else {{ Auth::user()->address[2] }} @endif</p>
+                                    @if(isset(Auth::user()->address[0]))
+                                        <p>Address : @if(Auth::user()->address[0] == 'address_a') {{ Auth::user()->address[1] }} @else {{ Auth::user()->address[2] }} @endif</p>
+                                    @endif                                    
                                     <p>Phone Number : {{ Auth::user()->phone }}</p>
                                 </div>
                             </div>
@@ -88,8 +90,9 @@
                                         <td>
                                             {{$items['order']['date']}}
                                         </td>
-                                        <td>                                        
-                                            <span class="badge badge-dot mr-4">
+                                        <td>      
+                                        <!-- badge badge-dot mr-4                                   -->
+                                            <span class="">
                                                 @if($items['order']['status']=='wait')
                                                 <i class="bg-warning"></i>
                                                 @else
@@ -123,4 +126,23 @@
         </div>
     </div>
 </div>
+
+@php
+$user = array(
+    'id' => Auth::user()->id,
+    'name' => Auth::user()->name,
+    'email' => Auth::user()->email,
+    'image' => Auth::user()->image,
+    'status' => Auth::user()->status,
+    );
+@endphp
+
+<chat-component 
+    v-bind:user="{{  json_encode($user) }}"
+    :messages="messages" 
+    v-on:messagesent="addMessage"
+    v-on:session="addSession"
+    v-on:delete_message="delMessage"
+></chat-component>
+  
 @endsection

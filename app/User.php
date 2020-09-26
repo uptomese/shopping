@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $collection = 'users';
 
     protected $fillable = [
-        'id', 'admin', 'name', 'password','email' , 'address', 'phone','image'
+        'id', 'admin', 'name', 'password','email' , 'address', 'phone','image','status'
     ];
 
     /**
@@ -45,5 +45,15 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->admin;
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function session()
+    {
+        return $this->hasMany(Session::class);
     }
 }
