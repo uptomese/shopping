@@ -36,7 +36,7 @@ class User_nan extends NanModel
                 'Unique' => true
             ],
             "admin",
-            "sell",
+            "sale",
             "name",
             "password",
             "email" => [

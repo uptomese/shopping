@@ -68,14 +68,14 @@ class AdminUsersController extends Controller
                 'image' => 'default.jpg',
                 'status' => "offline",
                 'admin' => $admin_status,
-                'sell' => $request->input('sell_status') ? $request->input('sell_status')*1 : 0,
+                'sale' => $request->input('sale_status') ? $request->input('sale_status')*1 : 0,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
 
             $save_user = DB::connection('mongodb')->collection("users")->insert($array_user);
             if($save_user){
-                if($admin!=1 && !$request->input('sell_status')){
+                if($admin!=1 && !$request->input('sale_status')){
                     $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
                     $session = Session::database()->collection("sessions")->insert([
                         'id' => Session::database()->collection("sessions")->getModifySequence('sessions_id'),
@@ -108,7 +108,7 @@ class AdminUsersController extends Controller
                     'address' => array('address_a', $request->input('address')),
                     'phone' => $request->input('phone'),
                     'admin' => $request->input('status')*1,
-                    'sell' => $request->input('sell_status') ? $request->input('sell_status')*1 : 0,
+                    'sale' => $request->input('sale_status') ? $request->input('sale_status')*1 : 0,
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
     

@@ -486,7 +486,7 @@ class ProductsController extends Controller
                 'id' => User_nan::database()->collection("users")->getModifySequence('user_id'),
                 'name' => $first_name." ".$last_name,
                 'admin' => 0,
-                'sell' => 0,
+                'sale' => 0,
                 'email' => $email,
                 'image' => 'default.jpg',
                 'status' => "offline",
@@ -499,11 +499,16 @@ class ProductsController extends Controller
             $save_user = DB::connection('mongodb')->collection("users")->insert($new_user);
 
             $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
+   
+            $user_sale = DB::connection('mongodb')->collection("users")->where('sale','=',1)->where('status','online')->first();
+            if($user_sale==null){
+                $user_sale = DB::connection('mongodb')->collection("users")->where('sale','=',1)->first();
+            }
 
             $session = Session_model::database()->collection("sessions")->insert([
                 'id' => Session_model::database()->collection("sessions")->getModifySequence('sessions_id'),
                 'user_id1' => $user_id['id']*1,
-                'user_id2' => 1,
+                'user_id2' => $user_sale['id']*1,
                 'unread' => "0,0",
                 'reading' => 0
             ]);

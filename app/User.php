@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $collection = 'users';
 
     protected $fillable = [
-        'id', 'admin', "sell", 'name', 'password','email' , 'address', 'phone','image','status'
+        'id', 'admin', "sale", 'name', 'password','email' , 'address', 'phone','image','status'
     ];
 
     /**

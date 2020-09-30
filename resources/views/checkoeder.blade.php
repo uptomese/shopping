@@ -78,7 +78,8 @@
                     <div class="order-col">
                         <div><strong>Delivery Status</strong></div>
                         <div><strong class="order-total">
-                            <span class="badge badge-dot mr-4">
+                        <!-- badge badge-dot mr-4 -->
+                            <span class="">
                                             @if($items['order']['status']=='wait')
                                             <i class="bg-warning"></i>
                                             @else

@@ -92,8 +92,8 @@
                                 <hr class="my-4" />
                                 <div class=" w-100">                                
                                     <div class="custom-control custom-radio mb-3">
-                                        <input type="checkbox" id="customRadio2" name="sell_status" class="custom-control-input" value="1" @if(isset($user) && $user['sell'] == 1) checked @endif>
-                                        <label class="custom-control-label" for="customRadio2">is Sell</label>
+                                        <input type="checkbox" id="customRadio2" name="sale_status" class="custom-control-input" value="1" @if(isset($user) && $user['sale'] == 1) checked @endif>
+                                        <label class="custom-control-label" for="customRadio2">is Sale</label>
                                     </div>
                                     <hr class="my-4" />                                
                                     <div class="custom-control custom-radio mb-3">
