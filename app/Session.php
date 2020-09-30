@@ -7,15 +7,18 @@ use Nantaburi\Mongodb\MongoNativeDriver\Model ;
 
 class Session extends Model
 {
-    protected $collection = "sessions";
+    protected $connection = "mongodb";
+
     protected $database = "Abpon";
 
+    protected $collection = "sessions";
+    
     protected $schema = [
             'sessions' => [
                 "id" => [
                     'AutoInc' => true,
-                    'AutoIncStartwith' => 10,
-                    'Index' => true,
+                    // 'AutoIncStartwith' => 10,
+                    // 'Index' => true,
                     'Unique' => true
                 ],
                 "user_id1",

@@ -522,4 +522,33 @@
     <!-- /container -->
 </div>
 <!-- /NEWSLETTER -->
+
+@if(Auth::check())
+
+<div id="app">
+    @php
+    $user = array(
+        'id' => Auth::user()->id,
+        'name' => Auth::user()->name,
+        'email' => Auth::user()->email,
+        'image' => Auth::user()->image,
+        'status' => Auth::user()->status,
+        );
+    @endphp
+
+    <chat-component 
+        v-bind:user="{{  json_encode($user) }}"
+        :messages="messages" 
+        v-on:messagesent="addMessage"
+        v-on:session="addSession"
+        v-on:delete_message="delMessage"
+    ></chat-component>
+</div>
+
+<script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ URL::asset('js/box.js') }} "></script>
+<script src="{{ asset('js/app.js') }}"></script>
+
+@endif
+
 @endsection

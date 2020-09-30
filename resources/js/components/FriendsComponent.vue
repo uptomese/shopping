@@ -1,10 +1,10 @@
 <template>
   <div class="chatbox__body" style="padding: 0%">
     <div class="row">
-      <div class="col-4" style="padding-right: 0%">
+      <div class="col-lg-4" style="padding-right: 0%">
         <div class="card card-default">
           <div class="has-search input-group">
-            <span class="fa fa-search form-control-feedback"></span>
+            <!-- <span class="fa fa-search form-control-feedback"></span> -->
             <input
               v-model="search"
               type="search"
@@ -30,7 +30,7 @@
                 />
                 <span :id="'unread_count' + friend.id" class="badge"></span>
                 <div class="chat message">
-                  <a class="username">
+                  <a class="username" style="color: white">
                     {{ friend.name }}
                     <span
                       :id="'status_online' + friend.id"
@@ -45,9 +45,12 @@
                       "
                     ></span>
                   </a>
-                  <a :id="'unread_message' + friend.id" class="letter">{{
-                    friend.unread_message
-                  }}</a>
+                  <a
+                    :id="'unread_message' + friend.id"
+                    class="letter"
+                    style="color: white"
+                    >{{ friend.unread_message }}</a
+                  >
                 </div>
               </li>
               <li
@@ -360,6 +363,10 @@ export default {
 </script>
 
 <style>
+.form-control {
+  height: 49px;
+}
+
 .chat img {
   width: 50px;
   height: 50px;
@@ -390,11 +397,11 @@ export default {
   height: 30px;
 }
 
-.has-search .form-control {
+/* .has-search .form-control {
   padding-left: 2.375rem;
-}
+} */
 
-.has-search .form-control-feedback {
+/* .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
   display: block;
@@ -404,5 +411,5 @@ export default {
   text-align: center;
   pointer-events: none;
   color: #aaa;
-}
+} */
 </style>

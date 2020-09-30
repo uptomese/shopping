@@ -2221,6 +2221,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2511,12 +2514,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_assets_js_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/assets/js/config.js */ "./src/assets/js/config.js");
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9998,7 +9995,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".camera[data-v-3f20c7be] {\n  padding: 0px;\n}\n.has-search .form-control[data-v-3f20c7be] {\n  padding-left: 2.375rem;\n}\n.has-search .form-control-feedback[data-v-3f20c7be] {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n}\n.message_image[data-v-3f20c7be] {\n  margin: auto;\n  left: 0;\n  bottom: 0;\n}\n#myImg[data-v-3f20c7be]:hover {\n  opacity: 0.7;\n}\n.uploader[data-v-3f20c7be] {\n  width: 100%;\n  background-color: #d0d0d0;\n}\n.uploader.dragging[data-v-3f20c7be] {\n  background-color: #f2f2f2;\n  color: #2196f3;\n  border: 2px dashed #2196f3;\n}\n.uploader.dragging .file-input label[data-v-3f20c7be] {\n  background: #2196f3;\n  color: #fff;\n}\n.chat-bubble[data-v-3f20c7be] {\n  left: 0;\n  margin-left: 15px;\n  padding-left: 15px;\n  text-align: left;\n  padding-top: 15px;\n  padding-bottom: 5px;\n  margin-bottom: 5px;\n  border-radius: 30px 30px 30px 0px;\n  background-color: #ffffff;\n  padding: 16px 28px;\n  -webkit-border-radius: 20px;\n  -webkit-border-bottom-left-radius: 2px;\n  -moz-border-radius: 20px;\n  border-bottom-left-radius: 2px;\n  display: inline-block;\n}\n.wavy[data-v-3f20c7be] {\n  position: relative;\n}\n.wavy span[data-v-3f20c7be] {\n  position: relative;\n  display: inline-block;\n  color: #000;\n  -webkit-animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n          animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n  -webkit-animation-delay: calc(0.1s * var(--i));\n          animation-delay: calc(0.1s * var(--i));\n}\n@-webkit-keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}\n@keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}", ""]);
+exports.push([module.i, ".form-control[data-v-3f20c7be] {\n  height: 49px;\n}\n.input-group .form-control[data-v-3f20c7be],\n.input-group-addon[data-v-3f20c7be],\n.input-group-btn[data-v-3f20c7be] {\n  display: table-cell;\n}\n.input-group-addon[data-v-3f20c7be] {\n  padding: 12px 12px;\n  font-size: 17px;\n  font-weight: 400;\n  line-height: 1;\n  color: #555;\n  text-align: center;\n  background-color: #eee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n.camera[data-v-3f20c7be] {\n  padding: 0px;\n}\n.message_image[data-v-3f20c7be] {\n  margin: auto;\n  left: 0;\n  bottom: 0;\n}\n#myImg[data-v-3f20c7be]:hover {\n  opacity: 0.7;\n}\n.uploader[data-v-3f20c7be] {\n  width: 100%;\n  background-color: #d0d0d0;\n}\n.uploader.dragging[data-v-3f20c7be] {\n  background-color: #f2f2f2;\n  color: #2196f3;\n  border: 2px dashed #2196f3;\n}\n.uploader.dragging .file-input label[data-v-3f20c7be] {\n  background: #2196f3;\n  color: #fff;\n}\n.chat-bubble[data-v-3f20c7be] {\n  left: 0;\n  margin-left: 15px;\n  padding-left: 15px;\n  text-align: left;\n  padding-top: 15px;\n  padding-bottom: 5px;\n  margin-bottom: 5px;\n  border-radius: 30px 30px 30px 0px;\n  background-color: #ffffff;\n  padding: 16px 28px;\n  -webkit-border-radius: 20px;\n  -webkit-border-bottom-left-radius: 2px;\n  -moz-border-radius: 20px;\n  border-bottom-left-radius: 2px;\n  display: inline-block;\n}\n.wavy[data-v-3f20c7be] {\n  position: relative;\n}\n.wavy span[data-v-3f20c7be] {\n  position: relative;\n  display: inline-block;\n  color: #000;\n  -webkit-animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n          animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n  -webkit-animation-delay: calc(0.1s * var(--i));\n          animation-delay: calc(0.1s * var(--i));\n}\n@-webkit-keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}\n@keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}", ""]);
 
 // exports
 
@@ -10017,7 +10014,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.chat img {\n  width: 50px;\n  height: 50px;\n  margin-right: 10px;\n  border: 1px solid #222222;\n}\n.chat .username {\n  margin-top: -10px;\n  font-size: 16px;\n}\n.chat .letter {\n  margin-top: -5px;\n  padding-top: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.letter:hover {\n  overflow: visible;\n}\n.message {\n  display: flex;\n  flex-direction: column;\n  height: 30px;\n}\n.has-search .form-control {\n  padding-left: 2.375rem;\n}\n.has-search .form-control-feedback {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n}\n", ""]);
+exports.push([module.i, "\n.form-control {\n  height: 49px;\n}\n.chat img {\n  width: 50px;\n  height: 50px;\n  margin-right: 10px;\n  border: 1px solid #222222;\n}\n.chat .username {\n  margin-top: -10px;\n  font-size: 16px;\n}\n.chat .letter {\n  margin-top: -5px;\n  padding-top: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.letter:hover {\n  overflow: visible;\n}\n.message {\n  display: flex;\n  flex-direction: column;\n  height: 30px;\n}\n\n/* .has-search .form-control {\n  padding-left: 2.375rem;\n} */\n\n/* .has-search .form-control-feedback {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n} */\n", ""]);
 
 // exports
 
@@ -72035,14 +72032,10 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "col-4", staticStyle: { "padding-right": "0%" } },
+            { staticClass: "col-lg-4", staticStyle: { "padding-right": "0%" } },
             [
               _c("div", { staticClass: "card card-default" }, [
                 _c("div", { staticClass: "has-search input-group" }, [
-                  _c("span", {
-                    staticClass: "fa fa-search form-control-feedback"
-                  }),
-                  _vm._v(" "),
                   _c("input", {
                     directives: [
                       {
@@ -72102,33 +72095,41 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "chat message" }, [
-                                  _c("a", { staticClass: "username" }, [
-                                    _vm._v(
-                                      "\n                  " +
-                                        _vm._s(friend.name) +
-                                        "\n                  "
-                                    ),
-                                    friend.status == "online"
-                                      ? _c("span", {
-                                          staticStyle: {
-                                            background: "rgb(66, 183, 42)",
-                                            "border-radius": "50%",
-                                            display: "inline-block",
-                                            height: "6px",
-                                            "margin-left": "4px",
-                                            width: "6px"
-                                          },
-                                          attrs: {
-                                            id: "status_online" + friend.id
-                                          }
-                                        })
-                                      : _vm._e()
-                                  ]),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "username",
+                                      staticStyle: { color: "white" }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                  " +
+                                          _vm._s(friend.name) +
+                                          "\n                  "
+                                      ),
+                                      friend.status == "online"
+                                        ? _c("span", {
+                                            staticStyle: {
+                                              background: "rgb(66, 183, 42)",
+                                              "border-radius": "50%",
+                                              display: "inline-block",
+                                              height: "6px",
+                                              "margin-left": "4px",
+                                              width: "6px"
+                                            },
+                                            attrs: {
+                                              id: "status_online" + friend.id
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  ),
                                   _vm._v(" "),
                                   _c(
                                     "a",
                                     {
                                       staticClass: "letter",
+                                      staticStyle: { color: "white" },
                                       attrs: {
                                         id: "unread_message" + friend.id
                                       }
@@ -72290,12 +72291,10 @@ var render = function() {
   return _vm.friend_id
     ? _c(
         "div",
-        { staticClass: "col-8", staticStyle: { "padding-left": "0%" } },
+        { staticClass: "col-lg-8", staticStyle: { "padding-left": "0%" } },
         [
           _c("div", { staticClass: "card card-default card-box" }, [
-            _c("div", { staticClass: "has-search input-group" }, [
-              _c("span", { staticClass: "fa fa-search form-control-feedback" }),
-              _vm._v(" "),
+            _c("div", { staticClass: "input-group" }, [
               _c("input", {
                 directives: [
                   {
@@ -72318,39 +72317,33 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c("div", { staticStyle: { "text-align": "right" } }, [
-                    _c("i", {
-                      staticClass: "far fa-file-image",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.getFile()
-                        }
-                      }
-                    })
-                  ])
-                ])
+              _c("span", { staticClass: "input-group-addon" }, [
+                _c("i", {
+                  staticClass: "far fa-file-image",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.getFile()
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
               _vm.friend_id.status == "online"
-                ? _c("div", { staticClass: "input-group-append" }, [
-                    _c("span", { staticClass: "input-group-text" }, [
-                      _c("div", { staticStyle: { "text-align": "right" } }, [
-                        _c("i", {
-                          staticClass: "fa fa-video-camera camera",
-                          staticStyle: { color: "green" },
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.openVideo(_vm.friend_id)
-                            }
+                ? _c("span", { staticClass: "input-group-addon" }, [
+                    _c("div", { staticStyle: { "text-align": "right" } }, [
+                      _c("i", {
+                        staticClass: "fa fa-video-camera camera",
+                        staticStyle: { color: "green" },
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.openVideo(_vm.friend_id)
                           }
-                        })
-                      ])
+                        }
+                      })
                     ])
                   ])
                 : _vm._e()
@@ -72801,79 +72794,21 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "panel-footer" }, [
-              this.update == true
-                ? _c("div", { staticClass: "input-group-prepend" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "input-group-text",
-                        attrs: { id: "basic-addon1" }
-                      },
-                      [_vm._v(_vm._s(this.messageDisable))]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
+            _c(
+              "div",
+              { staticClass: "panel-footer", staticStyle: { padding: "0" } },
+              [
+                this.update == true
+                  ? _c("div", { staticClass: "input-group-prepend" }, [
+                      _c(
+                        "span",
                         {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newMessage,
-                          expression: "newMessage"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "btn-input",
-                        type: "text",
-                        placeholder: "Type your message here...",
-                        tabindex: "0",
-                        dir: "ltr",
-                        spellcheck: "false",
-                        autocomplete: "off",
-                        autocorrect: "off",
-                        autocapitalize: "off",
-                        contenteditable: "true",
-                        name: "message"
-                      },
-                      domProps: { value: _vm.newMessage },
-                      on: {
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.sendMessage($event)
+                          staticClass: "input-group-text",
+                          attrs: { id: "basic-addon1" }
                         },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.newMessage = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("i", {
-                      staticClass: "fas fa-location-arrow icon",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.sendMessage($event)
-                        }
-                      }
-                    })
-                  ])
-                : _c("div", [
-                    _c("div", { staticClass: "input-group-prepend" }, [
+                        [_vm._v(_vm._s(this.messageDisable))]
+                      ),
+                      _vm._v(" "),
                       _c("input", {
                         directives: [
                           {
@@ -72932,47 +72867,110 @@ var render = function() {
                           }
                         }
                       })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "input-group-prepend",
-                        attrs: { hidden: "" }
-                      },
-                      [
+                    ])
+                  : _c("div", [
+                      _c("div", { staticClass: "input-group-prepend" }, [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newMessage,
+                              expression: "newMessage"
+                            }
+                          ],
                           staticClass: "form-control",
                           attrs: {
-                            id: "image_file",
-                            type: "file",
-                            onchange:
-                              "document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])",
-                            accept: ".jpg, .jpeg, .png"
+                            id: "btn-input",
+                            type: "text",
+                            placeholder: "Type your message here...",
+                            tabindex: "0",
+                            dir: "ltr",
+                            spellcheck: "false",
+                            autocomplete: "off",
+                            autocorrect: "off",
+                            autocapitalize: "off",
+                            contenteditable: "true",
+                            name: "message"
                           },
-                          on: { change: _vm.onImageChange }
-                        }),
-                        _vm._v(" "),
-                        _c("img", {
-                          attrs: { id: "blah", height: "40", width: "40" }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success",
-                            on: {
-                              click: function($event) {
-                                return _vm.uploadImage(_vm.friend_id.session)
+                          domProps: { value: _vm.newMessage },
+                          on: {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
                               }
+                              return _vm.sendMessage($event)
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newMessage = $event.target.value
                             }
-                          },
-                          [_vm._v("\n            Upload\n          ")]
-                        )
-                      ]
-                    )
-                  ])
-            ])
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("i", {
+                          staticClass: "fas fa-location-arrow icon",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.sendMessage($event)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "input-group-prepend",
+                          staticStyle: { display: "none" },
+                          attrs: { hidden: "" }
+                        },
+                        [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "image_file",
+                              type: "file",
+                              onchange:
+                                "document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])",
+                              accept: ".jpg, .jpeg, .png"
+                            },
+                            on: { change: _vm.onImageChange }
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            attrs: { id: "blah", height: "40", width: "40" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              on: {
+                                click: function($event) {
+                                  return _vm.uploadImage(_vm.friend_id.session)
+                                }
+                              }
+                            },
+                            [_vm._v("\n            Upload\n          ")]
+                          )
+                        ]
+                      )
+                    ])
+              ]
+            )
           ])
         ]
       )
@@ -90714,7 +90712,7 @@ __webpack_require__.r(__webpack_exports__);
   serverUrl: function serverUrl() {
     // return 'https://stream.thaisearchs.com';
     // return 'http://127.0.0.1:6999';
-    return 'http://127.0.0.1:6999';
+    return 'https://127.0.0.1:6999';
   },
   serverImage: function serverImage() {
     return 'http://127.0.0.1:8000/images';

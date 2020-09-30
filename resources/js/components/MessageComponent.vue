@@ -1,38 +1,32 @@
 <template>
-  <div v-if="friend_id" class="col-8" style="padding-left: 0%">
+  <div v-if="friend_id" class="col-lg-8" style="padding-left: 0%">
     <div class="card card-default card-box">
-      <div class="has-search input-group">
-        <span class="fa fa-search form-control-feedback"></span>
+      <div class="input-group">
         <input
           v-model="search"
           type="search"
           class="form-control"
           placeholder="Search message"
         />
-        <div class="input-group-append">
-          <span class="input-group-text">
-            <div style="text-align: right">
-              <i
-                class="far fa-file-image"
-                type="button"
-                @click.prevent="getFile()"
-              ></i>
-            </div>
-          </span>
-        </div>
-        <div v-if="friend_id.status == 'online'" class="input-group-append">
-          <span class="input-group-text">
-            <div style="text-align: right">
-              <i
-                class="fa fa-video-camera camera"
-                @click.prevent="openVideo(friend_id)"
-                type="button"
-                style="color: green"
-              ></i>
-            </div>
-          </span>
-        </div>
+        <span class="input-group-addon">
+          <i
+            class="far fa-file-image"
+            type="button"
+            @click.prevent="getFile()"
+          ></i>
+        </span>
+        <span v-if="friend_id.status == 'online'" class="input-group-addon">
+          <div style="text-align: right">
+            <i
+              class="fa fa-video-camera camera"
+              @click.prevent="openVideo(friend_id)"
+              type="button"
+              style="color: green"
+            ></i>
+          </div>
+        </span>
       </div>
+
       <div
         v-chat-scroll="{
           always: false,
@@ -255,7 +249,7 @@
           </div>
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="panel-footer" style="padding: 0">
         <div v-if="this.update == true" class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">{{
             this.messageDisable
@@ -306,7 +300,7 @@
             ></i>
           </div>
 
-          <div class="input-group-prepend" hidden>
+          <div class="input-group-prepend" hidden style="display: none">
             <input
               id="image_file"
               type="file"
@@ -590,6 +584,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.form-control {
+  height: 49px;
+}
+
+.input-group .form-control,
+.input-group-addon,
+.input-group-btn {
+  display: table-cell;
+}
+
+.input-group-addon {
+  padding: 12px 12px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .camera {
   padding: 0px;
 }
@@ -599,21 +615,21 @@ export default {
 //   width: 15px;
 // }
 
-.has-search .form-control {
-  padding-left: 2.375rem;
-}
+// .has-search .form-control {
+//   padding-left: 2.375rem;
+// }
 
-.has-search .form-control-feedback {
-  position: absolute;
-  z-index: 2;
-  display: block;
-  width: 2.375rem;
-  height: 2.375rem;
-  line-height: 2.375rem;
-  text-align: center;
-  pointer-events: none;
-  color: #aaa;
-}
+// .has-search .form-control-feedback {
+//   position: absolute;
+//   z-index: 2;
+//   display: block;
+//   width: 2.375rem;
+//   height: 2.375rem;
+//   line-height: 2.375rem;
+//   text-align: center;
+//   pointer-events: none;
+//   color: #aaa;
+// }
 
 .message_image {
   margin: auto;

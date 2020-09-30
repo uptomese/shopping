@@ -8,6 +8,22 @@
 
 		<title>Abpon | Thailandpages</title>
 
+		<link rel="dns-prefetch" href="//fonts.gstatic.com">
+  		<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://unpkg.com/marked@0.3.6"></script>
+		<script src="https://unpkg.com/lodash@4.16.0"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+		<!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> -->
+
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{URL::asset('css/box2.css')}} ">
+  		<link rel="stylesheet" href="{{URL::asset('css/chatbtn.css')}} ">
+		
+
 		<link rel="icon" href="{{ asset('assets/img/brand/abpon.png') }}" type="image/png">
 
 		<!-- Google font -->
@@ -27,7 +43,8 @@
 		<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
 		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}"/>
+		<!-- <link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}"/> -->
+		<link type="text/css" rel="stylesheet" href="{{asset('css/main_style.css')}}"/>	
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

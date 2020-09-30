@@ -8,9 +8,11 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\User_nan;
+use App\Session;
 
 class RegisterController extends Controller
 {
@@ -52,8 +54,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // ,'exists:admin'
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255','exists:admin'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -66,8 +69,8 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        return User::create([
+    { 
+        $user = User::create([
             'id' => User_nan::database()->collection("users")->getModifySequence('user_id'),
             'admin' => 0,
             'name' => $data['name'],
@@ -78,5 +81,17 @@ class RegisterController extends Controller
             'address' => array('address_a', $data['address']),
             'phone' => $data['phone'],
         ]);
+
+        $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
+
+        $session = Session::database()->collection("sessions")->insert([
+            'id' => Session::database()->collection("sessions")->getModifySequence('sessions_id'),
+            'user_id1' => $user_id['id']*1,
+            'user_id2' => 1,
+            'unread' => "0,0",
+            'reading' => 0
+        ]);
+
+        return $user;
     }
 }
