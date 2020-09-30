@@ -2214,6 +2214,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2223,7 +2230,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       select: null,
       index: 0,
       session: null,
-      search: ""
+      search: "",
+      baseUrl: ""
     };
   },
   props: ["messages", "user"],
@@ -2267,6 +2275,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this2.roomVideo();
 
             case 10:
+              _context.next = 12;
+              return _this2.getUrl();
+
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -2288,6 +2300,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    getUrl: function getUrl() {
+      this.baseUrl = window.location.origin;
+    },
     createRoom: function createRoom(session) {
       var vm = this;
       this.$root.socket.on("nameRoom", function (data) {
@@ -2827,41 +2842,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "user", "friend_id"],
@@ -2876,7 +2856,8 @@ __webpack_require__.r(__webpack_exports__);
       dragCount: 0,
       check_session: "",
       load: 2,
-      hasScrolledToBottom: false
+      hasScrolledToBottom: false,
+      baseUrl: ""
     };
   },
   components: {},
@@ -2899,6 +2880,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
+    getUrl: function getUrl() {
+      this.baseUrl = window.location.origin;
+    },
     //-------------------------------------------------------- load more messages
     handleScroll: function handleScroll(el) {
       if (el.srcElement.scrollTop == 0) {
@@ -10033,7 +10017,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.chat img {\n    width: 50px;\n    height: 50px;\n    margin-right: 10px;\n    border: 1px solid #222222;\n}\n.chat .username {\n    margin-top: -10px;\n    font-size: 16px;\n}\n.chat .letter {\n    margin-top: -5px;\n    padding-top: 0;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n.letter:hover {\n    overflow: visible;\n}\n.message {\n    display: flex;\n    flex-direction: column;\n    height: 30px;\n}\n.has-search .form-control {\n    padding-left: 2.375rem;\n}\n.has-search .form-control-feedback {\n    position: absolute;\n    z-index: 2;\n    display: block;\n    width: 2.375rem;\n    height: 2.375rem;\n    line-height: 2.375rem;\n    text-align: center;\n    pointer-events: none;\n    color: #aaa;\n}\n", ""]);
+exports.push([module.i, "\n.chat img {\n  width: 50px;\n  height: 50px;\n  margin-right: 10px;\n  border: 1px solid #222222;\n}\n.chat .username {\n  margin-top: -10px;\n  font-size: 16px;\n}\n.chat .letter {\n  margin-top: -5px;\n  padding-top: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.letter:hover {\n  overflow: visible;\n}\n.message {\n  display: flex;\n  flex-direction: column;\n  height: 30px;\n}\n.has-search .form-control {\n  padding-left: 2.375rem;\n}\n.has-search .form-control-feedback {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n}\n", ""]);
 
 // exports
 
@@ -72106,7 +72090,9 @@ var render = function() {
                                   staticClass: "profileimg",
                                   attrs: {
                                     src:
-                                      "../storage/user_images/" + friend.image
+                                      _vm.baseUrl +
+                                      "/storage/user_images/" +
+                                      friend.image
                                   }
                                 }),
                                 _vm._v(" "),
@@ -72118,9 +72104,9 @@ var render = function() {
                                 _c("div", { staticClass: "chat message" }, [
                                   _c("a", { staticClass: "username" }, [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                  " +
                                         _vm._s(friend.name) +
-                                        "\n                                    "
+                                        "\n                  "
                                     ),
                                     friend.status == "online"
                                       ? _c("span", {
@@ -72171,7 +72157,9 @@ var render = function() {
                                   staticClass: "profileimg",
                                   attrs: {
                                     src:
-                                      "../storage/user_images/" + friend.image
+                                      _vm.baseUrl +
+                                      "/storage/user_images/" +
+                                      friend.image
                                   }
                                 }),
                                 _vm._v(" "),
@@ -72198,9 +72186,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                    " +
+                                            "\n                  " +
                                               _vm._s(friend.name) +
-                                              "\n                                    "
+                                              "\n                  "
                                           ),
                                           friend.status == "online"
                                             ? _c("span", {
@@ -72223,9 +72211,9 @@ var render = function() {
                                       )
                                     : _c("a", { staticClass: "username" }, [
                                         _vm._v(
-                                          "\n                                    " +
+                                          "\n                  " +
                                             _vm._s(friend.name) +
-                                            "\n                                    "
+                                            "\n                  "
                                         ),
                                         friend.status == "online"
                                           ? _c("span", {
@@ -72382,7 +72370,7 @@ var render = function() {
                       smoothonremoved: false
                     },
                     expression:
-                      "{\n                always: false,\n                smooth: true,\n                scrollonremoved: true,\n                smoothonremoved: false\n            }"
+                      "{\n        always: false,\n        smooth: true,\n        scrollonremoved: true,\n        smoothonremoved: false,\n      }"
                   }
                 ],
                 staticClass: "card-body cardpadding uploader",
@@ -72416,14 +72404,14 @@ var render = function() {
                                   _c("a", [
                                     _c("i", { staticClass: "fa fa-calendar" }),
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                  " +
                                         _vm._s(
                                           _vm._f("moment")(
                                             message.created_at,
                                             "dddd, Do MMMM YYYY"
                                           )
                                         ) +
-                                        "\n                                "
+                                        "\n                "
                                     )
                                   ])
                                 ]),
@@ -72432,14 +72420,14 @@ var render = function() {
                                   _c("a", [
                                     _c("i", { staticClass: "far fa-clock" }),
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                  " +
                                         _vm._s(
                                           _vm._f("moment")(
                                             message.created_at,
                                             "H:mm:ss"
                                           )
                                         ) +
-                                        "\n                                "
+                                        "\n                "
                                     )
                                   ])
                                 ])
@@ -72448,7 +72436,10 @@ var render = function() {
                             _vm._v(" "),
                             _c("img", {
                               attrs: {
-                                src: "../storage/user_images/" + _vm.user.image,
+                                src:
+                                  _vm.baseUrl +
+                                  "/storage/user_images/" +
+                                  _vm.user.image,
                                 alt: "Picture"
                               }
                             }),
@@ -72527,9 +72518,9 @@ var render = function() {
                                                 }
                                               }),
                                               _vm._v(
-                                                "\n                                     " +
+                                                "\n                   " +
                                                   _vm._s(message.message) +
-                                                  "\n                                "
+                                                  "\n                "
                                               )
                                             ])
                                           ]
@@ -72539,9 +72530,9 @@ var render = function() {
                                           { attrs: { id: message.message_id } },
                                           [
                                             _vm._v(
-                                              "\n                                " +
+                                              "\n                " +
                                                 _vm._s(message.message) +
-                                                "\n                            "
+                                                "\n              "
                                             )
                                           ]
                                         )
@@ -72620,14 +72611,14 @@ var render = function() {
                                   _c("a", [
                                     _c("i", { staticClass: "fa fa-calendar" }),
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                  " +
                                         _vm._s(
                                           _vm._f("moment")(
                                             message.created_at,
                                             "dddd, Do MMMM YYYY"
                                           )
                                         ) +
-                                        "\n                                "
+                                        "\n                "
                                     )
                                   ])
                                 ]),
@@ -72636,14 +72627,14 @@ var render = function() {
                                   _c("a", [
                                     _c("i", { staticClass: "far fa-clock" }),
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                  " +
                                         _vm._s(
                                           _vm._f("moment")(
                                             message.created_at,
                                             "H:mm:ss"
                                           )
                                         ) +
-                                        "\n                                "
+                                        "\n                "
                                     )
                                   ])
                                 ])
@@ -72653,7 +72644,8 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 src:
-                                  "../storage/user_images/" +
+                                  _vm.baseUrl +
+                                  "/storage/user_images/" +
                                   _vm.friend_id.image,
                                 alt: "Picture"
                               }
@@ -72727,9 +72719,9 @@ var render = function() {
                                           [
                                             _c("p", [
                                               _vm._v(
-                                                "\n                                    " +
+                                                "\n                  " +
                                                   _vm._s(message.message) +
-                                                  " \n                                    "
+                                                  " \n                  "
                                               ),
                                               _c("i", {
                                                 staticClass: "fa fa-phone"
@@ -72742,9 +72734,9 @@ var render = function() {
                                           { attrs: { id: message.message_id } },
                                           [
                                             _vm._v(
-                                              "\n                                " +
+                                              "\n                " +
                                                 _vm._s(message.message) +
-                                                "\n                            "
+                                                "\n              "
                                             )
                                           ]
                                         )
@@ -72775,7 +72767,9 @@ var render = function() {
                         _c("img", {
                           attrs: {
                             src:
-                              "../storage/user_images/" + this.friend_id.image,
+                              _vm.baseUrl +
+                              "/storage/user_images/" +
+                              this.friend_id.image,
                             alt: "Picture"
                           }
                         }),
@@ -72973,11 +72967,7 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _vm._v(
-                              "\n                        Upload\n                    "
-                            )
-                          ]
+                          [_vm._v("\n            Upload\n          ")]
                         )
                       ]
                     )
@@ -73008,11 +72998,11 @@ var staticRenderFns = [
         _c("span", { staticStyle: { "--i": "5" } }, [_vm._v("n")]),
         _vm._v(" "),
         _c("span", { staticStyle: { "--i": "6" } }, [_vm._v("g")]),
-        _vm._v(" \n                                "),
+        _vm._v(" \n                "),
         _c("span", { staticStyle: { "--i": "7" } }, [_vm._v(".")]),
-        _vm._v(" \n                                "),
+        _vm._v(" \n                "),
         _c("span", { staticStyle: { "--i": "8" } }, [_vm._v(".")]),
-        _vm._v(" \n                                "),
+        _vm._v(" \n                "),
         _c("span", { staticStyle: { "--i": "9" } }, [_vm._v(".")])
       ]
     )

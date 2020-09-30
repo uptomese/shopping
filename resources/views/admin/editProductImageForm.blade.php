@@ -42,8 +42,8 @@
                             </div>
                             @endif
                             <div class="pl-lg-4">
-                                <img id="blah" src="{{ asset('storage') }}/product_images/{{$product[0]['image']}}" alt=""
-                                    width="auto" height="200">
+                                <img id="blah" src="{{ asset('storage') }}/product_images/{{$product[0]['image']}}"
+                                    alt="" width="auto" height="200">
                             </div>
                             <form action="/admin/updateImage/{{$product[0]['id']}}" method="POST"
                                 enctype="multipart/form-data">
@@ -68,6 +68,24 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
+
+@php
+    $user = array(
+    'id' => Auth::user()->id,
+    'name' => Auth::user()->name,
+    'email' => Auth::user()->email,
+    'image' => Auth::user()->image,
+    'status' => Auth::user()->status,
+    );
+@endphp
+
+<chat-component 
+    v-bind:user="{{  json_encode($user) }}" 
+    :messages="messages" 
+    v-on:messagesent="addMessage"
+    v-on:session="addSession" 
+    v-on:delete_message="delMessage"
+></chat-component>
 
 @endsection

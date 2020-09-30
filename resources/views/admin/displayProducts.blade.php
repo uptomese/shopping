@@ -112,4 +112,22 @@
         </div>
     </div>
 
-    @endsection
+@php
+$user = array(
+    'id' => Auth::user()->id,
+    'name' => Auth::user()->name,
+    'email' => Auth::user()->email,
+    'image' => Auth::user()->image,
+    'status' => Auth::user()->status,
+    );
+@endphp
+
+<chat-component 
+    v-bind:user="{{  json_encode($user) }}"
+    :messages="messages" 
+    v-on:messagesent="addMessage"
+    v-on:session="addSession"
+    v-on:delete_message="delMessage"
+></chat-component>
+
+@endsection

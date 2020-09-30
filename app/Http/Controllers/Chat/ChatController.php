@@ -301,6 +301,8 @@ class ChatController extends Controller
           $session = $request->get('session');
           $image = $request->get('image');
           $name = $session.'_'.time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+
+
           \Image::make($request->get('image'))->save(public_path('images/message_images/').$name);
 
           $id = Auth::user()->id;
