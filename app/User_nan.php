@@ -35,6 +35,8 @@ class User_nan extends NanModel
                 'Index' => true,
                 'Unique' => true
             ],
+            "admin",
+            "sell",
             "name",
             "password",
             "email" => [

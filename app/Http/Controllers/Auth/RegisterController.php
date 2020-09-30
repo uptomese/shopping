@@ -73,6 +73,7 @@ class RegisterController extends Controller
         $user = User::create([
             'id' => User_nan::database()->collection("users")->getModifySequence('user_id'),
             'admin' => 0,
+            'sell' => 0,
             'name' => $data['name'],
             'email' => $data['email'],
             'image' => 'default.jpg',

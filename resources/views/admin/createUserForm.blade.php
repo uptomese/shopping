@@ -89,14 +89,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class=" w-100">
+                                <hr class="my-4" />
+                                <div class=" w-100">                                
+                                    <div class="custom-control custom-radio mb-3">
+                                        <input type="checkbox" id="customRadio2" name="sell_status" class="custom-control-input" value="1" @if(isset($user) && $user['sell'] == 1) checked @endif>
+                                        <label class="custom-control-label" for="customRadio2">is Sell</label>
+                                    </div>
+                                    <hr class="my-4" />                                
                                     <div class="custom-control custom-radio mb-3">
                                         <input type="radio" id="customRadio1" name="status" class="custom-control-input" value="1" @if(isset($user) && $user['admin'] == 1) checked @endif required>
                                         <label class="custom-control-label" for="customRadio1">is Admin</label>
-                                    </div>
+                                    </div>                                
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="status" class="custom-control-input" value="0" @if(isset($user) && $user['admin'] == 0) checked @endif required>
-                                        <label class="custom-control-label" for="customRadio2">is User</label>
+                                        <input type="radio" id="customRadio3" name="status" class="custom-control-input" value="0" @if(isset($user) && $user['admin'] == 0) checked @endif required>
+                                        <label class="custom-control-label" for="customRadio3">is User</label>
                                     </div>
                                 </div>
                                 <hr class="my-4" />

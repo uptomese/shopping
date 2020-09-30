@@ -19,6 +19,7 @@ use App\User;
 use App\Review;
 use App\OrderItem;
 use App\User_nan;
+use App\Session as Session_model;
 
 class ProductsController extends Controller
 {
@@ -485,6 +486,7 @@ class ProductsController extends Controller
                 'id' => User_nan::database()->collection("users")->getModifySequence('user_id'),
                 'name' => $first_name." ".$last_name,
                 'admin' => 0,
+                'sell' => 0,
                 'email' => $email,
                 'image' => 'default.jpg',
                 'status' => "offline",
@@ -497,6 +499,14 @@ class ProductsController extends Controller
             $save_user = DB::connection('mongodb')->collection("users")->insert($new_user);
 
             $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
+
+            $session = Session_model::database()->collection("sessions")->insert([
+                'id' => Session_model::database()->collection("sessions")->getModifySequence('sessions_id'),
+                'user_id1' => $user_id['id']*1,
+                'user_id2' => 1,
+                'unread' => "0,0",
+                'reading' => 0
+            ]);
 
             // if(!$save_user)  return redirect()->route('allProducts');
             if($cart){
