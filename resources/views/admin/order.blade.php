@@ -181,9 +181,10 @@
                                 <td class="budget">
                                     {{$item['date']}}
                                 </td>
+                                <!-- badge badge-dot mr-4 -->
                                 <td>
                                     {{$item['address']}}&nbsp;(
-                                    <span class="badge badge-dot mr-4">
+                                    <span class="">
                                         @if($item['status']=='wait')
                                         <i class="bg-warning"></i>
                                         @else
@@ -227,7 +228,7 @@
                 <div class="card-footer py-4">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-end mb-0">
-                            {{$orders_users_in->links()}}
+                            {{ $orders_users_in->appends(array('year' => $select_year, 'month' => $date_m_now))->links() }}
                         </ul>
                     </nav>
                 </div>
@@ -272,9 +273,10 @@
                                 <td class="budget">
                                     {{$item['date']}}
                                 </td>
+                                <!-- badge badge-dot mr-4 -->
                                 <td>
                                     {{$item['address']}}&nbsp;(
-                                    <span class="badge badge-dot mr-4">
+                                    <span class="">
                                         @if($item['status']=='wait')
                                         <i class="bg-warning"></i>
                                         @else
@@ -318,7 +320,7 @@
                 <div class="card-footer py-4">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-end mb-0">
-                            {{$orders_users_out->links()}}
+                            {{ $orders_users_out->appends(array('year' => $select_year, 'month' => $date_m_now))->links() }}
                         </ul>
                     </nav>
                 </div>

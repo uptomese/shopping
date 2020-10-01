@@ -496,19 +496,18 @@ class ProductsController extends Controller
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             );
-            $save_user = DB::connection('mongodb')->collection("users")->insert($new_user);
+            $save_user = User_nan::database()->collection("users")->insertGetId($new_user, 'id');
 
-            $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
-   
-            $user_sale = DB::connection('mongodb')->collection("users")->where('sale','=',1)->where('status','online')->first();
+            $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->andwhere("status","=","online")->groupby('id','name')->random(1);
+
             if($user_sale==null){
-                $user_sale = DB::connection('mongodb')->collection("users")->where('sale','=',1)->first();
+                $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->groupby('id','name')->random(1);
             }
-
+            
             $session = Session_model::database()->collection("sessions")->insert([
                 'id' => Session_model::database()->collection("sessions")->getModifySequence('sessions_id'),
-                'user_id1' => $user_id['id']*1,
-                'user_id2' => $user_sale['id']*1,
+                'user_id1' => $save_user[2]*1,
+                'user_id2' => $user_sale[0]['id']*1,
                 'unread' => "0,0",
                 'reading' => 0
             ]);
@@ -524,7 +523,7 @@ class ProductsController extends Controller
                     'del_date' => date('Y-m-d'),
                     'quantity' => $cart->totalQuantity*1.0,
                     'price' => $cart->totalPrice*1.0,
-                    'user_id' => $user_id['id']*1,
+                    'user_id' => $save_user[2]*1,
                     'full_name' => null,
                     'email' => null,
                     'address' => $address,

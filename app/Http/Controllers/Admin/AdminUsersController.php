@@ -58,7 +58,7 @@ class AdminUsersController extends Controller
                 'password_confirmation' => 'min:6'
             ]);
 
-            $array_user = array([
+            $array_user = array(
                 'id' => User_nan::database()->collection("users")->getModifySequence('user_id'),
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
@@ -71,16 +71,22 @@ class AdminUsersController extends Controller
                 'sale' => $request->input('sale_status') ? $request->input('sale_status')*1 : 0,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
-            ]);
+            );
+            $save_user = User_nan::database()->collection("users")->insertGetId($array_user, 'id');
 
-            $save_user = DB::connection('mongodb')->collection("users")->insert($array_user);
             if($save_user){
-                if($admin!=1 && !$request->input('sale_status')){
-                    $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
+                if($admin_status != 1 && !$request->input('sale_status')){
+   
+                    $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->andwhere("status","=","online")->groupby('id','name')->random(1);
+
+                    if($user_sale==null){
+                        $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->groupby('id','name')->random(1);
+                    }
+
                     $session = Session::database()->collection("sessions")->insert([
                         'id' => Session::database()->collection("sessions")->getModifySequence('sessions_id'),
-                        'user_id1' => $user_id['id']*1,
-                        'user_id2' => 1,
+                        'user_id1' => $save_user[2]*1,
+                        'user_id2' => $user_sale[0]['id']*1,
                         'unread' => "0,0",
                         'reading' => 0
                     ]);

@@ -85,10 +85,16 @@ class RegisterController extends Controller
 
         $user_id = DB::connection('mongodb')->collection("users")->select('id')->orderBy('id','desc')->first();
 
+        $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->andwhere("status","=","online")->groupby('id','name')->random(1);
+
+        if($user_sale==null){
+            $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->groupby('id','name')->random(1);
+        }
+
         $session = Session::database()->collection("sessions")->insert([
             'id' => Session::database()->collection("sessions")->getModifySequence('sessions_id'),
             'user_id1' => $user_id['id']*1,
-            'user_id2' => 1,
+            'user_id2' => $user_sale[0]['id']*1,
             'unread' => "0,0",
             'reading' => 0
         ]);
