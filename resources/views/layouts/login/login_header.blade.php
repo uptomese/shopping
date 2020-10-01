@@ -14,7 +14,7 @@
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/marked@0.3.6"></script>
   <script src="https://unpkg.com/lodash@4.16.0"></script>
-  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -54,40 +54,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
-        <!-- <div class="navbar-collapse-header">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <a href="dashboard.html">
-                <img src="{{ asset('assets/img/brand/blue.png') }}">
-              </a>
-            </div>
-            <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-              </button>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a href="dashboard.html" class="nav-link">
-              <span class="nav-link-inner--text">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/login" class="nav-link">
-              <span class="nav-link-inner--text">Login</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/register" class="nav-link">
-              <span class="nav-link-inner--text">Register</span>
-            </a>
-          </li>
-        </ul> -->
-
         <hr class="d-lg-none" />
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <li class="nav-item">

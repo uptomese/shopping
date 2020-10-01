@@ -29,7 +29,7 @@ class AdminOrdersController extends Controller
             ->orderBy('date','desc')
             ->whereBetween('date', [$year.'-'.$month, $year.'-'.$month2])
             ->where('user_id','!=','no')
-            ->paginate(10,['*'],'month_'.$month);
+            ->paginate(10,['*'],'pageMonth_'.$month);
 
         foreach($result_array_order_in as $item){
             $user = DB::connection('mongodb')->collection("users")->select('id','name','email','image')->where('id','=',$item['user_id']*1)->first();
@@ -76,7 +76,7 @@ class AdminOrdersController extends Controller
             ->orderby('id','desc')
             ->whereBetween('date', [$year.'-'.$month, $year.'-'.$month2])
             ->where('user_id','=','no')
-            ->paginate(10,['*'],'month_out_'.$month);
+            ->paginate(10,['*'],'pageMonth__out_'.$month);
 
     
         // $orders_users_in = Order::collection('orders')

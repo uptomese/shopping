@@ -47,7 +47,153 @@
   <script src="{{ asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
  
   <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
+
+  <script>
+  // Dynamic Password Strength Validation
+  var result = $("#strength");
+  
+  $('#user_password').keyup(function(){
+      $(".result").html(checkStrength($('#user_password').val()))
+  })  
+
+  function checkStrength(password){
+
+  //initial strength
+  var strength = 0
+  
+  if (password.length == 0) {
+      result.removeClass()
+      return ''
+  }
+  //if the password length is less than 6, return message.
+  if (password.length < 6) {
+      result.removeClass()
+      result.addClass('short')
+      return 'too short'
+  }
+
+  //length is ok, lets continue.
+
+  //if length is 8 characters or more, increase strength value
+  if (password.length > 7) strength += 1
+
+  //if password contains both lower and uppercase characters, increase strength value
+  if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/))  strength += 1
+
+  //if it has numbers and characters, increase strength value
+  if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/))  strength += 1 
+
+  //if it has one special character, increase strength value
+  if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/))  strength += 1
+
+  //if it has two special characters, increase strength value
+  if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,",%,&,@,#,$,^,*,?,_,~])/)) strength += 1
+
+  //now we have calculated strength value, we can return messages
+
+  //if value is less than 2
+  if (strength < 2) {
+      result.removeClass()
+      result.addClass('weak')
+      return 'weak'
+  } else if (strength == 2 ) {
+      result.removeClass()
+      result.addClass('good')
+      return 'good'
+  } else {
+      result.removeClass()
+      result.addClass('strong')
+      return 'strong'
+  }
+}
+  </script>
   
 </body>
 
 </html>
+
+<style>
+.str-box {
+  position: relative;
+  width: 100px;
+  height: 12px;
+  float: left;
+}
+.str-box div {
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  -moz-transition: 1s;
+  -o-transition: 1s;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.short {
+  color: #FF0000;
+}
+.short .str-box.box1 div {
+  background: #f6dfc9;
+  width: 100%;
+}
+
+.weak {
+  color: #E66C2C;
+}
+.weak .str-box.box1 div {
+  background: #f4c9a0;
+  width: 100%;
+}
+.weak .str-box.box2 div {
+  background: #f4c9a0;
+  width: 100%;
+}
+
+.good {
+  color: #2D98F3;
+}
+.good .str-box.box1 div {
+  background: #f6b578;
+  width: 100%;
+}
+.good .str-box.box2 div {
+  background: #f6b578;
+  width: 100%;
+}
+.good .str-box.box3 div {
+  background: #f6b578;
+  width: 100%;
+}
+
+.strong {
+  color: #006400;
+}
+.strong .str-box.box1 div {
+  background: #f29d4b;
+  width: 100%;
+}
+.strong .str-box.box2 div {
+  background: #f29d4b;
+  width: 100%;
+}
+.strong .str-box.box3 div {
+  background: #f29d4b;
+  width: 100%;
+}
+.strong .str-box.box4 div {
+  background: #f29d4b;
+  width: 100%;
+}
+
+.result {
+  font-size: 18px;
+  font-family: arial;
+  width: auto;
+  display: none;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  font-variant: small-caps;
+}
+</style>
