@@ -127,7 +127,7 @@
                                                     <div class="input-group-append">
                                                         <button onclick="addHeader()" class="btn btn-outline-primary" type="button" >Add header</button>
                                                     </div>&nbsp;&nbsp;   &nbsp;   &nbsp;                                                  
-                                                    <button type="button" name="add" id="add" class="btn btn-success">Add More</button>                                                   
+                                                    <button onclick="Add()" type="button" name="add" id="add" class="btn btn-success">Add More</button>                                                   
                                                 </div>
                                             </div>                                              
                                         </div>                                              

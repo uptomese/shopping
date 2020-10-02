@@ -127,13 +127,18 @@
                         </div>
                         <br>
                         <div class="input-radio">
-                            <input type="radio" name="address" id="radio_address-1" value="{{$userData->address[1]}}" required @if($userData->address[0] == 'address_a') checked @endif>
+                            <input type="radio" name="address" id="radio_address-1" value="{{$userData->address[1] ?? ''}}" required @if($userData->address[0] ?? '' == 'address_a') checked @endif>
+                            @if(!isset($userData->address[0]))
+                            <div class="form-group">
+                                <input class="input" type="text" name="new_address" placeholder="Delivery address" required>
+                            </div>
+                            @endif
                             <label for="radio_address-1">
                                 <span></span>
-                                @php if($userData->address[0] == 'address_a'){ echo '(default)';} @endphp {{$userData->address[1]}}
+                                @php if($userData->address[0] ?? '' == 'address_a'){ echo '(default)';} @endphp {{$userData->address[1] ?? ''}}
                             </label>
                         </div>
-                        @if(count($address)>0)  
+                        @if(!isset($userData->address[0]) && count($address) > 0)  
                         <br>
                         <div class="input-radio">
                             <input type="radio" name="address" id="radio_address-2" value="address_b" required @if($userData->address[0] == 'address_b') checked @endif >
@@ -148,7 +153,7 @@
                                 </select>
                             </label>
                         </div> 
-                        @endif          
+                        @endif
                     </div>
                     @endif
                     <hr>

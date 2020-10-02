@@ -65,6 +65,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //Admin panel
+Route::get('admin/dashboards', ["uses"=>"Admin\AdminDashboardsController@index", 'as' => 'adminDisplayDashboards'])->middleware('restricToAdmin');
+
 Route::get('admin/products', ["uses"=>"Admin\AdminProductsController@index", 'as' => 'adminDisplayProducts'])->middleware('restricToAdmin');
 
 Route::get('admin/createProductForm', ["uses"=>"Admin\AdminProductsController@createProductForm", 'as' => 'adminCreateProductForm'])->middleware('restricToAdmin');

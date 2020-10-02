@@ -14,17 +14,11 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/marked@0.3.6"></script>
     <script src="https://unpkg.com/lodash@4.16.0"></script>
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}" /> -->
-
-    {{-- CSS --}}
-        {{-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
-        {{-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> --}}
-        {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
-        {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /> --}}
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="{{URL::asset('css/box2.css')}} ">
@@ -36,11 +30,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}"
-        type="text/css">
-    <!-- Page plugins -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
+
 </head>
 
 <body>
@@ -59,6 +52,12 @@
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <!-- Nav items -->
                     <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::url() == route('adminDisplayDashboards') ? 'active' : '' }}" href="{{ route('adminDisplayDashboards') }}">
+                                <i class="ni ni-chart-bar-32 text-pink"></i>
+                                <span class="nav-link-text">Dashboard</span>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::url() == route('adminDisplayProducts') ? 'active' : '' }}" href="{{ route('adminDisplayProducts') }}">
                                 <i class="ni ni-box-2 text-primary"></i>

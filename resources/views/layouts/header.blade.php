@@ -113,25 +113,24 @@
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 								<!-- Wishlist -->
-								<div>
+								<!-- <div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
-										<!-- <div class="qty">2</div> -->
+										<div class="qty">2</div>
 									</a>
-								</div>
+								</div> -->
 								<!-- /Wishlist -->
-
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
 										@if($totalQuantity>0)
 											<div class="qty"> {{ $totalQuantity }}</div>
 										@endif
 									</a>
-									<div class="cart-dropdown">
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:300px;padding:15px;">
 										<div class="cart-list">
 										<!-- @php print_r($cartItems->items)  @endphp -->
 										@foreach($cartItems->items as $item)
@@ -147,7 +146,6 @@
 											</div>
 										@endforeach
 										</div>
-
 										<div class="cart-summary">
 											<small>{{ $totalQuantity }} Item(s) selected</small>
 											<h5>SUBTOTAL: {{ $totalPrice }}</h5>

@@ -471,6 +471,10 @@ class ProductsController extends Controller
         $tel = $request->input('tel');
         $payment = $request->input('payment');
 
+        if($request->input('new_address')){
+            $address = $request->input('new_address');
+        }
+
         if($address=='address_b'){
             $address = $request->input('address_mult');
         }

@@ -52,7 +52,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('adminEditCategorieForm', ['id' => $categorie[0]['id']]) }}" class="btn btn-sm btn-outline-warning"> <i class="fa fa-edit"></i> แก้ไข</a>
-                                    <a href="{{ route('adminDeleteCategorie', ['id' => $categorie[0]['id']]) }}" @if($categorie['count']!=0) class="btn btn-sm btn-outline-danger disabled" @else class="btn btn-sm btn-outline-danger" @endif> <i class="fa fa-trash"></i> ลบ</a>
+                                    <a href="{{ route('adminDeleteCategorie', ['id' => $categorie[0]['id']]) }}" onclick="return confirm('Are you sure?')" @if($categorie['count']!=0) class="btn btn-sm btn-outline-danger disabled" @else class="btn btn-sm btn-outline-danger" @endif> <i class="fa fa-trash"></i> ลบ</a>
                                 </td>
                             </tr>
                             @endforeach

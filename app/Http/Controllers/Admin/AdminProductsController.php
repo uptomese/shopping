@@ -205,7 +205,7 @@ class AdminProductsController extends Controller
         if($exists){
             Storage::delete('public/product_images/'.$product[0]['image']);
         }
-        $deleteresult = Product::collection("products")->delete("id","=",$id*1);
+        $deleteresult = DB::connection('mongodb')->collection("products")->where("id","=",$id*1)->delete();
         return redirect()->route('adminDisplayProducts');
     }
 

@@ -150,6 +150,42 @@ $(document).ready(function() {
   width: 100%;
   z-index: -1;
 }
+
+.dropdown-menu .cart-list .product-widget .product-body .product-price {
+    color: #2b2d42;
+}
+
+.dropdown-menu .cart-btns {
+    margin: 0px -17px -17px;
+}
+
+.dropdown-menu .cart-btns>a {
+    display: inline-block;
+    width: calc(50% - 0px);
+    padding: 12px;
+    background-color: #d10024;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+
+.dropdown-menu .cart-btns>a:first-child {
+    margin-right: -4px;
+    background-color: #1e1f29;
+}
+
+.dropdown-menu .cart-btns>a:hover {
+    opacity: 0.9;
+}
+
+.dropdown-menu .cart-summary {
+    border-top: 1px solid #e4e7ed;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 </style>
 
 
