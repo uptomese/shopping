@@ -22,6 +22,9 @@
 <!-- Page content -->
 <div class="container-fluid mt--6">
     <div class="row">
+        <div class="container col-12">
+            @include('../alert')
+        </div>
         <div class="col-xl-6">
             <div class="card">
                 <div class="card-header border-0">

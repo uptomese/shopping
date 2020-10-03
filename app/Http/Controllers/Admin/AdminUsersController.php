@@ -18,14 +18,14 @@ class AdminUsersController extends Controller
     public function index()
     {
         $users = User_nan::collection('users')
-            ->select('id','name','email','address','phone','image','admin')
+            ->select('id','name','email','address','phone','image','admin','sale')
             ->where('id','!=','no')
             ->andWhere('admin','=',0)
             ->orderBy('id','desc')
             ->paginate(10);
 
         $admins = DB::connection('mongodb')->collection("users")
-            ->select('id','name','email','address','phone','image','admin')
+            ->select('id','name','email','address','phone','image','admin','sale')
             ->where('id','!=','no')
             ->where('admin','=',1)
             ->orderBy('id','desc')
@@ -90,9 +90,9 @@ class AdminUsersController extends Controller
                         'unread' => "0,0",
                         'reading' => 0
                     ]);
-                    if($session) return redirect()->route('getUsers');
-                }else return redirect()->route('getUsers');
-            }
+                    if($session) return redirect()->route('getUsers')->withsuccess('Users created successfully');
+                }else return redirect()->route('getUsers')->with('fail', 'Session created failed');
+            }else return redirect()->route('getUsers')->with('fail', 'Users created failed');
         }
     }
 
@@ -119,7 +119,9 @@ class AdminUsersController extends Controller
                 ]);
     
             if($save){
-                return redirect()->route('getUsers');
+                return redirect()->route('getUsers')->withsuccess('Users updated successfully');;
+            }else{
+                redirect()->route('getUsers')->with('fail', 'Users updated failed');
             }
         }
     }

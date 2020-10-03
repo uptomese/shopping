@@ -85,9 +85,9 @@ class AdminProductsController extends Controller
         );
         $save = Product::database()->collection("products")->insert($newProductArray);
         if($save){
-            return redirect()->route('adminDisplayProducts');
+            return redirect()->route('adminDisplayProducts')->withsuccess('Product created successfully');
         }else{
-            return redirect()->route('adminDisplayProducts');
+            return redirect()->route('adminDisplayProducts')->with('fail', 'Product created failed');
         }
     }
 
@@ -146,10 +146,9 @@ class AdminProductsController extends Controller
             $arrayToUpdate = array('image' => $product[0]['image']);
             DB::table('products')->where('id',$id)->update($arrayToUpdate);
 
-            return redirect()->route('adminDisplayProducts');
+            return redirect()->route('adminDisplayProducts')->withsuccess('Image Product updated successfully');
         }else{
-            $error = "No Image was Selected";
-            return $error;
+            return redirect()->route('adminDisplayProducts')->with('No Image was Selected');
         }
     }
 
@@ -192,9 +191,9 @@ class AdminProductsController extends Controller
                 ]);
 
         if($save){
-            return redirect()->route('adminDisplayProducts');
+            return redirect()->route('adminDisplayProducts')->withsuccess('Product updated successfully');
         }else{
-            return redirect()->route('adminDisplayProducts');
+            return redirect()->route('adminDisplayProducts')->with('fail', 'Product updated failed');
         }
     }
 
@@ -206,7 +205,7 @@ class AdminProductsController extends Controller
             Storage::delete('public/product_images/'.$product[0]['image']);
         }
         $deleteresult = DB::connection('mongodb')->collection("products")->where("id","=",$id*1)->delete();
-        return redirect()->route('adminDisplayProducts');
+        return redirect()->route('adminDisplayProducts')->withsuccess('Product deleted successfully');
     }
 
 
@@ -237,10 +236,10 @@ class AdminProductsController extends Controller
             'updated_at' => date('Y-m-d H:i:s')
         );
         $save = Categorie::database()->collection("categories")->insert($newCategorieArray);
-        if($save!=0){
-            return redirect()->route('adminDisplayCategories');
+        if($save){
+            return redirect()->route('adminDisplayCategories')->withsuccess('Categorie created successfully');
         }else{
-            return $save;
+            return redirect()->route('adminDisplayCategories')->with('fail', 'Categorie created failed');
         }
     }
 
@@ -248,8 +247,8 @@ class AdminProductsController extends Controller
     {
         $deleteresult = DB::connection('mongodb')->collection("categories")->where('id','=',$id*1)->delete();
         if($deleteresult){
-            return redirect()->route('adminDisplayCategories');
-        }else return redirect()->route('adminDisplayCategories');
+            return redirect()->route('adminDisplayCategories')->withsuccess('Categorie deleted successfully');
+        }else return redirect()->route('adminDisplayCategories')->with('fail', 'Categorie deleted failed');
     }
 
     public function editCategorie($id)
@@ -282,7 +281,7 @@ class AdminProductsController extends Controller
                 ]);
 
         if($save){
-            return redirect()->route('adminDisplayCategories');
-        }else return redirect()->route('adminDisplayCategories');
+            return redirect()->route('adminDisplayCategories')->withsuccess('Categorie updated successfully');
+        }else return redirect()->route('adminDisplayCategories')->with('fail', 'Categorie updated failed');
     }
 }

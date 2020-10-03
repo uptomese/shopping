@@ -122,7 +122,7 @@
 								</div> -->
 								<!-- /Wishlist -->
 								<!-- Cart -->
-								<div class="dropdown">
+								<div class="btn-group">
 									<a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
@@ -130,7 +130,7 @@
 											<div class="qty"> {{ $totalQuantity }}</div>
 										@endif
 									</a>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:300px;padding:15px;">
+									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="width:300px;padding:15px;">
 										<div class="cart-list">
 										<!-- @php print_r($cartItems->items)  @endphp -->
 										@foreach($cartItems->items as $item)

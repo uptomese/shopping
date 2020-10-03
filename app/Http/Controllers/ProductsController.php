@@ -582,7 +582,10 @@ class ProductsController extends Controller
                     $payment_for = "Screwshop ".$order_srt_id;
     
                     return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
+                }elseif($payment=='pay_pal'){
+                    return redirect()->route('allProducts')->with('fail', 'Web page is unavailable.');
                 }
+
 
                 // return Redirect::to("payment/post.php?order_id=Order".$order_id['id']."&payment_id=".$payment_id."&product_name=".$array_product_name."&price_total=".$price_total);
                 
@@ -657,7 +660,10 @@ class ProductsController extends Controller
                     $payment_for = "Screwshop ".$order_srt_id;
     
                     return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
+                }elseif($payment=='pay_pal'){
+                    return redirect()->route('allProducts')->with('fail', 'Web page is unavailable.');
                 }
+
 
             }else{
                 return redirect()->route('allProducts');
@@ -690,6 +696,14 @@ class ProductsController extends Controller
 
     public function creditCard($order_srt_id,$price_total,$payment_id,$product_name,$user_id)
     {
+        $payment_url = \Config::get('adminConfig.payment.payment_url');
+        $web_url = \Config::get('adminConfig.payment.url_myweb');
+        $web_currencycode = \Config::get('adminConfig.payment.currencycode');
+        $web_custip = \Config::get('adminConfig.payment.custip');
+        $web_custname = \Config::get('adminConfig.payment.custname');
+        $web_custemail = \Config::get('adminConfig.payment.custemail');
+        $web_custphone = \Config::get('adminConfig.payment.custphone');
+        $web_pagetimeout = \Config::get('adminConfig.payment.pagetimeout');
   
         if(Auth::check()){
             $oid_user = Auth::id();
@@ -710,46 +724,44 @@ class ProductsController extends Controller
         $encode = base64_encode($order_srt_id.''.$payment_id);
         $encode2 = self::encode($encode,'tbp123');
 
-        $URL = 'https://test2pay.ghl.com/IPGSG/Payment.aspx';
+        $URL = $payment_url;
         $TransactionType = 'SALE';
         $PymtMethod = 'ANY';
         $OrderNumber = $order_srt_id;
         $PaymentDesc = $product_name;
         $ServiceID = 'SIT';
         $PaymentID = $payment_id;
-        // $MerchantReturnURL = 'http://screwshop.thailandpages.com/payment/response.php'; // !
-        $MerchantReturnURL = 'http://127.0.0.1:8000/tbpapi/'.$encode2; // !
-        // $MerchantCallBackURL = 'http://screwshop.thailandpages.com';
-        $MerchantCallBackURL = 'http://127.0.0.1:8000';
+        $MerchantReturnURL = $web_url . '/tbpapi/'.$encode2;
+        $MerchantCallBackURL = $web_url;
         $Amount = $price_total;
-        $CurrencyCode = 'THB';
-        $CustIP = '127.0.0.1';
-        $PageTimeout = '780';
-        $CustName = 'TBP test';
-        $CustEmail = 'sciant@gmail.com';
-        $CustPhone = '6627519274';
-        $MerchantTermsURL = 'http://127.0.0.1:8000';
+        $CurrencyCode = $web_currencycode;
+        $CustIP = $web_custip;
+        $PageTimeout = $web_pagetimeout;
+        $CustName = $web_custname;
+        $CustEmail = $web_custemail;
+        $CustPhone = $web_custphone;
+        $MerchantTermsURL = $web_url;
 
         $HashValue =  hash('sha256', 'sit12345' . $ServiceID . $PaymentID . $MerchantReturnURL . $MerchantCallBackURL . $Amount . $CurrencyCode . $CustIP . $PageTimeout);
         
         return view('user.payment',[
-                'URL' => 'https://test2pay.ghl.com/IPGSG/Payment.aspx',
+                'URL' => $payment_url,
                 'TransactionType' => 'SALE',
                 'PymtMethod' => 'ANY',
                 'OrderNumber' => $order_srt_id,
                 'PaymentDesc' => $product_name,
                 'ServiceID' => 'SIT',  
                 'PaymentID' => $payment_id, 
-                'MerchantReturnURL' => 'http://127.0.0.1:8000/tbpapi/'.$encode2,
-                'MerchantCallBackURL' => 'http://127.0.0.1:8000',
+                'MerchantReturnURL' => $web_url . '/tbpapi/' . $encode2,
+                'MerchantCallBackURL' => $web_url,
                 'Amount' => $price_total,
-                'CurrencyCode' => 'THB',
-                'CustIP' => '127.0.0.1',
-                'PageTimeout' => '780',
-                'CustName' => 'TBP test',
-                'CustEmail' => 'sciant@gmail.com',
-                'CustPhone' => '6627519274',
-                'MerchantTermsURL' => 'http://127.0.0.1:8000',
+                'CurrencyCode' => $web_currencycode,
+                'CustIP' => $CustIP,
+                'PageTimeout' => $PageTimeout,
+                'CustName' => $CustName,
+                'CustEmail' => $CustEmail,
+                'CustPhone' => $CustPhone,
+                'MerchantTermsURL' => $web_url,
                 'HashValue' => $HashValue,
                 'Param6' => $encode_id_user
             ]);

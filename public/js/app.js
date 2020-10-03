@@ -2047,6 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "user"],
@@ -2311,7 +2312,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$root.socket.on("nameRoom", function (data) {
         if (data.data) {
           if (data.data[1] == vm.user.id) {
-            var image = "pf4.jpg";
+            var image = data.data[5];
             window.open(data.data[0], new Array(session, data.data[3], data.data[2], data.data[4], image), "location=1,status=1,scrollbars=1,width=900, height=560");
           }
         }
@@ -2839,6 +2840,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["messages", "user", "friend_id"],
@@ -2998,9 +3007,9 @@ __webpack_require__.r(__webpack_exports__);
       if (friend_id) {
         var vm = this;
         this.$root.socket.emit("roomVideo", new Array(friend_id.session, vm.user.id));
-        var image = "pf5.jpg";
+        var image = friend_id.image;
         var url = _src_assets_js_config_js__WEBPACK_IMPORTED_MODULE_0__["default"].serverUrl() + "/video/";
-        window.open(url + friend_id.session, new Array(friend_id.session, vm.user.name, vm.user.email, friend_id.id, friend_id.name, friend_id.email, image, vm.user.id), "location=1,status=1,scrollbars=1,width=900, height=560");
+        window.open(url + friend_id.session, new Array(friend_id.session, vm.user.name, vm.user.email, friend_id.id, friend_id.name, friend_id.email, image, vm.user.id, vm.user.image), "location=1,status=1,scrollbars=1,width=900, height=560");
       }
     },
     sendMessage: function sendMessage() {
@@ -71916,13 +71925,16 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row no-gutters" }, [
       _c(
         "div",
         {
-          staticClass:
-            "chatbox chatbox22 chatbox--tray chatbox--closed col-sm-10 col-md-6 col-lg-4 ",
-          staticStyle: { "background-color": "transparent", position: "fixed" }
+          staticClass: "chatbox chatbox22 chatbox--tray chatbox--closed col-11",
+          staticStyle: {
+            "background-color": "transparent",
+            position: "fixed",
+            width: "600px"
+          }
         },
         [
           _c("div", { staticClass: "chatbox__title" }, [
@@ -72032,7 +72044,7 @@ var render = function() {
         [
           _c(
             "div",
-            { staticClass: "col-lg-4", staticStyle: { "padding-right": "0%" } },
+            { staticClass: "col-xs-4", staticStyle: { "padding-right": "0%" } },
             [
               _c("div", { staticClass: "card card-default" }, [
                 _c("div", { staticClass: "has-search input-group" }, [
@@ -72291,7 +72303,10 @@ var render = function() {
   return _vm.friend_id
     ? _c(
         "div",
-        { staticClass: "col-lg-8", staticStyle: { "padding-left": "0%" } },
+        {
+          staticClass: "col",
+          staticStyle: { "padding-left": "0%", "margin-right": "15px" }
+        },
         [
           _c("div", { staticClass: "card card-default card-box" }, [
             _c("div", { staticClass: "input-group" }, [
@@ -72477,7 +72492,8 @@ var render = function() {
                                             attrs: {
                                               id: "myImg",
                                               src:
-                                                "/images/message_images/" +
+                                                _vm.baseUrl +
+                                                "/storage/message_images/" +
                                                 message.message
                                             }
                                           })
@@ -72684,7 +72700,8 @@ var render = function() {
                                             attrs: {
                                               id: "myImg",
                                               src:
-                                                "/images/message_images/" +
+                                                _vm.baseUrl +
+                                                "/storage/message_images/" +
                                                 message.message
                                             }
                                           })
@@ -90715,7 +90732,7 @@ __webpack_require__.r(__webpack_exports__);
     return 'https://127.0.0.1:6999';
   },
   serverImage: function serverImage() {
-    return 'http://127.0.0.1:8000/images';
+    return 'http://127.0.0.1:8000/storage/user_images';
   },
   //จำนวนข้อความก่อนจะดึงข้อความออกมา
   messagesDisplayed: function messagesDisplayed() {

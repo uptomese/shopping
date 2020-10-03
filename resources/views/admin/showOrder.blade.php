@@ -189,7 +189,7 @@
                         </div>
                         <div class="h2 mt-4">
                             <i class="ni business_briefcase-24 mr-2"></i>
-                            @if($user_order['address'][0] == 'address_a')                            
+                            @if(isset($user_order['address'][0]) && $user_order['address'][0] == 'address_a')                            
                             {{$user_order['address'][1] ?? ''}}
                             @else
                             {{$user_order['address'][2] ?? ''}}

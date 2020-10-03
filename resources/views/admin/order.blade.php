@@ -145,8 +145,15 @@
         <div class="col-xl-6">
             <div class="card">
                 <!-- Card header -->
-                <div class="card-header border-0">
-                    <h3 class="mb-0">ผู้ใช้ในระบบ <spen>({{$orders_users_in->total()}} list)</spen>
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">ผู้ใช้ในระบบ <spen>({{$orders_users_in->total()}} list)</spen></h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <h5 class="text-muted"><i class="fa fa-circle font-10 m-r-10 text-success"></i> Paid</h5>
+                        </div>
+                    </div>
                 </div>
                 <!-- Light table -->
                 <div class="table-responsive">
@@ -238,8 +245,15 @@
         <!-- Dark table -->
         <div class="col-xl-6">
             <div class="card bg-default shadow">
-                <div class="card-header bg-transparent border-0">
-                    <h3 class="mb-0" style="color: white;">ผู้ใช้นอกระบบ <spen>({{$orders_users_out->total()}} list)</spen>
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0" style="color: white;">ผู้ใช้นอกระบบ <spen>({{$orders_users_out->total()}} list)</spen></h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <h5 class="text-muted"><i class="fa fa-circle font-10 m-r-10 text-blue"></i> Paid</h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-dark table-flush">

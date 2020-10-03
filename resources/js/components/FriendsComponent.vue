@@ -1,7 +1,7 @@
 <template>
   <div class="chatbox__body" style="padding: 0%">
     <div class="row">
-      <div class="col-lg-4" style="padding-right: 0%">
+      <div class="col-xs-4" style="padding-right: 0%">
         <div class="card card-default">
           <div class="has-search input-group">
             <!-- <span class="fa fa-search form-control-feedback"></span> -->
@@ -169,7 +169,7 @@ export default {
       this.$root.socket.on("nameRoom", function (data) {
         if (data.data) {
           if (data.data[1] == vm.user.id) {
-            var image = "pf4.jpg";
+            var image = data.data[5];
             window.open(
               data.data[0],
               new Array(

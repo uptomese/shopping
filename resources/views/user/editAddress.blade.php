@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
@@ -105,7 +105,7 @@
                             <hr>
                             @endforeach
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="col-xl-8 order-xl-1">

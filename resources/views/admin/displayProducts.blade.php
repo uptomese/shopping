@@ -16,11 +16,9 @@
                 </div>
                 <div class="col-lg-8 col-5 text-right">
                     <!-- <select name="categorie_id" class="form-control">
-
                         <option value="11111">1111</option>
                         <option value="11111">1111</option>
                         <option value="11111">1111</option>
-   
                     </select> -->
                 </div>
             </div>
@@ -30,6 +28,9 @@
 <!-- Page content -->
 <div class="container-fluid mt--6">
     <div class="row">
+        <div class="container col-12">
+            @include('../alert')
+        </div>
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header border-0">

@@ -27,12 +27,18 @@
 <!-- Page content -->
 <div class="container-fluid mt--6">
     <div class="row">
+        <div class="container col-12">
+            @include('../alert')
+        </div>
         <div class="col-xl-6">
             <div class="card">
-                <div class="card-header border-0">
+                <div class="card-header">
                     <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="mb-0">Users <spen>({{$users->total}} list)</spen>
+                        <div class="col-8">
+                            <h3 class="mb-0">Users <spen>({{$users->total}} list)</spen></h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <h5 class="text-muted"><i class="fa fa-circle font-10 m-r-10 text-info"></i> Sale</h5>
                         </div>
                     </div>
                 </div>
@@ -50,7 +56,7 @@
                         </thead>
                         <tbody>
                             @foreach($users->items as $user)
-                            <tr>
+                            <tr style="@if($user['sale']==1) background-color:aliceblue; @endif">
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
@@ -100,10 +106,13 @@
 
         <div class="col-xl-6">
             <div class="card">
-                <div class="card-header border-0">
+                <div class="card-header">
                     <div class="row align-items-center">
-                        <div class="col">
-                            <h3 class="mb-0">Admin <spen>({{$admins->total()}} list)</spen>
+                        <div class="col-8">
+                            <h3 class="mb-0">Admin <spen>({{$admins->total()}} list)</spen></h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <h5 class="text-muted"><i class="fa fa-circle font-10 m-r-10 text-info"></i> Sale</h5>
                         </div>
                     </div>
                 </div>
@@ -121,7 +130,7 @@
                         </thead>
                         <tbody>
                             @foreach($admins as $user)
-                            <tr>
+                            <tr style="@if($user['sale']==1) background-color:aliceblue; @endif">
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">

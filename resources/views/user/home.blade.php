@@ -63,6 +63,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Id.</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Products</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Delivery Status</th>
@@ -86,6 +87,13 @@
                                                 </a>       
                                                 @endforeach 
                                             </div>
+                                        </td>
+                                        <td>
+                                            <ul>
+                                            @foreach($items['items'] as $item)  
+                                                <li>{{$item['product_name']}} ({{$item['product_quantity']}}) (${{$item['product_price']}})</li>
+                                            @endforeach 
+                                            </ul>
                                         </td>
                                         <td>
                                             {{$items['order']['date']}}

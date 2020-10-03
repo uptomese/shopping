@@ -13,6 +13,7 @@ var friend_name = res[4];
 var friend_email = res[5];
 var image = res[6];
 var me_id = res[7];
+var me_image = res[8];
 
 var url = config.serverImage() + "/" + image;
 
@@ -39,11 +40,11 @@ sessionStorage.setItem("username", me);
 
 socket.emit(
     "nameRoom",
-    new Array(roomLink, friend_id, me, friend_name, me_email)
+    new Array(roomLink, friend_id, me, friend_name, me_email, me_image)
 );
 
 var reload = "false";
-socket.on("roomAnswer", function(data) {
+socket.on("roomAnswer", function (data) {
     if (data && data.data[0] == session) {
         if (data.data[1] == "true") {
             reload = "true";
@@ -123,7 +124,7 @@ const keys = {
     End: false,
     Delete: false
 };
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (event.defaultPrevented) {
         return;
     }

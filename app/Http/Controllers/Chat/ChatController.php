@@ -302,8 +302,15 @@ class ChatController extends Controller
           $image = $request->get('image');
           $name = $session.'_'.time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
 
+          $resize = \Image::make($image)->resize(600, null, function ($constraint) {
+            $constraint->aspectRatio();
+          })->encode('jpg');
+          $hash = md5($resize->__toString());
 
-          \Image::make($request->get('image'))->save(public_path('images/message_images/').$name);
+          Storage::put('public/message_images/'.$name, $resize->__toString());
+
+
+        //   \Image::make($request->get('image'))->save(public_path('images/message_images/').$name);
 
           $id = Auth::user()->id;
           

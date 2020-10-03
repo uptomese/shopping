@@ -1,5 +1,9 @@
 <template>
-  <div v-if="friend_id" class="col-lg-8" style="padding-left: 0%">
+  <div
+    v-if="friend_id"
+    class="col"
+    style="padding-left: 0%; margin-right: 15px"
+  >
     <div class="card card-default card-box">
       <div class="input-group">
         <input
@@ -83,7 +87,9 @@
                   <img
                     id="myImg"
                     v-img:myimage
-                    :src="'/images/message_images/' + message.message"
+                    :src="
+                      baseUrl + '/storage/message_images/' + message.message
+                    "
                     class="message_image"
                     style="
                       border-radius: 20px;
@@ -181,7 +187,9 @@
                   <img
                     id="myImg"
                     v-img:image
-                    :src="'/images/message_images/' + message.message"
+                    :src="
+                      baseUrl + '/storage/message_images/' + message.message
+                    "
                     class="message_image"
                     style="
                       border-radius: 20px;
@@ -491,7 +499,7 @@ export default {
           "roomVideo",
           new Array(friend_id.session, vm.user.id)
         );
-        var image = "pf5.jpg";
+        var image = friend_id.image;
         var url = config.serverUrl() + "/video/";
 
         window.open(
@@ -504,7 +512,8 @@ export default {
             friend_id.name,
             friend_id.email,
             image,
-            vm.user.id
+            vm.user.id,
+            vm.user.image
           ),
           "location=1,status=1,scrollbars=1,width=900, height=560"
         );

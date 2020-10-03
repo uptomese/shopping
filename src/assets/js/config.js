@@ -9,9 +9,8 @@ export default {
 
 
     serverImage() {
-        return 'http://127.0.0.1:8000/images';
+        return 'http://127.0.0.1:8000/storage/user_images';
     },
-
 
     //จำนวนข้อความก่อนจะดึงข้อความออกมา
     messagesDisplayed() {

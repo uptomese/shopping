@@ -13,8 +13,13 @@
     </div>
     <div class="container mt--8 pb-5">
         <!-- Page content -->
-        <div class="container-fluid mt--6">
+        <div class="container-fluid mt--6">     
             <div class="row">
+                <div class="col-12">
+                    <div class="container">
+                        @include('../alert')
+                    </div>
+                </div>
                 <div class="col-xl-4 order-xl-2">
                     <div class="card card-profile">
                         <img src="{{ asset('assets/img/theme/img-1-1000x600.jpg') }}" alt="Image placeholder" class="card-img-top">
@@ -78,36 +83,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h3 class="mb-0">Address multiple</h3>
-                                </div>
-                                <div class="col-4 text-right">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal_add" data-whatever="@add">add</button>                            
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            @foreach($address as $item) 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">{{$item['title']}}</label>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <a href="{{ route('editAddress',['id' => $item['id']]) }}" class="btn btn-sm btn-outline-warning"> <i class="fa fa-edit"></i> แก้ไข</a>&nbsp;
-                                    <a href="{{ route('deleteAddress',['id' => $item['id']]) }}" class="btn btn-sm btn-outline-danger"> <i class="fa fa-trash"></i> ลบ</a>
-                                </div>
-                                    <p class="h5 font-weight-300">{{$item['address']}}</p>
-                            </div>
-                            <hr>
-                            @endforeach
-                        </div>
-                    </div>
-
                 </div>
                 <div class="col-xl-8 order-xl-1">
                     <div class="card">
@@ -154,37 +129,48 @@
                                 </div>
                                 <hr class="my-4" />
                                 <!-- Address -->
-                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_a" @if(isset($user['address'][0]) && $user['address'][0] == 'address_a') checked @endif>
-                                                    <label class="form-control-label" for="input-address"> Address</label>
-                                                    <input 
-                                                        id="autocomplete"
-                                                        class="form-control"
-                                                        placeholder="Home Address"
-                                                        value="{{$user['address'][1] ?? ''}}"
-                                                        type="text"
-                                                        name="address"
-                                                        >
-                                                    @if(count($address)>0) 
-                                                    <br>                                                    
-                                                    <input class="form-check-input" type="radio" name="type_address" value="address_b" @if($user['address'][0] == 'address_b') checked @endif @if(count($address)<1) disabled @endif>
-                                                    <label class="form-control-label" for="input-address"> Address multiple</label>
-                                                        <select name="type_address_b" class="form-control">                                                        
-                                                        @foreach ($address as $item)
-                                                            <option value="{{$item['address']}}" @if($user['address'][0] == 'address_b' && $item['address'] == $user['address'][2] ?? '') selected @endif>{{$item['title']}}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="heading-small text-muted mb-4">Address information</h6>
                                     </div>
-                                </div>
+                                    <div class="col text-right">
+                                        <h6 class="heading-small text-muted mb-4"><a href="#!" class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#Modal_add" data-whatever="@add">add</a></h6>                                    
+                                    </div>
+                                </div>                         
+                                @if(!isset($userData->address[0]) && count($address) == 0)
+                                    <h3 style="color:red;">Press the button to create an address.</h3>
+                                @else
+                                <table class="table table-borderless" style="width: 100%;">
+                                    <tr>
+                                        <td>
+                                        @if(isset($userData->address[0]))
+                                            <input class="form-check-input" type="radio" name="type_address" value="address_a" @if(isset($user['address'][0]) && $user['address'][0] == 'address_a') checked @endif required>                                                    
+                                            <input                                                                                        
+                                                value="{{$user['address'][1] ?? ''}}"
+                                                type="hidden"
+                                                name="address"
+                                                >               
+                                            <label class="form-control-label" for="input-address"> @php if($userData->address[0] ?? '' == 'address_a'){ echo '(default)';} @endphp {{$user['address'][1] ?? ''}}</label>                                                    
+                                        @endif
+                                        </td>
+                                        <td class="col text-right"></td>
+                                    </tr>
+                                    @if(count($address)>0)
+                                    @foreach ($address as $key => $item)    
+                                    <tr>
+                                        <td>
+                                            <input name="type_address" class="form-check-input" type="radio"  value="address_b_{{$item['address']}}" @if(isset($user['address'][0]) && $user['address'][0] == 'address_b' && $item['address'] == $user['address'][2] ?? '') checked @endif required>
+                                            <label class="form-control-label" for="input-address"> @php if(isset($user['address'][0]) && $user['address'][0] == 'address_b' && $item['address'] == $user['address'][2] ?? ''){ echo '(default)';} @endphp {{$item['title']}} : {{$item['address']}}</label>
+                                        <td>
+                                        <td class="col text-right">
+                                            <a href="{{ route('editAddress',['id' => $item['id']]) }}" class="btn btn-sm btn-outline-warning"> <i class="fa fa-edit"></i> แก้ไข</a>&nbsp;
+                                            <a href="{{ route('deleteAddress',['id' => $item['id']]) }}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger"> <i class="fa fa-trash"></i> ลบ</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach                                                 
+                                    @endif
+                                </table>
+                                @endif                                                                
                                 <hr class="my-4" />
                                 <button type="submit" name="submit" class="btn btn-round btn-primary">Update profile</button>
                             </form>

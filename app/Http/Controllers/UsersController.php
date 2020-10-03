@@ -30,14 +30,18 @@ class UsersController extends Controller
     }
 
     public function updateProfile(Request $request)
-    {       
+    {
+        if($request->input('address')==null){
+            return redirect()->route('getProfile')->with('fail', 'Press the button to create an address.');
+        }
+
         $type_address = $request->input('type_address');
 
         if($type_address=='address_a'){
             $address = array('address_a', $request->input('address'));
-        }elseif ($type_address=='address_b'){
-            
-            $address_b = $request->input('type_address_b');
+        }elseif ($type_address!='address_a'){
+            $address_b = $request->input('type_address');
+            $address_b = substr($address_b, 10);
             $address = array('address_b', $request->input('address'), $address_b);
         }
 
@@ -49,7 +53,9 @@ class UsersController extends Controller
         ]);
 
         if($save){
-            return redirect()->route('getProfile');
+            return redirect()->route('getProfile')->withsuccess('Profile updated successfully');
+        }else{
+            return redirect()->route('getProfile')->with('fail', 'Profile updated failed');
         }
     }
 
@@ -73,10 +79,9 @@ class UsersController extends Controller
                 'image' => $imageName,
             ]);
 
-            return redirect()->route('getProfile');
-
+            return redirect()->route('getProfile')->withsuccess('Image updated successfully');
         }else{
-            return redirect()->route('getProfile');
+            return redirect()->route('getProfile')->with('fail', 'Image updated failed');
         }       
     }
 
@@ -91,7 +96,11 @@ class UsersController extends Controller
             'updated_at' => date('Y-m-d H:i:s')
         );
         $save = Address::database()->collection("address")->insert($new_address);
-        return redirect()->route('getProfile');
+        if($save){
+            return redirect()->route('getProfile')->withsuccess('Address created successfully');
+        }else{
+            return redirect()->route('getProfile')->with('fail', 'Address created failed');
+        }
     }
 
     public function editAddress(Request $request, $id)
@@ -121,7 +130,9 @@ class UsersController extends Controller
         ]);
 
         if($save){
-            return redirect()->route('getProfile');
+            return redirect()->route('getProfile')->withsuccess('Address update successfully');
+        }else{
+            return redirect()->route('getProfile')->with('fail', 'Address update failed');
         }
     }
 
@@ -129,7 +140,9 @@ class UsersController extends Controller
     {
         $save = DB::connection('mongodb')->collection("address")->where('id','=',$id*1)->delete();
         if($save){
-            return redirect()->route('getProfile');
+            return redirect()->route('getProfile')->withsuccess('Address delete successfully');
+        }else{
+            return redirect()->route('getProfile')->with('fail', 'Address delete failed');
         }
     }
 }
