@@ -24,6 +24,7 @@ class OrderItem extends NanModel
             "product_id",
             "order_id",
             "product_quantity",
+            "product_name",
             "product_price",
             "created_at",
             "updated_at",

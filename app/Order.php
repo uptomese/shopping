@@ -14,7 +14,7 @@ class Order extends NanModel
     protected  $collection = "orders" ;  
 
     protected $schema = [
-        'products' => [
+        'orders' => [
             "id" => [
                 'AutoInc' => true,
                 // 'AutoIncStartwith' => 10,

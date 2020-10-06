@@ -77,16 +77,12 @@
 
     </script>
 
-
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-
     <script src="{{URL::asset('js/box.js')}} "></script>
-    <!-- <script src="{{ asset('js/app.js') }}" ></script> -->
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    <!-- <script src="{{ mix('js/app.js') }}"></script> -->
+
 
     <!-- Argon Scripts -->
     <!-- Core -->
@@ -102,6 +98,7 @@
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
 
 
+    
 
     </body>
 

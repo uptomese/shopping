@@ -64,3 +64,5 @@ Vue.use(VueImg);
 //npm install ejs
 //npm install body-parser
 //npm install express
+//npm install --save vue-chartjs 
+//npm install chart.js --save

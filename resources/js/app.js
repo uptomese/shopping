@@ -36,7 +36,7 @@ import config from "../../src/assets/js/config.js";
 const app = new Vue({
     el: "#app",
     components: {
-        'chat-component': ChatComponent
+        "chat-component": ChatComponent
     },
     data() {
         return {
@@ -62,7 +62,7 @@ const app = new Vue({
     methods: {
         videoTime() {
             let vm = this;
-            this.$root.socket.on("videoTime", function (data) {
+            this.$root.socket.on("videoTime", function(data) {
                 if (
                     vm.session == data["session"] &&
                     data["status"] == "start" &&
@@ -122,7 +122,7 @@ const app = new Vue({
         },
         reading() {
             let vm = this;
-            this.$root.socket.on("toChat", function (data) {
+            this.$root.socket.on("toChat", function(data) {
                 if (
                     vm.session == data.session["id"] &&
                     vm.user.id != data.user_id.id
@@ -141,7 +141,7 @@ const app = new Vue({
 
         chatMessagesImage() {
             let vm = this;
-            this.$root.socket.on("chatMessage_image", function (data) {
+            this.$root.socket.on("chatMessage_image", function(data) {
                 if (vm.session == data["session"]) {
                     vm.messages.push({
                         id: data["user"]["id"],
@@ -159,7 +159,7 @@ const app = new Vue({
 
         chatMessages() {
             let vm = this;
-            this.$root.socket.on("chatMessage", function (data) {
+            this.$root.socket.on("chatMessage", function(data) {
                 if (vm.session == data["session"]) {
                     vm.messages.push({
                         id: data["user"]["id"],
@@ -176,7 +176,7 @@ const app = new Vue({
 
         chatMessageVedeoTime() {
             let vm = this;
-            this.$root.socket.on("chatMessage_time", function (data) {
+            this.$root.socket.on("chatMessage_time", function(data) {
                 if (vm.session == data["session"]) {
                     vm.messages.push({
                         id: data["user"]["id"],

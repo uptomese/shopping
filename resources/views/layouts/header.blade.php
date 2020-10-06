@@ -151,7 +151,7 @@
 											<h5>SUBTOTAL: {{ $totalPrice }}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
+											<a href="{{ route('viewCart') }}">View Cart</a>
 											<a href="{{ route('cartproducts') }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>

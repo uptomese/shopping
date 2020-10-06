@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\User_nan;
 use App\Session;
+use App\Message;
 
 class RegisterController extends Controller
 {
@@ -91,14 +92,33 @@ class RegisterController extends Controller
             $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->groupby('id','name')->random(1);
         }
 
-        $session = Session::database()->collection("sessions")->insert([
+        $session = Session::database()->collection("sessions")->insertGetId([
             'id' => Session::database()->collection("sessions")->getModifySequence('sessions_id'),
             'user_id1' => $user_id['id']*1,
             'user_id2' => $user_sale[0]['id']*1,
-            'unread' => "0,0",
+            'unread' => "1,0",
             'reading' => 0
         ]);
 
+        self::firshMessage($session, $user_sale[0]['id']);
+
         return $user;
+    }
+
+    public function firshMessage($session, $sale_id)
+    {
+        if ($session) {
+            $message_insert = Message::collection("messages")->insert(
+                [
+                    'id' => Message::collection("messages")->getModifySequence('id'),
+                    "user_id" => $sale_id * 1,
+                    "session" => $session[2] * 1,
+                    "message" => \Config::get('adminConfig.firsh_messages'),
+                    "status" => 1,
+                    "created_at" => date("Y-m-d H:i:s"),
+                    "updated_at" => date("Y-m-d H:i:s")
+                ]
+            );
+        }
     }
 }

@@ -20,6 +20,7 @@ use App\Review;
 use App\OrderItem;
 use App\User_nan;
 use App\Session as Session_model;
+use App\Message;
 
 class ProductsController extends Controller
 {
@@ -170,7 +171,7 @@ class ProductsController extends Controller
         $updateCart->updatePriceAndQunatity();
         $request->session()->put("cart", $updateCart);
 
-        return redirect()->route('allProducts');
+        return redirect()->route('viewCart')->withsuccess("Delete product success");
     }
 
     public function getStore(Request $request)
@@ -508,13 +509,15 @@ class ProductsController extends Controller
                 $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->groupby('id','name')->random(1);
             }
             
-            $session = Session_model::database()->collection("sessions")->insert([
+            $session = Session_model::database()->collection("sessions")->insertGetId([
                 'id' => Session_model::database()->collection("sessions")->getModifySequence('sessions_id'),
                 'user_id1' => $save_user[2]*1,
                 'user_id2' => $user_sale[0]['id']*1,
-                'unread' => "0,0",
+                'unread' => "1,0",
                 'reading' => 0
             ]);
+
+            self::firshMessage($session, $user_sale[0]['id']);
 
             // if(!$save_user)  return redirect()->route('allProducts');
             if($cart){
@@ -1003,39 +1006,64 @@ class ProductsController extends Controller
 
     }
 
+    public function viewCart(Request $request)
+    {
+        $prevCart = $request->session()->get('cart');
 
+        $cart = new Cart($prevCart);
 
+        $totalQuantity = $cart->totalQuantity;
+        $totalPrice = $cart->totalPrice;
+        $cartItems = $cart;
+        return view('viewcart', [
+            'totalQuantity' => $totalQuantity,
+            'cartItems' => $cartItems,
+            'totalPrice' => $totalPrice,
+        ]);
+    }
 
+    public function increaseSingleProduct(Request $request, $id)
+    {
+        $prevCart = $request->session()->get('cart');
+        $cart = new Cart($prevCart);
 
+        $product = Product::collection("products")->where('id', "=", $id * 1)->first();
+        $cart->addItem($id, $product, 1);
+        $request->session()->put('cart', $cart);
+        // return redirect()->route("getProduct");
+        return redirect()->route('viewCart')->withsuccess("Plus product success.");
+    }
 
+    public function decreaseSingleProduct(Request $request, $id)
+    {
+        $prevCart = $request->session()->get('cart');
+        $cart = new Cart($prevCart);
 
+        if ($cart->items[$id]['quantity'] > 1) {
+            $product = Product::collection("products")->where('id', "=", $id * 1)->first();
+            $cart->items[$id]['quantity'] = $cart->items[$id]['quantity'] - 1;
+            $cart->items[$id]['totalSinglePrice'] = $cart->items[$id]['quantity'] * $product[0]['price'];
+            $cart->updatePriceAndQunatity();
+            $request->session()->put('cart', $cart);
+        }
+        // return redirect()->route("cartproducts");
+        return redirect()->route('viewCart')->withsuccess("Minus product success.");
+    }
 
-
-
-
-    // public function increaseSingleProduct(Request $request, $id)
-    // {
-    //     $prevCart = $request->session()->get('cart');
-    //     $cart = new Cart($prevCart);
-
-    //     $product = Product::find($id);
-    //     $cart->addItem($id,$product);
-    //     $request->session()->put('cart',$cart);
-    //     return redirect()->route("getProduct");
-    // }
-
-    // public function decreaseSingleProduct(Request $request, $id)
-    // {
-    //     $prevCart = $request->session()->get('cart');
-    //     $cart = new Cart($prevCart);
-
-    //     if($cart->items[$id]['quantity'] > 1){
-    //         $product = Product::find($id);
-    //         $cart->items[$id]['quantity'] = $cart->items[$id]['quantity']-1;
-    //         $cart->items[$id]['totalSinglePrice'] =$cart->items['quantity'] * $product['price'];
-    //         $cart->updatePriceAndQunatity();
-    //         $request->session()->put('cart',$cart);
-    //     }
-    //     return redirect()->route("cartproducts");
-    // }
+    public function firshMessage($session, $sale_id)
+    {
+        if ($session) {
+            $message_insert = Message::collection("messages")->insert(
+                [
+                    'id' => Message::collection("messages")->getModifySequence('id'),
+                    "user_id" => $sale_id * 1,
+                    "session" => $session[2] * 1,
+                    "message" => \Config::get('adminConfig.firsh_messages'),
+                    "status" => 1,
+                    "created_at" => date("Y-m-d H:i:s"),
+                    "updated_at" => date("Y-m-d H:i:s")
+                ]
+            );
+        }
+    }
 }

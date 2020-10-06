@@ -61,7 +61,6 @@ class AdminOrdersController extends Controller
             ($i < 10) ? $i = "0".$i : $i ;
             $j = ($i <= 10) ? "0".($i - 1) : $i - 1 ;
 
-            // $count_list_order[$count2] = $year.'-'.$j.'/ '. $year.'-'.$i ;
             $count_list_order[$count2] = DB::connection('mongodb')->collection("orders")
                 ->whereBetween('date', [$year.'-'.$j, $year.'-'.$i])
                 ->count();

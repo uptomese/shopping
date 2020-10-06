@@ -90130,7 +90130,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 var app = new Vue({
   el: "#app",
   components: {
-    'chat-component': _components_ChatComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    "chat-component": _components_ChatComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -90459,6 +90459,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(v_img__WEBPACK_IMPORTED_MODULE_2_
 //npm install ejs
 //npm install body-parser
 //npm install express
+//npm install --save vue-chartjs 
+//npm install chart.js --save
 
 /***/ }),
 

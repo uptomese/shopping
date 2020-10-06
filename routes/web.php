@@ -42,6 +42,12 @@ Route::get('/check_order', ["uses"=>"ProductsController@checkOrder", 'as' => 'ch
 
 Route::post('/send_order', ["uses"=>"ProductsController@sendCheckOrder", 'as' => 'sendCheckOrder']);
 
+Route::get('/viewcart', ["uses" => "ProductsController@viewCart", 'as' => 'viewCart']);
+
+Route::get('/cart_qty_plus/{id}', ["uses" => "ProductsController@increaseSingleProduct", 'as' => 'increaseSingleProduct']);
+
+Route::get('/cart_qty_minus/{id}', ["uses" => "ProductsController@decreaseSingleProduct", 'as' => 'decreaseSingleProduct']);
+
 
 
 Route::get('/user/profile/', ["uses"=>"UsersController@getProfile", 'as' => 'getProfile'])->middleware('auth');
@@ -66,6 +72,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Admin panel
 Route::get('admin/dashboards', ["uses"=>"Admin\AdminDashboardsController@index", 'as' => 'adminDisplayDashboards'])->middleware('restricToAdmin');
+
+Route::get('admin/dashboards/year', ["uses"=>"Admin\AdminDashboardsController@index", 'as' => 'adminDashboardSelectYear'])->middleware('restricToAdmin');
 
 Route::get('admin/products', ["uses"=>"Admin\AdminProductsController@index", 'as' => 'adminDisplayProducts'])->middleware('restricToAdmin');
 

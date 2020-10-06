@@ -50,7 +50,7 @@
                 <div class="order-summary">
                 <div class="section-title text-center">
                 @foreach($orders as $items)
-                <h3 class="title">Order#{{$items['id']}}</h3><br><h5>{{$items['name']}}</h5>
+                <h3 class="title">Order#{{$items['id']}}</h3><br><h5>{{$items['name'] ?? ''}}{{$items['full_name'] ?? ''}}</h5>
                 @endforeach
                 </div>
                     <div class="order-col">

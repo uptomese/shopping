@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-10 col-10">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
@@ -16,6 +16,15 @@
                 </ol>
               </nav>
             </div>
+            <form action="{{ route('adminDashboardSelectYear') }}" method="GET" style="width:100%" class="col-lg-2 col-2 text-right">
+                <!-- <input type="hidden" id="categories_checked" name="categories_checked"> -->
+                <select name="year" class="form-control" onchange="this.form.submit()">
+                    @foreach($all_year as $key => $item)
+                    @php $year_for = "20".$key ; @endphp
+                        <option value="{{$year_for}}" @if($select_year == $year_for) selected @endif>{{$year_for}}</option>
+                    @endforeach
+                </select>
+            </form>
           </div>
           <!-- Card stats -->
           <div class="row">
@@ -26,7 +35,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total traffic</h5>
-                      <span class="h2 font-weight-bold mb-0">350,897</span>
+                      <span class="h2 font-weight-bold mb-0">{{$total}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -47,8 +56,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">All Orders</h5>
+                      <span class="h2 font-weight-bold mb-0">{{$all_orders}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -63,9 +72,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-md-6">
+            <!-- <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
-                <!-- Card body -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -87,7 +95,6 @@
             </div>
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
-                <!-- Card body -->
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
@@ -106,7 +113,7 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -115,35 +122,40 @@
     <div class="container-fluid mt--6">
       <div class="row">
         <div class="col-xl-8">
-          <div class="card bg-default">
-            <div class="card-header bg-transparent">
+        <!-- bg-default -->
+          <div class="card">
+          <!-- bg-transparent -->
+            <div class="card-header">
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
-                  <h5 class="h3 text-white mb-0">Sales value</h5>
+                  <!-- h3 text-white mb-0 -->
+                  <h5 class="h3 mb-0">Sales value</h5>
+                  @php 
+                  $value_total_month = json_encode($total_month); 
+                  $value_total_order_count = json_encode($total_order_count); 
+                  @endphp
                 </div>
                 <div class="col">
                   <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 10, 30, 15, 40, 20, 60, 60]}]}}' data-prefix="$" data-suffix="k">
+                    <li id="fmp-button" class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data": @php echo $value_total_month; @endphp }]}}' data-prefix="$" data-suffix=" THB">
                       <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
-                        <span class="d-none d-md-block">Month</span>
+                        <span class="d-none d-md-block">Price</span>
                         <span class="d-md-none">M</span>
                       </a>
                     </li>
-                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets":[{"data":[0, 20, 5, 25, 10, 30, 15, 40, 40]}]}}' data-prefix="$" data-suffix="k">
+                    <li class="nav-item" data-toggle="chart" data-target="#chart-sales-dark" data-update='{"data":{"datasets": [{"data": @php echo $value_total_order_count; @endphp }]}}' data-prefix="" data-suffix=" list">
                       <a href="#" class="nav-link py-2 px-3" data-toggle="tab">
-                        <span class="d-none d-md-block">Week</span>
+                        <span class="d-none d-md-block">Orders</span>
                         <span class="d-md-none">W</span>
                       </a>
-                    </li>
+                    </li>            
                   </ul>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <!-- Chart -->
               <div class="chart">
-                <!-- Chart wrapper -->
                 <canvas id="chart-sales-dark" class="chart-canvas"></canvas>
               </div>
             </div>
@@ -155,19 +167,41 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-                  <h5 class="h3 mb-0">Total orders</h5>
+                  <h5 class="h3 mb-0">Top 3 categories</h5>                  
+                </div>
+                <div class="col">
+                  <ul class="nav nav-pills justify-content-end">
+                    <li id="fmp-button2" class="nav-item mr-2 mr-md-0" data-toggle="chart" data-target="#chart-bars" 
+                    data-update='{
+                      "data": {
+                        "datasets": [{"data": @php echo json_encode($categorie_quantity[1]); @endphp }],
+                        "labels": @php echo json_encode($categorie_quantity[0]); @endphp 
+                        }
+                      }' 
+                    data-prefix="" data-suffix="">
+                      <!-- <a href="#"  class="nav-link py-2 px-3" data-toggle="tab"> -->
+                      <a href="{{ route('adminDisplayDashboards') }}" type="button" class="nav-link py-2 px-3 btn-outline-primary">
+                        <span class="d-none d-md-block">Refresh</span>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <!-- Chart -->
               <div class="chart">
-                <canvas id="chart-bars" class="chart-canvas"></canvas>
+                  <canvas id="chart-bars" class="chart-canvas"></canvas>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <script>
+        window.onload = (event) => {
+          document.getElementById("fmp-button").click();
+          document.getElementById("fmp-button2").click();
+        };
+      </script>
       <div class="row">
         <div class="col-xl-8">
           <div class="card">

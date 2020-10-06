@@ -25,9 +25,12 @@
     },
     "dependencies": {
         "body-parser": "^1.19.0",
+        "chart.js": "^2.9.3",
         "express": "^4.17.1",
+        "numeral": "^2.0.6",
         "socket.io": "^2.3.0",
         "v-img": "^0.2.0",
+        "vue-chartjs": "^3.5.1",
         "vue-chat-scroll": "^1.4.0",
         "vue-moment": "^4.1.0",
         "vue-socket.io": "^3.0.10"
