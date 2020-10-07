@@ -24,6 +24,7 @@ use App\Message;
 
 class ProductsController extends Controller
 {
+
     public function aasort (&$array, $key) {
         $sorter=array();
         $ret=array();
@@ -699,14 +700,16 @@ class ProductsController extends Controller
 
     public function creditCard($order_srt_id,$price_total,$payment_id,$product_name,$user_id)
     {
-        $payment_url = \Config::get('adminConfig.payment.payment_url');
-        $web_url = \Config::get('adminConfig.payment.url_myweb');
-        $web_currencycode = \Config::get('adminConfig.payment.currencycode');
-        $web_custip = \Config::get('adminConfig.payment.custip');
-        $web_custname = \Config::get('adminConfig.payment.custname');
-        $web_custemail = \Config::get('adminConfig.payment.custemail');
-        $web_custphone = \Config::get('adminConfig.payment.custphone');
-        $web_pagetimeout = \Config::get('adminConfig.payment.pagetimeout');
+        $config = DB::connection('mongodb')->collection("config")->get();
+
+        $payment_url = $config[3]['value'] ? $config[3]['value'] : \Config::get('adminConfig.payment.payment_url');
+        $web_url = $config[4]['value'] ? $config[4]['value'] : \Config::get('adminConfig.payment.url_myweb');
+        $web_currencycode = $config[5]['value'] ? $config[5]['value'] : \Config::get('adminConfig.payment.currencycode');
+        $web_custip = $config[6]['value'] ? $config[6]['value'] : \Config::get('adminConfig.payment.custip');
+        $web_custname = $config[7]['value'] ? $config[7]['value'] : \Config::get('adminConfig.payment.custname');
+        $web_custemail = $config[8]['value'] ? $config[8]['value'] : \Config::get('adminConfig.payment.custemail');
+        $web_custphone = $config[9]['value'] ? $config[9]['value'] : \Config::get('adminConfig.payment.custphone');
+        $web_pagetimeout = $config[10]['value'] ? $config[10]['value'] : \Config::get('adminConfig.payment.pagetimeout');
   
         if(Auth::check()){
             $oid_user = Auth::id();
@@ -1052,13 +1055,15 @@ class ProductsController extends Controller
 
     public function firshMessage($session, $sale_id)
     {
+        $config = DB::connection('mongodb')->collection("config")->where('config','=','first_messages')->first();
+
         if ($session) {
             $message_insert = Message::collection("messages")->insert(
                 [
                     'id' => Message::collection("messages")->getModifySequence('id'),
                     "user_id" => $sale_id * 1,
                     "session" => $session[2] * 1,
-                    "message" => \Config::get('adminConfig.firsh_messages'),
+                    "message" => $config['value'] ? $config['value'] : \Config::get('adminConfig.first_messages'),
                     "status" => 1,
                     "created_at" => date("Y-m-d H:i:s"),
                     "updated_at" => date("Y-m-d H:i:s")

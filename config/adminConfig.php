@@ -8,7 +8,7 @@ return [
     //จำนวนที่จะแสดงข้อความออกมา ต้องมากกว่า messagesDisplayed ที่ config.js
     'limit_messages' => 50,
 
-    'firsh_messages' => 'บริษัท T.B.P. Publication Co.,Ltd ยินดีให้บริการ',
+    'first_messages' => 'บริษัท T.B.P. Publication Co.,Ltd ยินดีให้บริการ',
 
     'payment' => [
 

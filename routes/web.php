@@ -117,8 +117,12 @@ Route::get('admin/create_user', ["uses"=>"Admin\AdminUsersController@createUser"
 Route::post('admin/created_user', ["uses"=>"Admin\AdminUsersController@createdUser", 'as' => 'createdUser'])->middleware('restricToAdmin');
 
 Route::get('admin/update_user/{id}', ["uses"=>"Admin\AdminUsersController@updateUser", 'as' => 'updateUser'])->middleware('restricToAdmin');
+
 Route::post('admin/updated_user/{id}', ["uses"=>"Admin\AdminUsersController@updatedUser", 'as' => 'updatedUser'])->middleware('restricToAdmin');
 
+Route::get('admin/setting/config', ["uses"=>"Admin\AdminSettingController@settingConfig", 'as' => 'settingConfig'])->middleware('restricToAdmin');
+
+Route::post('admin/setting/config_update', ["uses"=>"Admin\AdminSettingController@updateConfig", 'as' => 'updateConfig'])->middleware('restricToAdmin');
 
 Route::post('tbpapi/{id}', ["uses"=>"ProductsController@paymentResponse", 'as' => 'paymentResponse']);
 

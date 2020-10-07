@@ -107,13 +107,15 @@ class RegisterController extends Controller
 
     public function firshMessage($session, $sale_id)
     {
+        $config = DB::connection('mongodb')->collection("config")->where('config','=','first_messages')->first();
+
         if ($session) {
             $message_insert = Message::collection("messages")->insert(
                 [
                     'id' => Message::collection("messages")->getModifySequence('id'),
                     "user_id" => $sale_id * 1,
                     "session" => $session[2] * 1,
-                    "message" => \Config::get('adminConfig.firsh_messages'),
+                    "message" => $config['value'] ? $config['value'] : \Config::get('adminConfig.first_messages'),
                     "status" => 1,
                     "created_at" => date("Y-m-d H:i:s"),
                     "updated_at" => date("Y-m-d H:i:s")

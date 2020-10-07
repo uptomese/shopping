@@ -25,9 +25,9 @@
                         </div>
                     </footer>
                 </div>
-                </div>
-                </div>
-                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
 
@@ -67,12 +67,26 @@
             var td = '<td><input type="text" name="addmore['+i+']['+value+']" placeholder="Enter '+value+'" class="form-control" /></td>';
             result += td;
         });
-        $("#dynamicTable").append('<tr>'+result+'<td><button type="button" class="btn btn-danger onclick="removeTr()"">Remove</button></td></tr>');
+        $("#dynamicTable").append('<tr>'+result+'<td><button type="button" class="btn btn-danger" onclick="deleteRow(this)">Remove</button></td></tr>');
     }
 
-    function removeTr() {
-        $(this).parents('tr').remove();
+    function upTo(el, tagName) {
+        tagName = tagName.toLowerCase();
+
+        while (el && el.parentNode) {
+            el = el.parentNode;
+            if (el.tagName && el.tagName.toLowerCase() == tagName) {
+            return el;
+            }
+        }
+        return null;
+    } 
+
+    function deleteRow(el) {
+        var row = upTo(el, 'tr')
+        if (row) row.parentNode.removeChild(row);
     }
+
 
 
     </script>
@@ -96,9 +110,6 @@
     <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('assets/js/argon.js?v=1.2.0') }}"></script>
-
-
-    
 
     </body>
 

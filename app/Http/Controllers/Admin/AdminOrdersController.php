@@ -26,7 +26,7 @@ class AdminOrdersController extends Controller
         $result_array_order_in_user = [];
         $result_array_order_in = DB::connection('mongodb')->collection("orders")
             ->select('*')
-            ->orderBy('date','desc')
+            ->orderBy('id','desc')
             ->whereBetween('date', [$year.'-'.$month, $year.'-'.$month2])
             ->where('user_id','!=','no')
             ->paginate(10,['*'],'pageMonth_'.$month);
@@ -44,7 +44,7 @@ class AdminOrdersController extends Controller
             ->select('id','date')
             ->where('user_id','!=','no')
             ->groupBy('date')
-            ->orderby('date','desc')
+            ->orderby('id','desc')
             ->get();
 
         foreach($get_year as $key => $item){

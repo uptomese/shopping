@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\User_nan;
 use App\Session;
+use App\Message;
 
 class AdminUsersController extends Controller
 {
@@ -83,13 +84,16 @@ class AdminUsersController extends Controller
                         $user_sale = User_nan::database()->collection("users")->select('id','name')->where("sale","=",1)->groupby('id','name')->random(1);
                     }
 
-                    $session = Session::database()->collection("sessions")->insert([
+                    $session = Session::database()->collection("sessions")->insertGetId([
                         'id' => Session::database()->collection("sessions")->getModifySequence('sessions_id'),
                         'user_id1' => $save_user[2]*1,
                         'user_id2' => $user_sale[0]['id']*1,
-                        'unread' => "0,0",
+                        'unread' => "1,0",
                         'reading' => 0
                     ]);
+
+                    self::firshMessage($session, $user_sale[0]['id']);
+
                     if($session) return redirect()->route('getUsers')->withsuccess('Users created successfully');
                 }else return redirect()->route('getUsers')->with('fail', 'Session created failed');
             }else return redirect()->route('getUsers')->with('fail', 'Users created failed');
@@ -123,6 +127,25 @@ class AdminUsersController extends Controller
             }else{
                 redirect()->route('getUsers')->with('fail', 'Users updated failed');
             }
+        }
+    }
+
+    public function firshMessage($session, $sale_id)
+    {
+        $config = DB::connection('mongodb')->collection("config")->where('config','=','first_messages')->first();
+
+        if ($session) {
+            $message_insert = Message::collection("messages")->insert(
+                [
+                    'id' => Message::collection("messages")->getModifySequence('id'),
+                    "user_id" => $sale_id * 1,
+                    "session" => $session[2] * 1,
+                    "message" => $config['value'] ? $config['value'] : \Config::get('adminConfig.first_messages'),
+                    "status" => 1,
+                    "created_at" => date("Y-m-d H:i:s"),
+                    "updated_at" => date("Y-m-d H:i:s")
+                ]
+            );
         }
     }
 }

@@ -60,13 +60,13 @@
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
-					<ul class="header-links pull-left">
+					<ul class="header-links pull-left">						
 						<li><a href="#"><i class="fa fa-phone"></i> 02-760-8880</a></li>
 						<li><a href="#"><i class="fa fa-envelope-o"></i> pornsawatv@gmail.com</a></li>
 						<li><a href="#"><i class="fa fa-map-marker"></i> 3300/111 Elephant Tower ( Zone B) 21 Fl., Phahonyothin Rd., Chompol, Jatujak, Bangkok 10900, Thailand</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> THB</a></li>
+						<li><a href="#"><i class="fa fa-dollar"></i> {{$configData[0]['value']}}</a></li>
 						@if(Auth::check())
 						<li><a href="/home"><i class="fa fa-user-o"></i> {{Auth::user()->name}}</a></li>
 						@else
