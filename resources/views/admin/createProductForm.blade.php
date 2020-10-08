@@ -48,14 +48,14 @@
                                 <!-- <h6 class="heading-small text-muted mb-4">Product</h6> -->
                                 <div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-city">Name</label>
                                                 <input type="text" id="name" name="name" class="form-control"
                                                     placeholder="Name" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-country">Categorie</label>
                                                 <select name="categorie_id" class="form-control">
@@ -65,11 +65,18 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-country">Price</label>
                                                 <input type="number" id="price" name="price" class="form-control" step=0.1
                                                     placeholder="Price" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-country">Stock</label>
+                                                <input type="number" id="stock" name="stock" class="form-control" min=0 step=1
+                                                    placeholder="Stock" required>
                                             </div>
                                         </div>
                                     </div>

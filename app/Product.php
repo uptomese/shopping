@@ -23,6 +23,7 @@ class Product extends NanModel
                 'Unique' => true
             ],
             "name",
+            "stock",
             "description",
             "standard",
             "material",

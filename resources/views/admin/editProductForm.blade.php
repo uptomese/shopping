@@ -70,6 +70,11 @@
                                         <input type="text" class="form-control" name="price" id="price"
                                             placeholder="price" value="{{$product[0]['price']}}" require>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="name">Stock</label>
+                                        <input type="number" class="form-control" name="stock" id="stock" min=0 step=1
+                                            placeholder="Stock" value="{{$product[0]['stock']}}" require>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     @if(isset($product[0]['standard']))

@@ -139,7 +139,7 @@
 													<img src="{{ Storage::disk('local')->url('product_images/'.$item['data'][0]['image']) }}" alt="">
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">{{ $item['data'][0]['name'] }}</a></h3>
+													<h3 class="product-name"><a href="{{ route('getProduct', ['id' => $item['data'][0]['id']]) }}">{{ $item['data'][0]['name'] }}</a></h3>
 													<h4 class="product-price"><span class="qty">{{ $item['quantity'] }}x</span>{{ $item['totalSinglePrice'] }}</h4>
 												</div>
 												<a href="{{ route('DeleteItemFromCart', ['id' => $item['data'][0]['id']]) }}"><button class="delete"><i class="fa fa-close"></i></button></a>

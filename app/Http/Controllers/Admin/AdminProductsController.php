@@ -21,9 +21,9 @@ class AdminProductsController extends Controller
     public function index()
     {
         $products = Product::collection('products')
-            ->select('products.id as product_id','products.name as product_name', 'products.description as description', 'categories.name as categorie_name', 'products.price as price','products.image as image')
+            ->select('products.id as product_id','products.name as product_name', 'products.description as description', 'categories.name as categorie_name', 'products.price as price','products.image as image' ,'products.stock as stock')
             ->leftjoin('categories','products.categorie_id','categories.id')
-            ->groupby('products.id','products.name','products.description','products.image','products.price','products.categorie_id','products.created_at','products.updated_at','categories.name','products.image')
+            ->groupby('$selected')
             ->orderby('products.id','desc')
             ->paginate(10);
 
@@ -46,6 +46,7 @@ class AdminProductsController extends Controller
             }
         }else $array_details = null;
 
+        $stock = $request->input('stock');
         $name = $request->input('name');
         $description = $request->input('description');
         $categorie_id = $request->input('categorie_id');
@@ -69,6 +70,7 @@ class AdminProductsController extends Controller
         $newProductArray = array(
             'id' => Product::database()->collection("products")->getModifySequence('product_id'),
             'name' => $name,
+            'stock' => $stock*1,
             'description' => $description,
             'categorie_id' => $categorie_id*1,
             'price' => $price,
@@ -96,7 +98,7 @@ class AdminProductsController extends Controller
         $product = Product::collection('products')
             ->select('products.id as product_id','products.name as product_name','products.description as description','products.price as price'
             ,'products.categorie_id as categorie_id','products.standard as standard','products.material as material','products.coating as coating'
-            ,'products.code as code','products.update as update','products.details as details')
+            ,'products.code as code','products.update as update','products.details as details', 'products.stock as stock')
             ->leftjoin('categories','products.categorie_id','categories.id')
             ->where('products.id','=',$id*1)
             ->groupby('$selected')
@@ -162,6 +164,7 @@ class AdminProductsController extends Controller
             }
         }else $array_details = null;
 
+        $stock = $request->input('stock');
         $name = $request->input('name');
         $description = $request->input('description');
         $categorie_id = $request->input('categorie_id');
@@ -178,6 +181,7 @@ class AdminProductsController extends Controller
             ->where('id',"=",$id*1)
             ->update([
                 'name' => $name,
+                'stock' => $stock*1,
                 'description' => $description,
                 'categorie_id' => $categorie_id*1,
                 'price' => $price*1.0,

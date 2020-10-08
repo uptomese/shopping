@@ -168,8 +168,11 @@
                                         </div>
                                         <div class="add-to-cart">
                                             <a href="{{ route('AddToCartProduct',['id' => $product['id'], 'qunatity' => 1]) }}">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to
-                                                    cart</button>
+                                                @if($product['stock']!=0)
+                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                @else
+                                                <button class="add-to-cart-btn" type="button" class="btn btn-lg btn-primary" disabled><i class="fa fa-times"></i> Out of stock</button>
+                                                @endif
                                             </a>
                                         </div>
                                     </a>

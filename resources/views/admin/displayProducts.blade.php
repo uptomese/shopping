@@ -54,6 +54,7 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">price</th>
+                                <th scope="col">stock</th>
                                 <th scope="col">image</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -75,6 +76,9 @@
                                 </td>
                                 <td>
                                     <p>${{$item['price']}}</p>
+                                </td>
+                                <td>
+                                    <p>{{$item['stock']}}</p>
                                 </td>
                                 <td scope="row">
                                     <div class="media align-items-center">

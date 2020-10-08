@@ -77,7 +77,7 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $products = Product::collection("products")
-            ->select('products.id as id','products.name as name','products.price as price','products.image as image','categories.name as categorie_name','products.ratting as ratting')
+            ->select('products.id as id','products.name as name','products.price as price','products.image as image','categories.name as categorie_name','products.ratting as ratting','products.stock as stock')
             ->leftjoin('categories','products.categorie_id','categories.id')
             ->groupby('$selected')
             ->orderby('products.id','desc')
@@ -85,7 +85,7 @@ class ProductsController extends Controller
             ->get();
 
         $ratting_products = Product::collection("products")
-            ->select('products.id as id','products.name as name','products.price as price','products.image as image','categories.name as categorie_name','products.ratting as ratting')
+            ->select('products.id as id','products.name as name','products.price as price','products.image as image','categories.name as categorie_name','products.ratting as ratting','products.stock as stock')
             ->leftjoin('categories','products.categorie_id','categories.id')
             ->groupby('$selected')
             ->orderby('products.ratting','desc')
@@ -557,7 +557,6 @@ class ProductsController extends Controller
                     $item_id = $cart_item['data'][0]['id'];
                     $item_name = $cart_item['data'][0]['name'];
                     $item_quantity = $cart_item['quantity'];
-    
                     $item_price = $cart_item['data'][0]['price'];
     
                     $newItemInCurrentOrder = array(
@@ -632,7 +631,6 @@ class ProductsController extends Controller
                     $item_id = $cart_item['data'][0]['id'];
                     $item_name = $cart_item['data'][0]['name'];
                     $item_quantity = $cart_item['quantity'];
-
                     $item_price = $cart_item['data'][0]['price'];
 
                     $newItemInCurrentOrder = array(
@@ -844,6 +842,21 @@ class ProductsController extends Controller
 
             $encode_order = str_rot13(base64_encode($order_id['order_id']*1));
 
+
+            $order_item = DB::connection('mongodb')->collection("order_items")->where('order_id','=',$order_id['order_id']*1)->get();
+            foreach($order_item as $item){
+                $stock = DB::connection('mongodb')->collection("products")->select('stock')->where('id','=',$item['product_id']*1)->first();
+                if(($item['product_quantity']*1) <= ($stock['stock']*1)){
+                    $remaining = ($stock['stock']*1) - ($item['product_quantity']*1);
+                    $update_stock = DB::connection('mongodb')->collection("products")->where('id','=',$item['product_id']*1)->update(['stock'=>$remaining]);
+                }else{
+                    $decode_test_id_user = self::decode($Param6,'tbp123');
+                    Auth::loginUsingId($decode_test_id_user);
+                    return redirect()->route('viewCart')->with('fail', 'Not enough product to buy');
+                }
+            }
+
+
             if(!Auth::check()){
                 Session::forget('cart');
                 // Session::flush();
@@ -1031,6 +1044,14 @@ class ProductsController extends Controller
         $cart = new Cart($prevCart);
 
         $product = Product::collection("products")->where('id', "=", $id * 1)->first();
+        
+        foreach($cart->items as $item){
+            $stock = Product::collection("products")->select('stock')->where('id', "=", $item['data'][0]['id'] * 1)->first();
+            if(($item['quantity']*1) >= ($stock[0]['stock']*1)){
+                return redirect()->route('viewCart')->with('fail', 'Not enough product to buy');
+            }
+        }
+        
         $cart->addItem($id, $product, 1);
         $request->session()->put('cart', $cart);
         // return redirect()->route("getProduct");

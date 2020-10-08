@@ -34,55 +34,42 @@
     <!-- container -->
     <div class="container">
         <div class="card shopping-cart">
-            <div class="card-header bg-dark text-light">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                Shipping cart
-                <a href="{{ route('allStore') }}" class="btn btn-outline-info btn-sm pull-right">Continiu shopping</a>
-                <div class="clearfix"></div>
+            <div class="card-header border-0">
+                <h2>
+                    <small>Shipping cart</small>
+                </h2>
             </div>
             <div class="card-body">
-                @foreach($cartItems->items as $item)
                     <!-- PRODUCT -->
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="{{ Storage::disk('local')->url('product_images/'.$item['data'][0]['image']) }}" alt="prewiew" width="120" height="80">
-                        </div>
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong>{{ $item['data'][0]['name'] }}</strong></h4>
-                            <h4>
-                                <small>@foreach($item['data'] as $item_description) {{ $item_description['description'] }} @endforeach</small>
-                            </h4>
-                        </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="product-details">
-                                <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 15px">
-                                    <h6><strong>{{ $item['data'][0]['price'] }} <span class="text-muted">x</span></strong></h6>
-                                </div>
-                                <div class="add-to-cart">
-                                    <div class="qty-label">
-                                        <div class="input-number">
-                                            <input type="number" name="qunatity" value="{{ $item['quantity'] }}" disabled>
-                                            <a href="{{ route('increaseSingleProduct', ['id' => $item['data'][0]['id']]) }}"><span class="qty-up">+</span></a>
-                                            <a href="{{ route('decreaseSingleProduct', ['id' => $item['data'][0]['id']]) }}"><span class="qty-down">-</span></a>
-                                        </div>
-                                    </div>   
-                                    {{-- <h6><strong>{{ $item['totalSinglePrice'] }}</strong></h6>                            --}}
-                                    <div class="pull-right" style="padding-top: 5px">
-                                        <a href="{{ route('DeleteItemFromCart', ['id' => $item['data'][0]['id']]) }}"><button class="delete"><i class="fa fa-trash"></i></button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <table class="table table-hover">
+                            <tbody>
+                            @foreach($cartItems->items as $item)
+                                <tr>
+                                    <td><img class="img-responsive" src="{{ Storage::disk('local')->url('product_images/'.$item['data'][0]['image']) }}" alt="prewiew" width="120" height="80"></td>
+                                    <td class="text-sm-center text-md-left">
+                                        <h4 class="product-name"><a href="{{ route('getProduct', ['id' => $item['data'][0]['id']]) }}"><strong>{{ $item['data'][0]['name'] }}</strong></a></h4>
+                                        <h4>
+                                            <small>@foreach($item['data'] as $item_description) {{ $item_description['description'] }} @endforeach</small>
+                                        </h4>
+                                    </td>
+                                    <td style="padding-top: 20px"><h6><strong>{{ $item['data'][0]['price'] }} <span class="text-muted">x</span></strong></h6></td>
+                                    <td style="width:100px">
+                                        <div class="qty-label">
+                                            <div class="input-number">
+                                                <input type="number" name="qunatity" value="{{ $item['quantity'] }}" min=0 disabled>
+                                                <a href="{{ route('increaseSingleProduct', ['id' => $item['data'][0]['id']]) }}"><span class="qty-up">+</span></a>
+                                                <a href="{{ route('decreaseSingleProduct', ['id' => $item['data'][0]['id']]) }}"><span class="qty-down">-</span></a>
+                                            </div>
+                                        </div>   
+                                    </td>
+                                    <td style="padding-top: 20px"><h6><strong>{{ $item['totalSinglePrice'] }}</strong></h6></td>
+                                    <td style="padding-top: 15px"><a href="{{ route('DeleteItemFromCart', ['id' => $item['data'][0]['id']]) }}"><button class="delete" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button></a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <hr>
-                    <!-- END PRODUCT -->
-                @endforeach
-                    
-                {{-- <div class="pull-right">
-                    <a href="" class="btn btn-outline-secondary pull-right">
-                        Update shopping cart
-                    </a>
-                </div> --}}
                 <div class="pull-right" style="margin: 10px">
                     <div class="cart-summary">
                         <small>{{ $totalQuantity }} Item(s) selected</small>
@@ -91,19 +78,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                {{-- <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="cupone code">
-                        </div>
-                        <div class="col-6">
-                            <input type="submit" class="btn btn-default" value="Use cupone">
-                        </div>
-                    </div>
-                </div> --}}
                 <div class="pull-right" style="margin: 10px">                    
                     <a href="{{ route('cartproducts') }}"><button type="submit" name="submit" class="primary-btn order-submit">Checkout</button></a>
-                    {{-- <a href="" class="btn btn-success pull-right">Checkout</a> --}}
                 </div>
             </div>
         </div>   
@@ -147,9 +123,6 @@
     <!-- /container -->
 </div>
 <!-- /NEWSLETTER -->
-{{-- @if(!isset($array_orders))
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
-@endif --}}
 
 
 @if(Auth::check())

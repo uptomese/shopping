@@ -116,10 +116,10 @@
                         <h3 class="product-price">{{$product['price']}}
                             <!-- <del class="product-old-price">{{$product['price']}}</del> -->
                         </h3>
-                        <span class="product-available">In Stock</span>
+                        <span class="product-available">In Stock ({{ $product['stock'] }})</span>
                     </div>
                     <p>{{$product['description']}}</p>
-
+ 
                     <!-- <div class="product-options">
                         <label>
                             Size
@@ -140,13 +140,12 @@
                             <div class="qty-label">
                                 Qty
                                 <div class="input-number">
-                                    <input type="number" name="qunatity" value=0>
+                                    <input type="number" name="qunatity" value=1 min=0 max="{{$product['stock']}}">
                                     <span class="qty-up">+</span>
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
-                            <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to
-                                cart</button>
+                            <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                         </form>
                     </div>
 
