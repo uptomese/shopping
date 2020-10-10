@@ -39,7 +39,7 @@ class HomeController extends Controller
         $array_orders = array();
         foreach($orders->items as $item){
             $order_items = OrderItem::collection('order_items')
-                ->select('order_items.id as id','order_items.product_name as product_name','order_items.product_quantity as product_quantity','order_items.product_price as product_price','products.image as image')
+                ->select('order_items.id as id','order_items.product_id as product_id','order_items.product_name as product_name','order_items.product_quantity as product_quantity','order_items.product_price as product_price','products.image as image')
                 ->leftjoin('products','order_items.product_id','products.id')
                 ->groupby('$selected')
                 ->where('order_items.order_id','=',$item['id']*1)

@@ -119,10 +119,9 @@
                                             </div>
                                             <img id="blah" height="330" width="auto" />
                                             <hr class="my-4" />
-                                            <input type="file" class="form-control" name="image" id="image"
+                                            <input type="file" class="form-control" name="image[]" id="image" multiple="multiple"
                                                 onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"
-                                                placeholder="image" accept=".png, .jpg, .jpeg" required>
-                                       
+                                                placeholder="image" accept=".png, .jpg, .jpeg" required>                                       
                                         </div> 
                                     </div>
                                     <hr class="my-4" />

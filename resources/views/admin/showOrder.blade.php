@@ -101,8 +101,11 @@
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder"
-                                                src="{{ asset('storage') }}/product_images/{{$item['image'] ?? ''}}" style="width:40px;height:40px;">
+                                            @if(gettype($item['image'])=="array")                                            
+                                            <img src="{{ asset('storage') }}/product_images/{{$item['product_id']}}/{{$item['image'][0] ?? ''}}" alt="" style="width:40px;height:40px;">
+                                            @else
+                                            <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image'] ?? '') }}" alt="" style="width:40px;height:40px;">
+                                            @endif
                                         </a>
                                         <div class="media-body">
                                             <span class="name mb-0 text-sm">{{$item['product_name']}}</span>

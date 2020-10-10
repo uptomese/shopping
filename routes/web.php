@@ -84,6 +84,11 @@ Route::get('admin/editProductForm/{id}', ["uses"=>"Admin\AdminProductsController
 Route::post('admin/updateProduct/{id}', ["uses"=>"Admin\AdminProductsController@updateProduct", 'as' => 'adminUpdateProductForm'])->middleware('restricToAdmin');
 
 Route::get('admin/editProductImageForm/{id}', ["uses"=>"Admin\AdminProductsController@editProductImageForm", 'as' => 'adminEditProductImageForm'])->middleware('restricToAdmin');
+
+Route::post('admin/addImage/{id}', ["uses"=>"Admin\AdminProductsController@addProductImage", 'as' => 'adminAddProductImageForm'])->middleware('restricToAdmin');
+
+Route::get('admin/deleteImage/{id}/{index}', ["uses"=>"Admin\AdminProductsController@deleteImage", 'as' => 'adminDeleteImage'])->middleware('restricToAdmin');
+
 Route::post('admin/updateImage/{id}', ["uses"=>"Admin\AdminProductsController@updateProductImage", 'as' => 'adminUpdateProductImageForm'])->middleware('restricToAdmin');
 
 Route::get('admin/deleteProduct/{id}', ["uses"=>"Admin\AdminProductsController@deleteProduct", 'as' => 'adminDeleteProduct'])->middleware('restricToAdmin');

@@ -36,8 +36,7 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="mb-0">Products <spen>({{$products->total}} list)</spen>
-                            </h3>
+                            <h3 class="mb-0">Products <spen>({{$products->total}} list)</spen></h3>
                         </div>
                         <div class="col text-right">
                             <a href="{{ route('adminCreateProductForm') }}" class="btn btn-sm btn-primary">New</a>
@@ -81,13 +80,17 @@
                                     <p>{{$item['stock']}}</p>
                                 </td>
                                 <td scope="row">
-                                    <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder"
-                                                src="{{ asset('storage') }}/product_images/{{$item['image']}}"
-                                                style="width:40px;height:40px;">
+                                    @if(gettype($item['image'])=="array")
+                                    <div class="avatar-group">
+                                        @foreach($item['image'] as $key => $array_image)                            
+                                        <a href="#" class="avatar avatar-sm rounded-circle media align-items-center" data-toggle="tooltip" data-original-title="{{$array_image}}">
+                                            <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['product_id']}}/{{$item['image'][$key]}}" style="width:50px;height:50px;">
                                         </a>
+                                        @endforeach
                                     </div>
+                                    @else
+                                    <img class="avatar avatar-sm rounded-circle media align-items-center" alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['image']}}" style="width:50px;height:50px;">
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{ route('adminEditProductImageForm', ['id' => $item['product_id']]) }}"

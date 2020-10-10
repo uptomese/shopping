@@ -165,7 +165,11 @@
                                     <div class="product-widget">
                                         <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                             <div class="product-img">
+                                                @if(gettype($item['image'])=="array")                                            
+                                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                                @else
                                                 <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
+                                                @endif
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">{{$item['categorie_name']}}</p>
@@ -265,7 +269,11 @@
                     <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                         <div class="product">
                             <div class="product-img">
-                                <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" >
+                                @if(gettype($item['image'])=="array")                                            
+                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                @else
+                                <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
+                                @endif
                                 <div class="product-label">
                                     <!-- <span class="sale">-30%</span>
                                     <span class="new">NEW</span> -->
@@ -342,7 +350,11 @@
                                 <td>${{$item['price']}}</td>
                                 <td>  
                                     <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
-                                        <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['image']}}" style="width:100px;height:90px;border-radius: 50%;"> 
+                                        @if(gettype($item['image'])=="array")                                            
+                                        <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="" style="width:100px;height:90px;border-radius: 50%;">
+                                        @else
+                                        <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" style="width:100px;height:90px;border-radius: 50%;">
+                                        @endif
                                     </a>
                                 </td>
                             </tr>

@@ -8,4 +8,9 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>Error!</strong> {{\Session::get('fail')}}
 </div>
+@elseif($errors->any())
+<div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> {{print_r($errors->all())}}
+</div>
 @endif

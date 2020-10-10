@@ -53,21 +53,17 @@
             <!-- Product main img -->
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
+                @if(gettype($product['image'])=="array")    
+                    @foreach($product['image'] as $image)
                     <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
+                        <img src="{{ asset('storage') }}/product_images/{{$product['id']}}/{{$image}}" alt="">
                     </div>
-
+                    @endforeach
+                @else
                     <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
+                        <img src="{{ asset('storage') }}/product_images/{{$product['image']}}" alt="">
                     </div>
-
-                    <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
-                    </div>
+                @endif
                 </div>
             </div>
             <!-- /Product main img -->
@@ -75,21 +71,17 @@
             <!-- Product thumb imgs -->
             <div class="col-md-2  col-md-pull-5">
                 <div id="product-imgs">
+                @if(gettype($product['image'])=="array")    
+                    @foreach($product['image'] as $image)
                     <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
+                        <img src="{{ asset('storage') }}/product_images/{{$product['id']}}/{{$image}}" alt="">
                     </div>
-
+                    @endforeach
+                @else
                     <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
+                        <img src="{{ asset('storage') }}/product_images/{{$product['image']}}" alt="">
                     </div>
-
-                    <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
-                    </div>
+                @endif
                 </div>
             </div>
             <!-- /Product thumb imgs -->
@@ -445,7 +437,11 @@
             <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                 <div class="product">
                     <div class="product-img">
+                        @if(gettype($item['image'])=="array")                                            
+                        <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                        @else
                         <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
+                        @endif
                         <div class="product-label">
                             <!-- <span class="sale">-30%</span> -->
                             <span class="new">NEW</span>

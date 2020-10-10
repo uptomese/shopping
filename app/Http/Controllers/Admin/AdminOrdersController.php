@@ -145,9 +145,9 @@ class AdminOrdersController extends Controller
     public function showOrder($id)
     {
         $order_items = OrderItem::collection('order_items')
-            ->select('order_items.id as id','order_items.product_name as product_name','order_items.product_quantity as product_quantity','order_items.product_price as product_price','products.image as image')
+            ->select('order_items.id as id','order_items.product_id as product_id','order_items.product_name as product_name','order_items.product_quantity as product_quantity','order_items.product_price as product_price','products.image as image')
             ->leftjoin('products','order_items.product_id','products.id')
-            ->groupby('order_items.id','order_items.product_name','order_items.product_quantity','order_items.product_price','products.image')
+            ->groupby('$selected')
             ->where('order_items.order_id','=',$id*1)
             ->get();
             

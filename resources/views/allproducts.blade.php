@@ -129,8 +129,11 @@
                                 <div class="product">
                                     <a href="{{ route('getProduct', ['id'=>$product['id']]) }}">
                                         <div class="product-img">
-                                            <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}"
-                                                alt="">
+                                            @if(gettype($product['image'])=="array")                                            
+                                            <img src="{{ asset('storage') }}/product_images/{{$product['id']}}/{{$product['image'][0]}}" alt="">
+                                            @else
+                                            <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
+                                            @endif
                                             <div class="product-label">
                                                 <!-- <span class="sale">-30%</span> -->
                                                 @if($searchText ?? '' == 'true')
@@ -156,14 +159,9 @@
                                                 @endfor
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                        class="tooltipp">add to wishlist</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                        class="tooltipp">add to compare</span></button>
-                                                <button class="quick-view"><a
-                                                        href="{{ route('getProduct', ['id'=>$product['id']]) }}"><i
-                                                            class="fa fa-eye"></i></a><span class="tooltipp">quick
-                                                        view</span></button>
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><a href="{{ route('getProduct', ['id'=>$product['id']]) }}"><i class="fa fa-eye"></i></a><span class="tooltipp">quick view</span></button>
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
@@ -276,7 +274,11 @@
                                 <div class="product">
                                 <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                     <div class="product-img">
+                                        @if(gettype($item['image'])=="array")                                            
+                                        <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                        @else
                                         <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
+                                        @endif
                                         <div class="product-label">
                                             <!-- <span class="sale">-30%</span>
                                             <span class="new">NEW</span> -->
@@ -299,18 +301,14 @@
                                             @endfor
                                         </div>
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">add to wishlist</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">add to compare</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">quick view</span></button>
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
                                         <a href="{{ route('AddToCartProduct',['id' => $item['id'], 'qunatity' => 1]) }}">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to
-                                                cart</button>
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </a>
                                     </div>
                                 </a>
@@ -353,7 +351,11 @@
                                     <div class="product-widget">
                                         <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                             <div class="product-img">
+                                                @if(gettype($item['image'])=="array")                                            
+                                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                                @else
                                                 <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
+                                                @endif
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">{{$item['categorie_name']}}</p>
@@ -374,7 +376,11 @@
                                     <div class="product-widget">
                                         <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                             <div class="product-img">
+                                                @if(gettype($item['image'])=="array")                                            
+                                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                                @else
                                                 <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
+                                                @endif
                                             </div>
                                             <div class="product-body">
                                                 <p class="product-category">{{$item['categorie_name']}}</p>

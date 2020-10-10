@@ -46,7 +46,13 @@
                             <tbody>
                             @foreach($cartItems->items as $item)
                                 <tr>
-                                    <td><img class="img-responsive" src="{{ Storage::disk('local')->url('product_images/'.$item['data'][0]['image']) }}" alt="prewiew" width="120" height="80"></td>
+                                    <td>
+                                        @if(gettype($item['data'][0]['image'])=="array")                                            
+                                        <img class="img-responsive" src="{{ asset('storage') }}/product_images/{{$item['data'][0]['id']}}/{{$item['data'][0]['image'][0]}}" alt="prewiew" width="120" height="80">
+                                        @else
+                                        <img class="img-responsive" src="{{ Storage::disk('local')->url('product_images/'.$item['data'][0]['image']) }}" alt="prewiew" width="120" height="80">
+                                        @endif
+                                    </td>
                                     <td class="text-sm-center text-md-left">
                                         <h4 class="product-name"><a href="{{ route('getProduct', ['id' => $item['data'][0]['id']]) }}"><strong>{{ $item['data'][0]['name'] }}</strong></a></h4>
                                         <h4>
