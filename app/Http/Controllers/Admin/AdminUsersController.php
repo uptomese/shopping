@@ -13,6 +13,8 @@ use App\User;
 use App\User_nan;
 use App\Session;
 use App\Message;
+use App\Order;
+use App\OrderItem;
 
 class AdminUsersController extends Controller
 {
@@ -147,5 +149,50 @@ class AdminUsersController extends Controller
                 ]
             );
         }
+    }
+
+    public function getOrders($id)
+    {
+        $user = DB::connection('mongodb')->collection("users")->where('id','=',$id*1)->first();
+
+        $price = DB::connection('mongodb')->collection("orders")
+            ->where('user_id','=',$id*1)
+            ->where('status_payment','=',1)
+            ->get();
+
+        $count = DB::connection('mongodb')->collection("orders")
+            ->where('user_id','=',$id*1)
+            ->where('status_payment','=',1)
+            ->count();
+
+        $total_price = 0;
+        foreach($price as $item){
+            $total_price = $total_price + ($item['price']*1.0);
+        }
+
+        $orders = Order::collection('orders')
+            ->select('*')
+            ->where('user_id','=',$id*1)
+            ->orderBy('id','desc')
+            ->paginate(5);
+
+        $array_orders = array();
+        foreach($orders->items as $item){
+            $order_items = OrderItem::collection('order_items')
+                ->select('order_items.id as id','order_items.product_id as product_id','order_items.product_name as product_name','order_items.product_quantity as product_quantity','order_items.product_price as product_price','products.image as image')
+                ->leftjoin('products','order_items.product_id','products.id')
+                ->groupby('$selected')
+                ->where('order_items.order_id','=',$item['id']*1)
+                ->get();
+            array_push($array_orders, array('order'=>$item,'items'=>$order_items));
+        }
+
+        return view('admin.showUsersOrder',[
+            'user' => $user,
+            'array_orders' => $array_orders,
+            'orders' => $orders,
+            'total_price' => '$' . number_format($total_price,2),
+            'count' => $count
+            ]);
     }
 }

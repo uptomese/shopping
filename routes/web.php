@@ -78,9 +78,11 @@ Route::get('admin/dashboards/year', ["uses"=>"Admin\AdminDashboardsController@in
 Route::get('admin/products', ["uses"=>"Admin\AdminProductsController@index", 'as' => 'adminDisplayProducts'])->middleware('restricToAdmin');
 
 Route::get('admin/createProductForm', ["uses"=>"Admin\AdminProductsController@createProductForm", 'as' => 'adminCreateProductForm'])->middleware('restricToAdmin');
+
 Route::post('admin/sendCreateProductForm', ["uses"=>"Admin\AdminProductsController@sendCreateProductForm", 'as' => 'adminSendCreateProductForm'])->middleware('restricToAdmin');
 
 Route::get('admin/editProductForm/{id}', ["uses"=>"Admin\AdminProductsController@editProductForm", 'as' => 'adminEditProductForm'])->middleware('restricToAdmin');
+
 Route::post('admin/updateProduct/{id}', ["uses"=>"Admin\AdminProductsController@updateProduct", 'as' => 'adminUpdateProductForm'])->middleware('restricToAdmin');
 
 Route::get('admin/editProductImageForm/{id}', ["uses"=>"Admin\AdminProductsController@editProductImageForm", 'as' => 'adminEditProductImageForm'])->middleware('restricToAdmin');
@@ -101,9 +103,11 @@ Route::get('admin/testStorage', function(){
 });
 
 Route::get('admin/categories', ["uses"=>"Admin\AdminProductsController@indexCategories", 'as' => 'adminDisplayCategories'])->middleware('restricToAdmin');
+
 Route::post('admin/createCategorieForm', ["uses"=>"Admin\AdminProductsController@createCategorieForm", 'as' => 'adminCreateCategorieForm'])->middleware('restricToAdmin');
 
 Route::get('admin/editCategorieForm/{id}', ["uses"=>"Admin\AdminProductsController@editCategorie", 'as' => 'adminEditCategorieForm'])->middleware('restricToAdmin');
+
 Route::post('admin/updateCategorie/{id}', ["uses"=>"Admin\AdminProductsController@updateCategorie", 'as' => 'adminUpdateCategorieForm'])->middleware('restricToAdmin');
 
 Route::get('admin/deleteCategorie/{id}', ["uses"=>"Admin\AdminProductsController@deleteCategorie", 'as' => 'adminDeleteCategorie'])->middleware('restricToAdmin');
@@ -113,9 +117,12 @@ Route::get('admin/orders', ["uses"=>"Admin\AdminOrdersController@index", 'as' =>
 Route::get('admin/order/{id}', ["uses"=>"Admin\AdminOrdersController@showOrder", 'as' => 'adminShowOrder'])->middleware('restricToAdmin');
 
 Route::get('admin/update_order_success/{id}', ["uses"=>"Admin\AdminOrdersController@updateOrderSuccess", 'as' => 'updateOrderSuccess'])->middleware('restricToAdmin');
+
 Route::get('admin/update_order_wait/{id}', ["uses"=>"Admin\AdminOrdersController@updateOrderWait", 'as' => 'updateOrderWait'])->middleware('restricToAdmin');
 
 Route::get('admin/users', ["uses"=>"Admin\AdminUsersController@index", 'as' => 'getUsers'])->middleware('restricToAdmin');
+
+Route::get('admin/user/orders/{id}', ["uses"=>"Admin\AdminUsersController@getOrders", 'as' => 'getOrders'])->middleware('restricToAdmin');
 
 Route::get('admin/create_user', ["uses"=>"Admin\AdminUsersController@createUser", 'as' => 'createUser'])->middleware('restricToAdmin');
 

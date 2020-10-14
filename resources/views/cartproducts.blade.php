@@ -144,9 +144,9 @@
                             <input type="radio" name="address" id="radio_address-2" value="address_b" required @if($userData->address[0] == 'address_b') checked @endif >
                             <label for="radio_address-2">
                                 <span></span>
-                                <select name="address_mult"  class="input-select" style="width: 100%;">
-                                    @foreach ($address as $item)
-                                    <option value="{{$item['address']}}" @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) selected @endif>
+                                <select id="mySelect" name="address_mult"  class="input-select" style="width: 100%;">
+                                    @foreach ($address as $key => $item)
+                                    <option value="{{$item['address']}}" name="{{$key}}" @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) selected @endif>
                                     @if(isset($userData->address[2]) && $item['address'] == $userData->address[2]) (default) @endif {{$item['title']}} [ {{$item['address']}} ]
                                     </option>
                                     @endforeach
@@ -179,6 +179,7 @@
                                 <p>Pay for items or services you've purchased easily and more securely. All you need is an email address or mobile number to send a payment.</p>
                             </div>
                         </div>
+
                         <!-- <div class="input-radio">
                             <input type="radio" name="payment" id="payment-2">
                             <label for="payment-2">
@@ -222,6 +223,8 @@
                     </div> -->
                     <!-- <a href="{{ route('createOrder') }}" class="primary-btn order-submit" type="submit">Place order</a> -->
                     <button type="submit" name="submit" class="primary-btn order-submit">Place order</button>
+
+                    <button onclick="sendAddress()" style="display:none;">Click me</button>
                 </div>
                 <!-- /Order Details -->
             </form>
@@ -298,3 +301,33 @@
 @endif
 
 @endsection
+
+<script>
+function sendAddress() {
+
+    const rbs = document.querySelectorAll('input[name="address"]');
+
+    let selectedValue;
+
+    for (const rb of rbs) {
+        if (rb.checked) {
+            selectedValue = rb.value;
+            break;
+        }
+    }
+
+    if(selectedValue=="address_b"){
+
+        var x = document.getElementById("mySelect").selectedIndex;
+        var y = document.getElementById("mySelect").options;
+
+        selectedValue = "address_b_" + y[x].index;
+
+    }else{
+
+        selectedValue = "address_a";
+    }
+
+    console.log(selectedValue);
+}
+</script>

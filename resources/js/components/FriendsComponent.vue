@@ -63,6 +63,13 @@
                 <img
                   :src="baseUrl + '/storage/user_images/' + friend.image"
                   class="profileimg"
+                  v-if="friend.status == 'online'"
+                  style="border: 2px solid #00ff00"
+                />
+                <img
+                  :src="baseUrl + '/storage/user_images/' + friend.image"
+                  class="profileimg"
+                  v-else
                 />
                 <span
                   v-if="friend.resulut_unread > 0"
@@ -395,6 +402,21 @@ export default {
   display: flex;
   flex-direction: column;
   height: 30px;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: red;
+  border-radius: 10px;
 }
 
 /* .has-search .form-control {

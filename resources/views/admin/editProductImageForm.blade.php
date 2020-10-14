@@ -21,8 +21,8 @@
 </div>
 
 <div class="container-fluid mt--6">
-    <div class="row justify-content-md-center">
-        <div class="col-xl-8">
+    <div class="row ">
+        <div class="col-xl-12">
             <div class="container col-12">
                 @include('../alert')
             </div>
@@ -63,24 +63,27 @@
                                     <div class="pl-lg-4">
                                         <form action="/admin/updateImage/{{$product[0]['id']}}" method="POST" enctype="multipart/form-data">
                                             {{csrf_field()}}
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="form-group">
-                                                            <label for="description">{{$product[0]['image'][$key]}}</label>
-                                                            <input type="hidden" name="type_image" value="image_b">
-                                                            <input type="hidden" name="index" value="{{$key}}">
-                                                            <input type="hidden" name="file_name" value="{{$product[0]['image'][$key]}}">
-                                                            <input type="file" class="form-control" name="image" id="image"
-                                                                onchange="document.getElementById('blah[{{$key}}]').src = window.URL.createObjectURL(this.files[0])"
-                                                                placeholder="image" value="{{$key}}"
-                                                                accept=".png, .jpg, .jpeg" require>
-                                                        </div>
-                                                        <!-- placeholder="image" value="{{$product[0]['image'][$key]}}" -->
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label for="description">{{$product[0]['image'][$key]}}</label>
+                                                        <input type="hidden" name="type_image" value="image_b">
+                                                        <input type="hidden" name="index" value="{{$key}}">
+                                                        <input type="hidden" name="file_name" value="{{$product[0]['image'][$key]}}">
+                                                        <input type="file" class="form-control" name="image" id="image"
+                                                            onchange="document.getElementById('blah[{{$key}}]').src = window.URL.createObjectURL(this.files[0])"
+                                                            placeholder="image" value="{{$key}}"
+                                                            accept=".png, .jpg, .jpeg" require>
                                                     </div>
-                                                <button type="submit" name="submit" class="btn btn-info">Save</button>
-                                        </form>
-                                                <a href="../deleteImage/{{$product[0]['id']}}/{{$key}}"><button type="btn" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delte</button></a>
+                                                    <!-- placeholder="image" value="{{$product[0]['image'][$key]}}" -->
                                                 </div>
+                                            <button type="submit" name="submit" class="btn btn-info">Save</button>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <div class="row">
+                                            <a href="../deleteImage/{{$product[0]['id']}}/{{$key}}"><button type="btn" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delte</button></a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -115,7 +118,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 @php
 $user = array(

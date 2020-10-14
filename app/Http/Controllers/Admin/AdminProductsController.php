@@ -300,13 +300,43 @@ class AdminProductsController extends Controller
 
     public function deleteProduct($id)
     {
+        
         $product = Product::collection("products")->where('id',"=",$id*1)->first();
-        $exists = Storage::disk('local')->exists("public/product_images/".$product[0]['image']);
-        if($exists){
-            Storage::delete('public/product_images/'.$product[0]['image']);
+
+        $exists = Storage::disk('local')->exists('public/product_images/'.$id);
+
+        if(gettype($product[0]['image']) == "array"){
+
+            if($exists){
+    
+                Storage::disk('local')->deleteDirectory('public/product_images/'.$id);
+    
+                DB::connection('mongodb')->collection("products")->where("id","=",$id*1)->delete();
+    
+                return back()->withsuccess('Product deleted successfully');
+    
+            }else{
+    
+            return back()->with('fail', 'Product deleted failed');
+
+            }
+
+
+        }else{
+
+            $exists = Storage::disk('local')->exists("public/product_images/".$product[0]['image']);
+
+            if($exists){
+
+                Storage::delete('public/product_images/'.$product[0]['image']);
+            }
+
+            $deleteresult = DB::connection('mongodb')->collection("products")->where("id","=",$id*1)->delete();
+
+            return back()->withsuccess('Product deleted successfully');
+
         }
-        $deleteresult = DB::connection('mongodb')->collection("products")->where("id","=",$id*1)->delete();
-        return redirect()->route('adminDisplayProducts')->withsuccess('Product deleted successfully');
+
     }
 
 

@@ -70,7 +70,7 @@
                                     </div>
                                 </th>
                                 <td>
-                                    <a href="#"><span class="name mb-0 text-sm">{{$user['name']}}</span></a>
+                                    <a href="{{ route('getOrders', ['id' => $user['id']]) }}"><span class="name mb-0 text-sm">{{$user['name']}}</span></a>
                                 </td>
                                 <td>
                                     {{$user['email']}}
@@ -144,7 +144,7 @@
                                     </div>
                                 </th>
                                 <td>
-                                    <a href="#"><span class="name mb-0 text-sm">{{$user['name']}}</span></a>
+                                    <a href="{{ route('getOrders', ['id' => $user['id']]) }}"><span class="name mb-0 text-sm">{{$user['name']}}</span></a>
                                 </td>
                                 <td>
                                     {{$user['email']}}

@@ -144,7 +144,7 @@ class ProductsController extends Controller
         $cart = self::getCart($request);
         if($cart){
             if(Auth::check()){
-                $address = DB::connection('mongodb')->collection("address")->where('user_id','=',Auth::user()->id*1)->get();
+                $address = DB::connection('mongodb')->collection("address")->where('user_id','=',Auth::user()->id*1)->orderBy('id','desc')->get();
                 return view('cartproducts',$cart, [
                     'address' => $address
                     ]);

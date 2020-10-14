@@ -2225,6 +2225,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -10023,7 +10030,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.form-control {\n  height: 49px;\n}\n.chat img {\n  width: 50px;\n  height: 50px;\n  margin-right: 10px;\n  border: 1px solid #222222;\n}\n.chat .username {\n  margin-top: -10px;\n  font-size: 16px;\n}\n.chat .letter {\n  margin-top: -5px;\n  padding-top: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.letter:hover {\n  overflow: visible;\n}\n.message {\n  display: flex;\n  flex-direction: column;\n  height: 30px;\n}\n\n/* .has-search .form-control {\n  padding-left: 2.375rem;\n} */\n\n/* .has-search .form-control-feedback {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n} */\n", ""]);
+exports.push([module.i, "\n.form-control {\n  height: 49px;\n}\n.chat img {\n  width: 50px;\n  height: 50px;\n  margin-right: 10px;\n  border: 1px solid #222222;\n}\n.chat .username {\n  margin-top: -10px;\n  font-size: 16px;\n}\n.chat .letter {\n  margin-top: -5px;\n  padding-top: 0;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.letter:hover {\n  overflow: visible;\n}\n.message {\n  display: flex;\n  flex-direction: column;\n  height: 30px;\n}\n.badge {\n  display: inline-block;\n  min-width: 10px;\n  padding: 3px 7px;\n  font-size: 12px;\n  font-weight: 700;\n  line-height: 1;\n  color: #fff;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: middle;\n  background-color: red;\n  border-radius: 10px;\n}\n\n/* .has-search .form-control {\n  padding-left: 2.375rem;\n} */\n\n/* .has-search .form-control-feedback {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n} */\n", ""]);
 
 // exports
 
@@ -72166,15 +72173,28 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("img", {
-                                  staticClass: "profileimg",
-                                  attrs: {
-                                    src:
-                                      _vm.baseUrl +
-                                      "/storage/user_images/" +
-                                      friend.image
-                                  }
-                                }),
+                                friend.status == "online"
+                                  ? _c("img", {
+                                      staticClass: "profileimg",
+                                      staticStyle: {
+                                        border: "2px solid #00ff00"
+                                      },
+                                      attrs: {
+                                        src:
+                                          _vm.baseUrl +
+                                          "/storage/user_images/" +
+                                          friend.image
+                                      }
+                                    })
+                                  : _c("img", {
+                                      staticClass: "profileimg",
+                                      attrs: {
+                                        src:
+                                          _vm.baseUrl +
+                                          "/storage/user_images/" +
+                                          friend.image
+                                      }
+                                    }),
                                 _vm._v(" "),
                                 friend.resulut_unread > 0
                                   ? _c(

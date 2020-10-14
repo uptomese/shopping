@@ -105,15 +105,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Name</label>
-                                                <input type="text" id="input-username" class="form-control" name="name"
-                                                    placeholder="Name" value="{{$user['name']}}">
+                                                <input type="text" id="input-username" class="form-control" name="name" placeholder="Name" value="{{$user['name']}}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-email">Email</label>
-                                                <input type="email" id="input-email" class="form-control" name="email"
-                                                    placeholder="Email" value="{{$user['email']}}" disabled>
+                                                <input type="email" id="input-email" class="form-control" name="email" placeholder="Email" value="{{$user['email']}}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -121,8 +119,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-last-name">Phone number</label>
-                                                <input type="text" id="input-last-name" class="form-control" name="phone"
-                                                    placeholder="Phone" value="{{$user['phone'] ?? ''}}">
+                                                <input type="text" id="input-last-name" class="form-control" name="phone" placeholder="Phone" value="{{$user['phone'] ?? ''}}" required>
                                             </div>
                                         </div>
                                     </div>

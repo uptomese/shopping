@@ -93,12 +93,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('adminEditProductImageForm', ['id' => $item['product_id']]) }}"
-                                        class="btn btn-sm btn-outline-success"> <i class="fa fa-image"></i> รูป</a>
-                                    <a href="{{ route('adminEditProductForm', ['id' => $item['product_id']]) }}"
-                                        class="btn btn-sm btn-outline-warning"> <i class="fa fa-edit"></i> แก้ไข</a>
-                                    <a href="{{ route('adminDeleteProduct', ['id' => $item['product_id']]) }}"
-                                        class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash"></i> ลบ</a>
+                                    <a href="{{ route('adminEditProductImageForm', ['id' => $item['product_id']]) }}" class="btn btn-sm btn-outline-success"> <i class="fa fa-image"></i> รูป</a>
+                                    <a href="{{ route('adminEditProductForm', ['id' => $item['product_id']]) }}" class="btn btn-sm btn-outline-warning"> <i class="fa fa-edit"></i> แก้ไข</a>
+                                    <a href="{{ route('adminDeleteProduct', ['id' => $item['product_id']]) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')"> <i class="fa fa-trash"></i> ลบ</a>
                                 </td>
                             </tr>
                             @endforeach
