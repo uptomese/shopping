@@ -145,4 +145,37 @@ class UserController extends Controller
             ? DB::collection('sessions')->where('id',$session1['id'])->update(['reading' => 0]) 
             : DB::collection('sessions')->where('id',$session2['id'])->update(['reading' => 0]);
     }
+
+    public function newUserOnline(Request $request, $myId, $newId)
+    {
+
+        $check = DB::collection('sessions')->where('user_id1','=',$myId*1)->where('user_id2','=',$newId*1)->first();
+
+        if($check!=null){
+
+            $new_user = User::where('id','=',$check['user_id2']*1)->first();
+
+            $new_user['index_unread'] = 0;
+
+            return array('new_user' => $new_user, 'session' => $check);
+
+        }else{
+
+            $check2 = DB::collection('sessions')->where('user_id1','=',$newId*1)->where('user_id2','=',$myId*1)->first();
+
+            if($check2){
+
+                $new_user2 = User::where('id','=',$check2['user_id1']*1)->first();
+    
+                $new_user2['index_unread'] = 1;
+    
+                return array('new_user' => $new_user2, 'session' => $check2);
+
+            }else{
+
+                return false;
+
+            }
+        }
+    }
 }

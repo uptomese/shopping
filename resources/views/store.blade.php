@@ -321,9 +321,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                        <th scope="col">Id.</th>
-                        <th scope="col">Ratting</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Ratting</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
                         <th scope="col">Image</th>
@@ -332,7 +331,7 @@
                     <tbody>
                         @foreach($array_products->items as $item)
                             <tr>
-                                <td>{{$item['id']}}</td>
+                                <td>{{$item['name']}}</td>
                                 <td scope="row">
                                     <div class="product-rating">
                                         @php ($item['ratting']==5) ? $star = 5 : $star = $item['ratting'] % 5;  @endphp
@@ -344,14 +343,15 @@
                                             <i class="fa fa-star-o empty"></i>
                                         @endfor
                                     </div>
-                                </td>
-                                <td>{{$item['name']}}</td>
+                                </td>                                
                                 <td>{{$item['description']}}</td>
                                 <td>${{$item['price']}}</td>
                                 <td>  
                                     <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
-                                        @if(gettype($item['image'])=="array")                                            
-                                        <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="" style="width:100px;height:90px;border-radius: 50%;">
+                                        @if(gettype($item['image'])=="array")
+                                            @foreach(array_slice($item['image'],0,1) as $image_array) 
+                                                <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="" style="width:100px;height:90px;border-radius: 50%;">
+                                            @endforeach                                       
                                         @else
                                         <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" style="width:100px;height:90px;border-radius: 50%;">
                                         @endif
@@ -460,5 +460,26 @@
 <script src="{{ asset('js/app.js') }}"></script>
 
 @endif
+
+<script>
+$(document).ready(function() {
+	var interval = setInterval(function() {
+		var momentNow = moment();
+		$('#time-dd').html(momentNow.format('DD'));
+		$('#time-hh').html(momentNow.format('hh'));
+		$('#time-mm').html(momentNow.format('mm'));
+		$('#time-ss').html(momentNow.format('ss'));
+	}, 100);
+
+	var array_choice = []
+	var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+	for (var i = 0; i < checkboxes.length; i++) {
+		array_choice.push(checkboxes[i].value)
+	}
+
+	document.getElementById("categories_checked").value = array_choice;
+});
+</script>
 
 @endsection

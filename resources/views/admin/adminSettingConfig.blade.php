@@ -2,7 +2,6 @@
 
 @section('center')
 
-
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">
@@ -25,6 +24,9 @@
 <div class="container-fluid mt--6">
     <div class="row">
         <div class="col-xl-12">
+            <div class="container col-12">
+                @include('../alert')
+            </div>
             <div class="col-xl-12 order-xl-1">
                 <div class="card">
                     <div class="card-body">
@@ -99,9 +101,34 @@
                             <!-- Description -->
                             <h6 class="heading-small text-muted mb-4">Chat</h6>
                             <div class="pl-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label">First message for sale</label>
-                                    <textarea name="first_messages" rows="4" class="form-control" placeholder="">{{ $config[2]['value'] }}</textarea>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">First message for sale</label>
+                                            <textarea name="first_messages" rows="4" class="form-control" placeholder="">{{ $config[2]['value'] }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Limit Messages</label>
+                                            <select name="limit_messages" class="form-control">
+                                                <option value="10" @if($config[1]['value']=='10' ) selected @endif>10</option>
+                                                <option value="20" @if($config[1]['value']=='20' ) selected @endif>20</option>
+                                                <option value="50" @if($config[1]['value']=='50' ) selected @endif>50</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Delete Old Messages</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="delete_old_messages" class="form-control" placeholder="Date" value="{{ $config[0]['value'] }}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Day</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <button type="submit" name="submit" class="btn btn-info">Update</button>

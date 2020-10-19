@@ -64,20 +64,54 @@ class ChatController extends Controller
 
     private function deleteOldMessages($session)
     {
-        $date = \Config::get('adminConfig.delete_old_messages');
+        $config = DB::connection('mongodb')->collection("config")->get();
+
+        $date = $config[0]['value'] ? $config[0]['value']*1 : \Config::get('adminConfig.delete_old_messages');
+
         $last_month = date('Y-m-d h:i:s', time() - (86400 * $date));
+
         $delete_old_messages = DB::collection('messages')
             ->where([
                 ['session','=',$session],
-                ['status', '!=', 0],
-                ['status', '!=', 3]
+                ['status', '!=', 2],
+                ['created_at', '<=', $last_month]
             ])
-            ->where('created_at', '<=',$last_month)
             ->delete();
+            
+        $delete_old_messages_image = DB::collection('messages')
+            ->where([
+                ['session','=',$session],
+                ['status', '=', 2],
+                ['created_at', '<=', $last_month]
+            ])
+            ->get();
+
+        foreach($delete_old_messages_image as $item){
+
+            $exists = Storage::disk('local')->exists('public/message_images/'.$item['message']);
+
+            if($exists){
+
+                $del_image = Storage::disk('local')->delete('public/message_images/'.$item['message']);
+                
+                DB::collection('messages')->where('id','=',$item['id']*1)->delete();
+
+            }else{
+                
+                DB::collection('messages')->where('id','=',$item['id']*1)->delete();
+
+            }
+
+        }
+
     }
 
     public function fetchMessages(Request $request)
     {
+        $config = DB::connection('mongodb')->collection("config")->get();
+
+        $limit = $config[1]['value'] ? $config[1]['value']*1 : \Config::get('adminConfig.limit_messages');
+
         $session = $request->session;
 
         self::deleteOldMessages($session);
@@ -89,8 +123,7 @@ class ChatController extends Controller
             ['status', '!=', 0],
             ['status', '!=', 3]
         ])->count();
-
-        $limit = \Config::get('adminConfig.limit_messages');
+        
         $skip = ($row * 1) - ($limit * $load);
         if($limit >= $row) $limit = $row;
         if($load >= 2){

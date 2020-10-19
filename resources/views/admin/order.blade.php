@@ -175,13 +175,14 @@
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="/admin/order/{{$item['id']}}" class="avatar rounded-circle mr-3">
-                                            <img alt="Image user"
-                                                    src="{{ asset('storage') }}/user_images/{{$orders_users_in_user[$key]['user']['image'] ?? ''}}"
-                                                    style="width:40px;height:40px;">
+                                            @if(isset($orders_users_in_user[$key]['user']['image']))
+                                            <img alt="Image user" src="{{ asset('storage') }}/user_images/{{$orders_users_in_user[$key]['user']['image'] ?? ''}}" style="width:40px;height:40px;">
+                                            @else
+                                            <img alt="Image user" src="{{ asset('storage') }}/product_images/product-default.jpg" style="width:40px;height:40px;">
+                                            @endif
                                         </a>
                                         <div class="media-body">
-                                            <a href="/admin/order/{{$item['id']}}"><span
-                                                    class="name mb-0 text-sm">{{$orders_users_in_user[$key]['user']['name'] ?? ''}}</span></a>
+                                            <a href="/admin/order/{{$item['id']}}"><span class="name mb-0 text-sm">{{$orders_users_in_user[$key]['user']['name'] ?? ''}}</span></a>
                                         </div>
                                     </div>
                                 </th>
@@ -190,15 +191,15 @@
                                 </td>
                                 <!-- badge badge-dot mr-4 -->
                                 <td>
-                                    {{$item['address']}}&nbsp;(
+                                    {{$item['address']}}&nbsp;<b>(
                                     <span class="">
                                         @if($item['status']=='wait')
                                         <i class="bg-warning"></i>
                                         @else
                                         <i class="bg-success"></i>
                                         @endif
-                                        <span class="status">{{$item['status']}} )</span>
-                                    </span>                                    
+                                        <b><span class="status">{{$item['status']}} )</span>
+                                    </span></b>                                    
                                 </td>
                                 <td class="budget">
                                     {{$item['quantity']}}
@@ -289,7 +290,7 @@
                                 </td>
                                 <!-- badge badge-dot mr-4 -->
                                 <td>
-                                    {{$item['address']}}&nbsp;(
+                                    {{$item['address']}}&nbsp;<b>(
                                     <span class="">
                                         @if($item['status']=='wait')
                                         <i class="bg-warning"></i>
@@ -297,7 +298,7 @@
                                         <i class="bg-success"></i>
                                         @endif
                                         <span class="status">{{$item['status']}} )</span>
-                                    </span>  
+                                    </span></b>  
                                 </td>
                                 <td class="budget">
                                     {{$item['quantity']}}

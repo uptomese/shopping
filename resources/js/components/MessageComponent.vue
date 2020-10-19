@@ -2,7 +2,7 @@
   <div
     v-if="friend_id"
     class="col"
-    style="padding-left: 0%; margin-right: 15px"
+    style="padding-left: 0%; margin-right: 15px; padding-right: 0px;"
   >
     <div class="card card-default card-box">
       <div class="input-group">
@@ -593,6 +593,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.col {
+    max-width: 100%;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
 .form-control {
   height: 49px;
 }

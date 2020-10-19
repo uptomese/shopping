@@ -105,28 +105,6 @@
 	</body>
 </html>
 
-<script>
-$(document).ready(function() {
-	var interval = setInterval(function() {
-		var momentNow = moment();
-		$('#time-dd').html(momentNow.format('DD'));
-		$('#time-hh').html(momentNow.format('hh'));
-		$('#time-mm').html(momentNow.format('mm'));
-		$('#time-ss').html(momentNow.format('ss'));
-	}, 100);
-
-	var array = []
-	var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
-	for (var i = 0; i < checkboxes.length; i++) {
-		array.push(checkboxes[i].value)
-	}
-	document.getElementById("categories_checked").value = array;
-
-});
-</script>
-
-
 <style>
 .table-details {
   overflow: hidden;

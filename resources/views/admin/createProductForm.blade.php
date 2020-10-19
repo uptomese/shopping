@@ -110,16 +110,20 @@
                                         <input type="date" name="update" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-8">   
                                     <div class="form-group">
                                         <label class="form-control-label">Image</label>
-                                    </div>
-                                    <img id="blah" height="330" width="auto" />
+                                    </div>                                    
+                                    <div class="row-image">
+                                        <div id="myImg" class="column-image">
+
+                                        </div>
+                                    </div>      
                                     <hr class="my-4" />
                                     <input type="file" class="form-control" name="image[]" id="image"
                                         multiple="multiple"
-                                        onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])"
-                                        placeholder="image" accept=".png, .jpg, .jpeg" required>
+                                        onclick="checkFile()"
+                                        placeholder="image" accept=".png, .jpg, .jpeg" required>   
                                 </div>
                             </div>
                             <hr class="my-4" />
@@ -171,5 +175,47 @@
         v-on:session="addSession" 
         v-on:delete_message="delMessage">
     </chat-component>
+
+    <script>
+
+        var count = 0;
+
+        $(function() {
+            $(":file").change(function() {
+                if (this.files && this.files[0]) {
+                    count = this.files.length;
+                    console.log(count);
+                    for (var i = 0; i < this.files.length; i++) {
+                        var reader = new FileReader();
+                        reader.onload = imageIsLoaded;
+                        reader.readAsDataURL(this.files[i]);
+                    }
+                }
+            });
+        });
+
+        var i = 0
+        function imageIsLoaded(e) {
+            var num = 100 / count;
+            if(count > 4){
+                var x = $('#myImg').append("<img id='file_image["+i+"]' src='"+e.target.result+"' style='width:25%;height:auto;padding:10px;border-radius:20px;'>");
+            }else{
+                var x = $('#myImg').append("<img id='file_image["+i+"]' src='"+e.target.result+"' style='width:"+num+"%;height:auto;padding:10px;border-radius:20px;'>");
+            }
+
+            i++;
+        };
+
+        function checkFile() {
+            for (var j = 0; j < i; j++) {
+                var x = document.getElementById("file_image["+j+"]");
+                if(x){
+                    x.remove(x.selectedIndex);
+                }
+            }
+            i = 0;
+        }
+        
+    </script>
 
     @endsection

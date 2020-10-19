@@ -173,21 +173,29 @@ class AdminProductsController extends Controller
     {
         $all_images = DB::connection('mongodb')->collection("products")->select('image')->where('id','=',$id*1)->first();
 
-        $image_del = $all_images['image'][$index];
+        if(count($all_images['image']) < 2){
 
-        $exists = Storage::disk('local')->exists("public/product_images/".$id.'/'.$image_del);
+            return back()->with('fail', 'Must have 1 image');
 
-        if($exists){
-
-            Storage::delete('public/product_images/'.$id.'/'.$image_del);
-
-            unset($all_images['image'][$index]);
-
-            DB::table('products')->where('id',$id*1)->update(['image' => $all_images['image']]);
-
-            return back()->withsuccess('Image Product delete successfully');
         }else{
-            return back()->with('fail', 'Image Product delete fail');
+            
+            $image_del = $all_images['image'][$index];
+    
+            $exists = Storage::disk('local')->exists("public/product_images/".$id.'/'.$image_del);
+    
+            if($exists){
+    
+                Storage::delete('public/product_images/'.$id.'/'.$image_del);
+    
+                unset($all_images['image'][$index]);
+    
+                DB::table('products')->where('id',$id*1)->update(['image' => $all_images['image']]);
+    
+                return back()->withsuccess('Image Product delete successfully');
+            }else{
+                return back()->with('fail', 'Image Product delete fail');
+            }
+
         }
 
     }

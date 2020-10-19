@@ -18,16 +18,38 @@ class AdminSettingController extends Controller
     public function updateConfig(Request $request)
     {
 
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_payment_url')->update(['value' => $request->input('payment_payment_url')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_url_myweb')->update(['value' => $request->input('payment_url_myweb')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_currencycode')->update(['value' => $request->input('payment_currencycode')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custip')->update(['value' => $request->input('payment_custip')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custname')->update(['value' => $request->input('payment_custname')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custemail')->update(['value' => $request->input('payment_custemail')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custphone')->update(['value' => $request->input('payment_custphone')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'pagetimeout')->update(['value' => $request->input('pagetimeout')]);
-        DB::connection('mongodb')->collection("config")->where('config',"=",'first_messages')->update(['value' => $request->input('first_messages')]);
+        $save_web_payment = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_payment_url')->update(['value' => $request->input('payment_payment_url')]);
+        $save_mywab = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_url_myweb')->update(['value' => $request->input('payment_url_myweb')]);
+        $save_currency = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_currencycode')->update(['value' => $request->input('payment_currencycode')]);
+        $save_custip = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custip')->update(['value' => $request->input('payment_custip')]);
+        $save_custname = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custname')->update(['value' => $request->input('payment_custname')]);
+        $save_custemail = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custemail')->update(['value' => $request->input('payment_custemail')]);
+        $save_custphone = DB::connection('mongodb')->collection("config")->where('config',"=",'payment_custphone')->update(['value' => $request->input('payment_custphone')]);
+        $save_pagetimeout = DB::connection('mongodb')->collection("config")->where('config',"=",'pagetimeout')->update(['value' => $request->input('pagetimeout')]);
+        $save_first_messages = DB::connection('mongodb')->collection("config")->where('config',"=",'first_messages')->update(['value' => $request->input('first_messages')]);
 
-        return redirect()->route('settingConfig')->withsuccess('Config update successfully');
+        $save_limit_messages = DB::connection('mongodb')->collection("config")->where('config',"=",'limit_messages')->update(['value' => $request->input('limit_messages')]);
+        $save_delete_old_messages = DB::connection('mongodb')->collection("config")->where('config',"=",'delete_old_messages')->update(['value' => $request->input('delete_old_messages')]);
+
+        $save_web_payment_r = ($save_web_payment==1) ? "Payment Url" : '';
+        $save_mywab_r = ($save_mywab==1) ? "Url Web" : '';
+        $save_currency_r = ($save_currency==1) ? "Currency" : '';
+        $save_custip_r = ($save_custip==1) ? "Cust IP" : '';
+        $save_custname_r = ($save_custname==1) ? "Cust Name" : '';
+        $save_custemail_r = ($save_custemail==1) ? "Cust Email" : '';
+        $save_custphone_r = ($save_custphone==1) ? "Cust Phone" : '';
+        $save_pagetimeout_r = ($save_pagetimeout==1) ? "Pagetimeout" : '';
+        $save_first_messages_r = ($save_first_messages==1) ? "First Messages" : '';
+        $save_limit_messages_r = ($save_limit_messages==1) ? "Limit Messages" : '';
+        $save_delete_old_messages_r = ($save_delete_old_messages==1) ? "Delete old messages" : '';
+
+        $text_update = $save_web_payment_r.$save_mywab_r.$save_currency_r.$save_custip_r.$save_custname_r.$save_custemail_r.$save_custphone_r.$save_pagetimeout_r.$save_first_messages_r.$save_limit_messages_r.$save_delete_old_messages_r;
+
+        if($save_web_payment||$save_mywab||$save_currency||$save_custip||$save_custname||$save_custemail||$save_custphone||$save_pagetimeout||$save_first_messages||$save_limit_messages_r||$save_delete_old_messages_r){
+            return back()->withsuccess($text_update.' update successfully');
+        }else{
+            return back()->with('fail', 'No update');
+        }
+
     }
 }

@@ -114,3 +114,36 @@
     </body>
 
     </html>
+
+    <style>
+    .row-image {
+        display: -ms-flexbox; /* IE 10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE 10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+    }
+
+    /* Create two equal columns that sits next to each other */
+    .column-image {
+        -ms-flex: 50%; /* IE 10 */
+        flex: 50%;
+        padding: 0 4px;
+    }
+
+    .column-image img {
+        margin-top: 8px;
+        vertical-align: middle;
+    }
+
+    .image-area {
+        position: relative;
+        width: 50%;
+        background: #333;
+    }
+
+    img {
+        border-radius: 8px;
+    }
+
+    </style>

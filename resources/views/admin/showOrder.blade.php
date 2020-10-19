@@ -101,10 +101,16 @@
                                 <th scope="row">
                                     <div class="media align-items-center">
                                         <a href="#" class="avatar rounded-circle mr-3">
-                                            @if(gettype($item['image'])=="array")                                            
-                                            <img src="{{ asset('storage') }}/product_images/{{$item['product_id']}}/{{$item['image'][0] ?? ''}}" alt="" style="width:40px;height:40px;">
+                                            @if(isset($item['image']))
+                                                @if(gettype($item['image'])=="array")
+                                                    @foreach(array_slice($item['image'],0,1) as $image_array)
+                                                        <img alt="Image" src="{{ asset('storage') }}/product_images/{{$item['product_id']}}/{{$image_array}}" alt="" style="width:60px;height:60px;">
+                                                    @endforeach                   
+                                                @else
+                                                    <img alt="Image" src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" style="width:60px;height:60px;">
+                                                @endif
                                             @else
-                                            <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image'] ?? '') }}" alt="" style="width:40px;height:40px;">
+                                            <img alt="Image" src="{{ Storage::disk('local')->url('product_images/product-default.jpg') }}" alt="" style="width:60px;height:60px;">
                                             @endif
                                         </a>
                                         <div class="media-body">
@@ -156,14 +162,14 @@
                             <a href="#">
                             @if(isset($user_order['image']))
                                 @if($user_order['image']=='no')
-                                <img src="{{ asset('storage') }}/user_images/default.jpg" class="rounded-circle"
+                                <img src="{{ asset('storage') }}/product_images/product-default.jpg" class="rounded-circle"
                                     style="width:150px;height:140px;">
                                 @else
                                 <img src="{{ asset('storage') }}/user_images/{{$user_order['image']}}"
                                     class="rounded-circle" style="width:150px;height:140px;">
                                 @endif
                             @else
-                                <img src="{{ asset('storage') }}/user_images/default.jpg" class="rounded-circle"
+                                <img src="{{ asset('storage') }}/product_images/product-default.jpg" class="rounded-circle"
                                     style="width:150px;height:140px;">
                             @endif 
                             </a>
@@ -174,8 +180,10 @@
                     <div class="d-flex justify-content-between">
                     @if(isset($user_order['image']))
                         @if($user_order['image']!='no')
-                            <!-- <a href="#" class="btn btn-sm btn-info  mr-4 ">Profile</a>
-                            <a href="#" class="btn btn-sm btn-danger float-right">Block</a> -->
+                            <a href="{{ route('getOrders', ['id' => $user_order['id']]) }}" class="btn btn-sm btn-secondary  mr-4 ">Orders</a>
+                            @if($user_order['name']!="admin")
+                            <a href="/admin/update_user/{{$user_order['id']}}" class="btn btn-sm btn-secondary float-right">Profile</a>
+                            @endif
                         @endif
                     @endif 
                     </div>

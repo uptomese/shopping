@@ -2434,7 +2434,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$root.socket.on("userOnline", function (data) {
         if (data.userId) {
           var i = 0;
+          var array_friend_id = [];
           vm.friend_list.forEach(function (element) {
+            array_friend_id.push(element.id);
+
             if (element.id == data.userId) {
               vm.friend_list[i].status = "online";
               vm.friend_list.push();
@@ -2445,6 +2448,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           axios.post("/api/user/online/" + data.userId, {
             id: data.userId
           });
+          var new_user = data.userId;
+          var check = array_friend_id.includes(new_user);
+
+          if (check == false) {
+            axios.post("/api/new_user/online/" + vm.user.id + '/' + new_user).then(function (r) {
+              if (r.data) {
+                vm.friend_list.push({
+                  email: r.data['new_user']['email'],
+                  id: r.data['new_user']['id'],
+                  image: r.data['new_user']['image'],
+                  index_unread: r.data['new_user']['index_unread'],
+                  name: r.data['new_user']['name'],
+                  resulut_unread: "0",
+                  session: r.data['session']['id'],
+                  status: "online",
+                  unread: r.data['session']['unread'],
+                  unread_message: ""
+                });
+              }
+            });
+          }
         }
       });
       this.$root.socket.on("userOffline", function (data) {
@@ -10011,7 +10035,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".form-control[data-v-3f20c7be] {\n  height: 49px;\n}\n.input-group .form-control[data-v-3f20c7be],\n.input-group-addon[data-v-3f20c7be],\n.input-group-btn[data-v-3f20c7be] {\n  display: table-cell;\n}\n.input-group-addon[data-v-3f20c7be] {\n  padding: 12px 12px;\n  font-size: 17px;\n  font-weight: 400;\n  line-height: 1;\n  color: #555;\n  text-align: center;\n  background-color: #eee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n.camera[data-v-3f20c7be] {\n  padding: 0px;\n}\n.message_image[data-v-3f20c7be] {\n  margin: auto;\n  left: 0;\n  bottom: 0;\n}\n#myImg[data-v-3f20c7be]:hover {\n  opacity: 0.7;\n}\n.uploader[data-v-3f20c7be] {\n  width: 100%;\n  background-color: #d0d0d0;\n}\n.uploader.dragging[data-v-3f20c7be] {\n  background-color: #f2f2f2;\n  color: #2196f3;\n  border: 2px dashed #2196f3;\n}\n.uploader.dragging .file-input label[data-v-3f20c7be] {\n  background: #2196f3;\n  color: #fff;\n}\n.chat-bubble[data-v-3f20c7be] {\n  left: 0;\n  margin-left: 15px;\n  padding-left: 15px;\n  text-align: left;\n  padding-top: 15px;\n  padding-bottom: 5px;\n  margin-bottom: 5px;\n  border-radius: 30px 30px 30px 0px;\n  background-color: #ffffff;\n  padding: 16px 28px;\n  -webkit-border-radius: 20px;\n  -webkit-border-bottom-left-radius: 2px;\n  -moz-border-radius: 20px;\n  border-bottom-left-radius: 2px;\n  display: inline-block;\n}\n.wavy[data-v-3f20c7be] {\n  position: relative;\n}\n.wavy span[data-v-3f20c7be] {\n  position: relative;\n  display: inline-block;\n  color: #000;\n  -webkit-animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n          animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n  -webkit-animation-delay: calc(0.1s * var(--i));\n          animation-delay: calc(0.1s * var(--i));\n}\n@-webkit-keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}\n@keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}", ""]);
+exports.push([module.i, ".col[data-v-3f20c7be] {\n  max-width: 100%;\n  flex-basis: 0;\n  flex-grow: 1;\n}\n.form-control[data-v-3f20c7be] {\n  height: 49px;\n}\n.input-group .form-control[data-v-3f20c7be],\n.input-group-addon[data-v-3f20c7be],\n.input-group-btn[data-v-3f20c7be] {\n  display: table-cell;\n}\n.input-group-addon[data-v-3f20c7be] {\n  padding: 12px 12px;\n  font-size: 17px;\n  font-weight: 400;\n  line-height: 1;\n  color: #555;\n  text-align: center;\n  background-color: #eee;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n}\n.camera[data-v-3f20c7be] {\n  padding: 0px;\n}\n.message_image[data-v-3f20c7be] {\n  margin: auto;\n  left: 0;\n  bottom: 0;\n}\n#myImg[data-v-3f20c7be]:hover {\n  opacity: 0.7;\n}\n.uploader[data-v-3f20c7be] {\n  width: 100%;\n  background-color: #d0d0d0;\n}\n.uploader.dragging[data-v-3f20c7be] {\n  background-color: #f2f2f2;\n  color: #2196f3;\n  border: 2px dashed #2196f3;\n}\n.uploader.dragging .file-input label[data-v-3f20c7be] {\n  background: #2196f3;\n  color: #fff;\n}\n.chat-bubble[data-v-3f20c7be] {\n  left: 0;\n  margin-left: 15px;\n  padding-left: 15px;\n  text-align: left;\n  padding-top: 15px;\n  padding-bottom: 5px;\n  margin-bottom: 5px;\n  border-radius: 30px 30px 30px 0px;\n  background-color: #ffffff;\n  padding: 16px 28px;\n  -webkit-border-radius: 20px;\n  -webkit-border-bottom-left-radius: 2px;\n  -moz-border-radius: 20px;\n  border-bottom-left-radius: 2px;\n  display: inline-block;\n}\n.wavy[data-v-3f20c7be] {\n  position: relative;\n}\n.wavy span[data-v-3f20c7be] {\n  position: relative;\n  display: inline-block;\n  color: #000;\n  -webkit-animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n          animation: animate-data-v-3f20c7be 1.5s infinite ease-in-out;\n  -webkit-animation-delay: calc(0.1s * var(--i));\n          animation-delay: calc(0.1s * var(--i));\n}\n@-webkit-keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}\n@keyframes animate-data-v-3f20c7be {\n0% {\n    transform: translateY(0px);\n    color: #999999;\n}\n28% {\n    transform: translateY(-7px);\n    color: #b3b3b3;\n}\n44% {\n    transform: translateY(0px);\n    color: #cccccc;\n}\n}", ""]);
 
 // exports
 
@@ -72325,7 +72349,11 @@ var render = function() {
         "div",
         {
           staticClass: "col",
-          staticStyle: { "padding-left": "0%", "margin-right": "15px" }
+          staticStyle: {
+            "padding-left": "0%",
+            "margin-right": "15px",
+            "padding-right": "0px"
+          }
         },
         [
           _c("div", { staticClass: "card card-default card-box" }, [

@@ -129,8 +129,10 @@
                                 <div class="product">
                                     <a href="{{ route('getProduct', ['id'=>$product['id']]) }}">
                                         <div class="product-img">
-                                            @if(gettype($product['image'])=="array")                                            
-                                            <img src="{{ asset('storage') }}/product_images/{{$product['id']}}/{{$product['image'][0]}}" alt="">
+                                            @if(gettype($product['image'])=="array")
+                                                @foreach(array_slice($product['image'],0,1) as $image_array) 
+                                                    <img src="{{ asset('storage') }}/product_images/{{$product['id']}}/{{$image_array}}" alt="">
+                                                @endforeach                
                                             @else
                                             <img src="{{ Storage::disk('local')->url('product_images/'.$product['image']) }}" alt="">
                                             @endif
@@ -274,8 +276,10 @@
                                 <div class="product">
                                 <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                     <div class="product-img">
-                                        @if(gettype($item['image'])=="array")                                            
-                                        <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                        @if(gettype($item['image'])=="array")       
+                                            @foreach(array_slice($item['image'],0,1) as $image_array) 
+                                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="">
+                                            @endforeach                                        
                                         @else
                                         <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
                                         @endif
@@ -377,7 +381,9 @@
                                         <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                             <div class="product-img">
                                                 @if(gettype($item['image'])=="array")                                            
-                                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                                    @foreach(array_slice($item['image'],0,1) as $image_array) 
+                                                        <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="">
+                                                    @endforeach  
                                                 @else
                                                 <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
                                                 @endif

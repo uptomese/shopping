@@ -162,8 +162,10 @@
                 </div>
                 <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                     <div class="d-flex justify-content-between">
-                            <!-- <a href="#" class="btn btn-sm btn-info  mr-4 ">Profile</a>
-                            <a href="#" class="btn btn-sm btn-danger float-right">Block</a> -->
+                        <a href="{{ url()->previous() }}" class="btn btn-sm btn-secondary  mr-4 ">Back</a>
+                        @if($user['name']!="admin")
+                        <a href="/admin/update_user/{{$user['id']}}" class="btn btn-sm btn-secondary float-right">Profile</a>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body pt-0">

@@ -19,4 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/user/online/{id}', 'Chat\UserController@userOnline');
+
 Route::post('/user/offline/{id}', 'Chat\UserController@userOffline');
+
+Route::post('/new_user/online/{myId}/{newId}', 'Chat\UserController@newUserOnline');

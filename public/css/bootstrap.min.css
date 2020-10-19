@@ -6522,7 +6522,8 @@ a.thumbnail:hover {
 .list-group-item {
     position: relative;
     display: block;
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
+    padding: 1.5rem 1rem;
     margin-bottom: -1px;
     background-color: #fff;
     border: 1px solid #ddd

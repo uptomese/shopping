@@ -288,7 +288,9 @@ export default {
       this.$root.socket.on("userOnline", function (data) {
         if (data.userId) {
           let i = 0;
+          var array_friend_id = [];
           vm.friend_list.forEach((element) => {
+            array_friend_id.push(element.id);
             if (element.id == data.userId) {
               vm.friend_list[i].status = "online";
               vm.friend_list.push();
@@ -298,6 +300,26 @@ export default {
           axios.post("/api/user/online/" + data.userId, {
             id: data.userId,
           });
+          var new_user = data.userId;
+          var check = array_friend_id.includes(new_user);
+          if(check==false){
+            axios.post("/api/new_user/online/"+vm.user.id+'/'+new_user).then(r=>{
+              if(r.data){
+                vm.friend_list.push({
+                  email : r.data['new_user']['email'],
+                  id : r.data['new_user']['id'],
+                  image : r.data['new_user']['image'],
+                  index_unread : r.data['new_user']['index_unread'],
+                  name : r.data['new_user']['name'],
+                  resulut_unread : "0",
+                  session : r.data['session']['id'],
+                  status : "online",
+                  unread : r.data['session']['unread'],
+                  unread_message : "",
+                });
+              }
+            });
+          }
         }
       });
       this.$root.socket.on("userOffline", function (data) {
