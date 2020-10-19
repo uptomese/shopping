@@ -26,14 +26,10 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li><a href="{{ route('allProducts') }}">Home</a></li>
-                <!-- <li><a href="#">Hot Deals</a></li> -->
+            <li><a href="{{ route('allProducts') }}">Home</a></li>
                 <li><a href="{{ route('allStore') }}">Store</a></li>
                 <li><a href="{{ route('cartproducts') }}">Checkout</a></li>
-                <!-- <li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li> -->
+                <li><a href="{{ route('checkOrder') }}">Check Order</a></li>
             </ul>
             <!-- /NAV -->
         </div>

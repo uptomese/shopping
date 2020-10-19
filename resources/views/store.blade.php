@@ -166,7 +166,9 @@
                                         <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                                             <div class="product-img">
                                                 @if(gettype($item['image'])=="array")                                            
-                                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                                    @foreach(array_slice($item['image'],0,1) as $image_array) 
+                                                        <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="">
+                                                    @endforeach    
                                                 @else
                                                 <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
                                                 @endif
@@ -269,8 +271,10 @@
                     <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
                         <div class="product">
                             <div class="product-img">
-                                @if(gettype($item['image'])=="array")                                            
-                                <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$item['image'][0]}}" alt="">
+                                @if(gettype($item['image'])=="array")      
+                                    @foreach(array_slice($item['image'],0,1) as $image_array) 
+                                        <img src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="">
+                                    @endforeach                                       
                                 @else
                                 <img src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="">
                                 @endif
@@ -460,26 +464,5 @@
 <script src="{{ asset('js/app.js') }}"></script>
 
 @endif
-
-<script>
-$(document).ready(function() {
-	var interval = setInterval(function() {
-		var momentNow = moment();
-		$('#time-dd').html(momentNow.format('DD'));
-		$('#time-hh').html(momentNow.format('hh'));
-		$('#time-mm').html(momentNow.format('mm'));
-		$('#time-ss').html(momentNow.format('ss'));
-	}, 100);
-
-	var array_choice = []
-	var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
-	for (var i = 0; i < checkboxes.length; i++) {
-		array_choice.push(checkboxes[i].value)
-	}
-
-	document.getElementById("categories_checked").value = array_choice;
-});
-</script>
 
 @endsection

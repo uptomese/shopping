@@ -102,6 +102,36 @@
 		<script src="{{asset('js/main.js')}}"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+	
+	
+		<script>
+		$(document).ready(function() {
+			var interval = setInterval(function() {
+				var momentNow = moment();
+				$('#time-dd').html(momentNow.format('DD'));
+				$('#time-hh').html(momentNow.format('hh'));
+				$('#time-mm').html(momentNow.format('mm'));
+				$('#time-ss').html(momentNow.format('ss'));
+			}, 100);
+
+			var array_choice = []
+			var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+			for (var i = 0; i < checkboxes.length; i++) {
+				array_choice.push(checkboxes[i].value)
+			}
+
+			document.getElementById("categories_checked").value = array_choice;
+		});
+
+		// ------------------
+
+		window.addEventListener("load", () => { 
+			document.getElementById("loading").style.display = "none"; 
+		}); 
+
+		</script>
+
 	</body>
 </html>
 

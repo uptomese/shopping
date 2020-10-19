@@ -94,8 +94,10 @@
                                         @foreach($items['items'] as $item)                                                          
                                         <a href="#" class="avatar avatar-lg" data-toggle="tooltip" data-original-title="{{$item['product_name']}} ({{$item['product_quantity']}}) (${{$item['product_price']}})">
                                             @if (isset($item['image']))
-                                                @if(gettype($item['image'])=="array")                                            
-                                                <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['product_id']}}/{{$item['image'][0]}}" alt="" style="width:60px;height:60px;">
+                                                @if(gettype($item['image'])=="array")
+                                                    @foreach(array_slice($item['image'],0,1) as $image_array) 
+                                                        <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['product_id']}}/{{$image_array}}" alt="" style="width:60px;height:60px;">
+                                                    @endforeach                           
                                                 @else
                                                 <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" style="width:60px;height:60px;">
                                                 @endif
