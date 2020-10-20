@@ -26,7 +26,7 @@ return [
     
         'custphone' => '6627519274',
 
-        'pagetimeout' => '780',
+        'pagetimeout' => '780'
 
     ],
 

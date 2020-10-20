@@ -65,9 +65,9 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">						
-						<li><a href="#"><i class="fa fa-phone"></i> 02-760-8880</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> pornsawatv@gmail.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 3300/111 Elephant Tower ( Zone B) 21 Fl., Phahonyothin Rd., Chompol, Jatujak, Bangkok 10900, Thailand</a></li>
+						<li><a href="#"><i class="fa fa-phone"></i> {{$companyData[2]}}</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> {{$companyData[3]}}</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> {{$companyData[1]}}</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> {{$configData[0]['value']}}</a></li>

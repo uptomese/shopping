@@ -123,7 +123,7 @@
                                     <input type="file" class="form-control" name="image[]" id="image"
                                         multiple="multiple"
                                         onclick="checkFile()"
-                                        placeholder="image" accept=".png, .jpg, .jpeg" required>   
+                                        placeholder="image" accept=".png, .jpg, .jpeg" required>
                                 </div>
                             </div>
                             <hr class="my-4" />
@@ -184,7 +184,6 @@
             $(":file").change(function() {
                 if (this.files && this.files[0]) {
                     count = this.files.length;
-                    console.log(count);
                     for (var i = 0; i < this.files.length; i++) {
                         var reader = new FileReader();
                         reader.onload = imageIsLoaded;

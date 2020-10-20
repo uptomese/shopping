@@ -32,6 +32,38 @@
                     <div class="card-body">
                         <form action="/admin/setting/config_update" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
+                            <h6 class="heading-small text-muted mb-4">Company</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Email</label>
+                                            <input type="text" name="conpany_email" class="form-control" placeholder="" value="{{ $config[14]['value'] }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Telephone number</label>
+                                            <input type="text" name="conpany_phone" class="form-control" placeholder="" value="{{ $config[13]['value'] }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">About</label>
+                                            <textarea name="conpany_about" rows="4" class="form-control" placeholder="">{{ $config[11]['value'] }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Address</label>
+                                            <textarea name="conpany_address" rows="4" class="form-control" placeholder="">{{ $config[12]['value'] }}</textarea>
+                                        </div>
+                                    </div>                                   
+                                </div>
+                            </div>
+                            <hr class="my-4" />
                             <h6 class="heading-small text-muted mb-4">Payment credit card</h6>
                             <div class="pl-lg-4">
                                 <div class="row">
