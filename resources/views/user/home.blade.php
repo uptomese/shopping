@@ -35,11 +35,9 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="{{ route('allProducts')}}" class="btn btn-sm btn-outline-info"> <i
-                                    class="fa fa-image"></i> Main Website</a>
+                            <a href="{{ route('allProducts')}}" class="btn btn-sm btn-outline-info"> <i class="fa fa-image"></i> Main Website</a>
                             @if($userData->isAdmin())
-                            <a href="{{ route('adminDisplayProducts')}}" class="btn btn-sm btn-outline-success"> <i
-                                    class="fa fa-image"></i> Admin Dashboard</a>
+                            <a href="{{ route('adminDisplayProducts')}}" class="btn btn-sm btn-outline-success"> <i class="fa fa-image"></i> Admin Dashboard</a>
                             @endif
                         </div>
                     </div>
@@ -80,7 +78,7 @@
                                         <td>
                                             <div class="avatar-group">
                                                 @foreach($items['items'] as $item)                                                          
-                                                <a href="#" class="avatar avatar-lg" data-toggle="tooltip" data-original-title="{{$item['product_name']}} ({{$item['product_quantity']}}) (${{$item['product_price']}})">
+                                                <a class="avatar avatar-lg" data-toggle="tooltip" data-original-title="{{$item['product_name']}} ({{$item['product_quantity']}}) (${{$item['product_price']}})">
                                                     @if(isset($item['image']))
                                                         @if(gettype($item['image'])=="array")
                                                             @foreach(array_slice($item['image'],0,1) as $image_array)

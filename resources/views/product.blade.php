@@ -2,22 +2,6 @@
 
 @section('center')
 
-<!-- <div id="breadcrumb" class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="breadcrumb-tree">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">All Categories</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li><a href="#">Headphones</a></li>
-                    <li class="active">Product name goes here</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <!-- NAVIGATION -->
 <nav id="navigation">
     <!-- container -->
@@ -39,6 +23,10 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<br>
+<div class="container">
+    @include('alert')
+</div>
 
 <!-- SECTION -->
 <div class="section">
@@ -463,9 +451,13 @@
                         </div>
                     </div>
                     <div class="add-to-cart">
+                        @if($item['stock']!=0)
                         <a href="{{ route('AddToCartProduct',['id' => $item['id'], 'qunatity' => 1]) }}">
                             <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                         </a>
+                        @else
+                        <button class="add-to-cart-btn" type="button" class="btn btn-lg btn-primary" disabled><i class="fa fa-times"></i> Out of stock</button>
+                        @endif 
                     </div>
                 </div>
             </a>

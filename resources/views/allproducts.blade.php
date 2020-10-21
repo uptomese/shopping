@@ -166,14 +166,14 @@
                                                 <button class="quick-view"><a href="{{ route('getProduct', ['id'=>$product['id']]) }}"><i class="fa fa-eye"></i></a><span class="tooltipp">quick view</span></button>
                                             </div>
                                         </div>
-                                        <div class="add-to-cart">
+                                        <div class="add-to-cart">            
+                                            @if($product['stock']!=0)
                                             <a href="{{ route('AddToCartProduct',['id' => $product['id'], 'qunatity' => 1]) }}">
-                                                @if($product['stock']!=0)
                                                 <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-                                                @else
-                                                <button class="add-to-cart-btn" type="button" class="btn btn-lg btn-primary" disabled><i class="fa fa-times"></i> Out of stock</button>
-                                                @endif
                                             </a>
+                                            @else
+                                            <button class="add-to-cart-btn" type="button" class="btn btn-lg btn-primary" disabled><i class="fa fa-times"></i> Out of stock</button>
+                                            @endif                                            
                                         </div>
                                     </a>
                                 </div>
@@ -310,10 +310,14 @@
                                             <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                         </div>
                                     </div>
-                                    <div class="add-to-cart">
+                                    <div class="add-to-cart">          
+                                        @if($item['stock']!=0)
                                         <a href="{{ route('AddToCartProduct',['id' => $item['id'], 'qunatity' => 1]) }}">
                                             <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                                         </a>
+                                        @else
+                                        <button class="add-to-cart-btn" type="button" class="btn btn-lg btn-primary" disabled><i class="fa fa-times"></i> Out of stock</button>
+                                        @endif 
                                     </div>
                                 </a>
                                 </div>

@@ -28,6 +28,11 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<br>
+<div class="container">
+    @include('alert')
+</div>
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->

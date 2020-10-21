@@ -193,6 +193,53 @@
     padding-top: 15px;
     padding-bottom: 15px;
 }
+/* ---------------------------------- */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 90px;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+}
+
+.button {
+  position: absolute;
+  width: 100px;
+  left:0;
+  top: 0;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .35s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container-image {
+  position: relative;
+  width: 90px;
+}
+
+.container-image:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, .3);
+}
+
+.button a {
+  padding: 12px 25px;
+  text-align: center;
+  color: white;
+  border: solid 2px red;
+  z-index: 1;
+}
+
+.container-image:hover .button {
+  opacity: 1;
+}
 
 </style>
 

@@ -133,9 +133,9 @@ class ProductsController extends Controller
     
             $request->session()->put('cart',$cart);
             
-            return redirect()->route('allProducts');
+            return back()->withsuccess("Add product success");
             
-        }else return redirect()->route('getProduct',['id'=>$id]); 
+        }else return back()->with('fail', 'Add product fail');
 
     }
 
@@ -172,7 +172,7 @@ class ProductsController extends Controller
         $updateCart->updatePriceAndQunatity();
         $request->session()->put("cart", $updateCart);
 
-        return redirect()->route('viewCart')->withsuccess("Delete product success");
+        return back()->withsuccess("Delete product success");
     }
 
     public function getStore(Request $request)
@@ -572,7 +572,6 @@ class ProductsController extends Controller
                     $create_order_items = DB::connection('mongodb')->collection("order_items")->insert($newItemInCurrentOrder);
                 }
                 
-                // return redirect()->route('allProducts')->withsuccess("Thank For Choosing Us");
                 // !..............................................................................
                 if($payment=='credit_card'){
 
@@ -583,14 +582,14 @@ class ProductsController extends Controller
                     $payment_id = "SITTBP1".sprintf("%010d", $order_id['id']).$random_str;
 
                     $payment_for = "Screwshop ".$order_srt_id;
-    
+     
+                    // ! รอแก้ stock เมื่อ จำนวน ที่ชื้อ มากกว่า จำนวน stock ที่มี
+
+                    dd($cart);
                     return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
                 }elseif($payment=='pay_pal'){
                     return redirect()->route('allProducts')->with('fail', 'Web page is unavailable.');
                 }
-
-
-                // return Redirect::to("payment/post.php?order_id=Order".$order_id['id']."&payment_id=".$payment_id."&product_name=".$array_product_name."&price_total=".$price_total);
                 
             }else{
                 return redirect()->route('allProducts');
@@ -660,8 +659,18 @@ class ProductsController extends Controller
                     $payment_id = "SITTBP1".sprintf("%010d", $order_id['id']).$random_str;
     
                     $payment_for = "Screwshop ".$order_srt_id;
-    
-                    return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
+ 
+                    // ! หน้า product ปุ่ม out by sell
+                    $pass_cart = [];
+                    foreach($cart->items as $item){
+                        if($item['quantity'] > $item['data'][0]['stock']){
+                            return back()->with('fail', $item['data'][0]['name'] . ' can not for sell');
+                        }else{
+                            return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
+                        }
+                    }
+
+                    // return self::creditCard($order_srt_id,$price_total,$payment_id,$payment_for,$order_id['user_id']);
                 }elseif($payment=='pay_pal'){
                     return redirect()->route('allProducts')->with('fail', 'Web page is unavailable.');
                 }
@@ -850,9 +859,21 @@ class ProductsController extends Controller
                     $remaining = ($stock['stock']*1) - ($item['product_quantity']*1);
                     $update_stock = DB::connection('mongodb')->collection("products")->where('id','=',$item['product_id']*1)->update(['stock'=>$remaining]);
                 }else{
+                    $update_status_fail_at_orders = DB::connection('mongodb')->collection("orders")
+                        ->where('id',"=",$order_id['order_id']*1)
+                        ->update([
+                            'status_payment' => 0,
+                        ]);
+                        
+                    $update_status_fail_at_payment = DB::connection('mongodb')->collection("payment")
+                        ->where('order_id',"=",$order_id['order_id']*1)
+                        ->update([
+                            'txn_xtatus' => 1,
+                        ]);
+
                     $decode_test_id_user = self::decode($Param6,'tbp123');
                     Auth::loginUsingId($decode_test_id_user);
-                    return redirect()->route('viewCart')->with('fail', 'Not enough product to buy');
+                    return back()->with('fail', 'Not enough product to buy');
                 }
             }
 
@@ -1048,14 +1069,14 @@ class ProductsController extends Controller
         foreach($cart->items as $item){
             $stock = Product::collection("products")->select('stock')->where('id', "=", $item['data'][0]['id'] * 1)->first();
             if(($item['quantity']*1) >= ($stock[0]['stock']*1)){
-                return redirect()->route('viewCart')->with('fail', 'Not enough product to buy');
+                return back()->with('fail', 'Not enough product to buy');
             }
         }
         
         $cart->addItem($id, $product, 1);
         $request->session()->put('cart', $cart);
         // return redirect()->route("getProduct");
-        return redirect()->route('viewCart')->withsuccess("Plus product success.");
+        return back()->withsuccess("Plus product success.");
     }
 
     public function decreaseSingleProduct(Request $request, $id)
@@ -1071,7 +1092,7 @@ class ProductsController extends Controller
             $request->session()->put('cart', $cart);
         }
         // return redirect()->route("cartproducts");
-        return redirect()->route('viewCart')->withsuccess("Minus product success.");
+        return back()->withsuccess("Minus product success.");
     }
 
     public function firshMessage($session, $sale_id)

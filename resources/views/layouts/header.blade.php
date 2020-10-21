@@ -56,6 +56,14 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+		<style>
+			body {
+				font-family: 'Bai Jamjuree', sans-serif;
+				font-family: 'Kanit', sans-serif;
+			}
+		</style>
     </head>
 	<body>
 		<!-- HEADER -->
@@ -140,8 +148,10 @@
 										@foreach($cartItems->items as $item)
 											<div class="product-widget">
 												<div class="product-img">
-													@if(gettype($item['data'][0]['image'])=="array")                                            
-													<img src="{{ asset('storage') }}/product_images/{{$item['data'][0]['id']}}/{{$item['data'][0]['image'][0]}}" alt="">
+													@if(gettype($item['data'][0]['image'])=="array")
+														@foreach(array_slice($item['data'][0]['image'],0,1) as $image_array) 
+															<img src="{{ asset('storage') }}/product_images/{{$item['data'][0]['id']}}/{{$image_array}}" alt="">
+														@endforeach                                              
 													@else
 													<img src="{{ Storage::disk('local')->url('product_images/'.$item['data'][0]['image']) }}" alt="">
 													@endif

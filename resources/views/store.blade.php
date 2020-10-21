@@ -27,6 +27,10 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<br>
+<div class="container">
+    @include('alert')
+</div>
 
 <!-- SECTION -->
 <div class="section">
@@ -335,7 +339,7 @@
                     <tbody>
                         @foreach($array_products->items as $item)
                             <tr>
-                                <td>{{$item['name']}}</td>
+                                <td style="font-size:16px;"><a href="{{ route('getProduct', ['id'=>$item['id']]) }}"><b>{{$item['name']}}</b></a></td>
                                 <td scope="row">
                                     <div class="product-rating">
                                         @php ($item['ratting']==5) ? $star = 5 : $star = $item['ratting'] % 5;  @endphp
@@ -351,15 +355,29 @@
                                 <td>{{$item['description']}}</td>
                                 <td>${{$item['price']}}</td>
                                 <td>  
-                                    <a href="{{ route('getProduct', ['id'=>$item['id']]) }}">
-                                        @if(gettype($item['image'])=="array")
-                                            @foreach(array_slice($item['image'],0,1) as $image_array) 
-                                                <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="" style="width:100px;height:90px;border-radius: 50%;">
-                                            @endforeach                                       
+                                    @if(gettype($item['image'])=="array")
+                                        @foreach(array_slice($item['image'],0,1) as $image_array)
+                                            <div class="container-image">
+                                                <img alt="Image placeholder" src="{{ asset('storage') }}/product_images/{{$item['id']}}/{{$image_array}}" alt="" style="width:100px;height:90px;border-radius: 5%;">
+                                                <div class="overlay"></div>
+                                                @if($item['stock']!=0)
+                                                <div class="button"><a href="{{ route('AddToCartProduct',['id' => $item['id'], 'qunatity' => 1]) }}"><b> Add </b></a></div>
+                                                @else
+                                                <div class="button"><a style="border: solid 2px white;"><b> Out of stock </b></a></div>
+                                                @endif
+                                            </div>
+                                        @endforeach                                       
+                                    @else
+                                    <div class="container-image">
+                                        <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" style="width:100px;height:90px;border-radius: 5%;">
+                                        <div class="overlay"></div>
+                                        @if($item['stock']!=0)
+                                        <div class="button"><a href="{{ route('AddToCartProduct',['id' => $item['id'], 'qunatity' => 1]) }}"><b> Add </b></a></div>
                                         @else
-                                        <img alt="Image placeholder" src="{{ Storage::disk('local')->url('product_images/'.$item['image']) }}" alt="" style="width:100px;height:90px;border-radius: 50%;">
+                                        <div class="button"><a style="border: solid 2px white;"><b> Out of stock </b></a></div>
                                         @endif
-                                    </a>
+                                    </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

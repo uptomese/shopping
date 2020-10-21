@@ -43,6 +43,15 @@
   <!-- Loading -->
   <link type="text/css" rel="stylesheet" href="{{asset('css/loading.css')}}"/>
 
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Bai Jamjuree', sans-serif;
+      font-family: 'Kanit', sans-serif;
+    }
+  </style>
+
 </head>
 
 <body class="bg-default">

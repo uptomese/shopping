@@ -23,6 +23,7 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<br>
 <div class="container">
     @include('alert')
 </div>
